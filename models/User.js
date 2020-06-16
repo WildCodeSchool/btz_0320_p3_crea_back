@@ -22,8 +22,12 @@ const User = sequelizeInstance.define("User", {
         allowNull: false,
     },
     password: {
-        type: Sequelize.STRING(8, 15),
+        type: Sequelize.STRING(14),
         allowNull: false,
+        validate : {
+            max : 14,
+            min : 8,
+        }
     },
     localisation: {
         type: Sequelize.STRING(50),
@@ -50,7 +54,7 @@ const User = sequelizeInstance.define("User", {
         allowNull: true,
     },
     siret: {
-        type: Sequelize.INTEGER(14),
+        type: Sequelize.STRING(14),
         allowNull: false,
     },
     qualification: {

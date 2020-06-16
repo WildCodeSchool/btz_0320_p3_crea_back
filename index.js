@@ -5,6 +5,7 @@ const port = 8080;
 const sequelize = require("./sequelize");
 const users = require("./routes/users.route");
 
+app.use(express.json())
 app.use("/users", users);
 
 app.get("/", (req, res) => {
@@ -12,7 +13,7 @@ app.get("/", (req, res) => {
 });
 
 sequelize
-    .sync()
+    .sync({force : true})
     .then(() => {
         return sequelize.authenticate();
     })
