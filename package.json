@@ -15,5 +15,8 @@
     "mysql2": "^2.1.0",
     "nodemon": "^2.0.4",
     "sequelize": "^5.21.13"
+  },
+  "devDependencies": {
+    "mocha": "^8.0.1"
   }
 }
