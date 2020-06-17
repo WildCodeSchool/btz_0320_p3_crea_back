@@ -37,8 +37,8 @@ jobs:
         env:
           CI: true
           PORT: 6000
-          DB_HOST: localhost
-          DB_USER: postgres
-          DB_PW: postgres
-          DB_DIALECT: postgres
-          DB_DATABASE: postgres
+          DBHOST: localhost
+          DBUSER: postgres
+          DBPASS: postgres
+          DBDIALECT: postgres
+          DBNAME: postgres

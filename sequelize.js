@@ -1,11 +1,12 @@
 require("dotenv").config();
 const Sequelize = require("sequelize");
-const { DBNAME, DBPASS, DBUSER, NODE_ENV } = process.env;
+const { DBNAME, DBPASS, DBUSER, DBDIALECT, DBHOST } = process.env;
 
 module.exports = new Sequelize({
-    host: "localhost",
+    host: DBHOST || "localhost",
     username: DBUSER,
     password: DBPASS,
-    database: NODE_ENV !== "test" ? DBNAME : "crea_project",
-    dialect: "mysql",
+    database: DBNAME,
+    dialect:  DBDIALECT,
+    logging: process.env.NODE_ENV === "test" ? false : true,
 });
