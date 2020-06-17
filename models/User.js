@@ -43,11 +43,11 @@ const User = sequelizeInstance.define("User", {
     },
     isAdmin: {
         type: Sequelize.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
     },
     schoolName: {
         type: Sequelize.STRING(50),
-        allowNull: false,
+        allowNull: true,
     },
     companyName: {
         type: Sequelize.STRING(50),
@@ -55,27 +55,27 @@ const User = sequelizeInstance.define("User", {
     },
     siret: {
         type: Sequelize.STRING(14),
-        allowNull: false,
+        allowNull: true,
     },
     qualification: {
         type: Sequelize.STRING(50),
-        allowNull: false,
+        allowNull: true,
     },
     mobility: {
         type: Sequelize.STRING(50),
-        allowNull: false,
+        allowNull: true,
     },
     name_organisation: {
         type: Sequelize.STRING(50),
-        allowNull: false,
+        allowNull: true,
     },
     isActive: {
         type: Sequelize.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
     },
     logo: {
         type: Sequelize.STRING(200),
-        allowNull: false,
+        allowNull: true,
     },
 });
 

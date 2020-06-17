@@ -22,3 +22,31 @@ Content-Type: application/json
     "isActive" : false,
     "logo" : "bjisdckjs"
 }
+
+###
+
+PUT http://localhost:8080/users/d85df18b-9722-4e65-a41c-c21e4f5a0735 HTTP/1.1
+Content-Type: application/json
+
+{
+    "lastName" : "jean",
+    "firstName" : "toto",
+    "email" : "helloworld",
+    "password" : "blablabla",
+    "localisation" : "anglet",
+    "phone_number" : 10940239,
+    "phone_number2" : 58493029,
+    "isAdmin" : false,
+    "schoolName" : "HEC",
+    "companyName" : "HEC",
+    "siret" : "234536251",
+    "qualification" : "metier",
+    "mobility" : "USA",
+    "name_organisation" : "ADIE",
+    "isActive" : false,
+    "logo" : "mlkdmlqksml.png"
+}
+
+###
+
+DELETE http://localhost:8080/users/c5e5dca9-00c5-405f-8146-ca97da2c0c97 HTTP/1.1
