@@ -1,0 +1,26 @@
+GET http://localhost:8080/users/post/jobCategory HTTP/1.1
+
+###
+POST http://localhost:8080/users/post/jobCategory HTTP/1.1
+Content-Type: application/json
+
+{
+    "labelFr" : "toto",
+    "labelEs" : "jean",
+    "labelEus" : "hello"
+}
+
+###
+
+PUT http://localhost:8080/users/post/jobCategory/21c6179f-8e9d-4ad7-a3ae-a1a7689f53b4 HTTP/1.1
+Content-Type: application/json
+
+{
+    "labelFr" : "marcel",
+    "labelEs" : "pagnol",
+    "labelEus" : "world"
+}
+
+###
+
+DELETE http://localhost:8080/users/post/jobCategory/21c6179f-8e9d-4ad7-a3ae-a1a7689f53b4 HTTP/1.1
