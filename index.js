@@ -5,26 +5,30 @@ const port = 8080;
 const sequelize = require("./sequelize");
 const users = require("./routes/users.route");
 
-app.use(express.json())
+app.use(express.json());
 app.use("/users", users);
 
 app.get("/", (req, res) => {
-    res.status(200).send("Bienvenue sur CREA_PROJECT");
+  res.status(200).send("Bienvenue sur CREA_PROJECT");
 });
 
-sequelize
-    .sync({force : true})
+if (process.env.NODE_ENV !== "test") {
+  sequelize
+    .sync({ force: true })
     .then(() => {
-        return sequelize.authenticate();
+      return sequelize.authenticate();
     })
     .then(() => {
-        app.listen(port, (err) => {
-            if (err) {
-                throw new Error("Something really bad happened ...");
-            }
-            console.log(`Server is listening on ${port}`);
-        });
+      app.listen(port, (err) => {
+        if (err) {
+          throw new Error("Something really bad happened ...");
+        }
+        console.log(`Server is listening on ${port}`);
+      });
     })
     .catch((err) => {
-        console.log("enable to join database", err.message);
+      console.log("enable to join database", err.message);
     });
+}
+
+module.exports = app;
