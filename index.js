@@ -4,9 +4,11 @@ const app = express();
 const port = 8080;
 const sequelize = require("./sequelize");
 const users = require("./routes/users.route");
+const type_post = require("./routes/type_post.route");
 
 app.use(express.json());
 app.use("/users", users);
+app.use("/user/post/type_post", type_post);
 
 app.get("/", (req, res) => {
   res.status(200).send("Bienvenue sur CREA_PROJECT");
