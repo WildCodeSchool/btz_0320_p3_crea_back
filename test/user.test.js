@@ -43,16 +43,44 @@ describe("USERS", () => {
   describe("Post one user", () => {
     it("should post a new user", async () => {
       try {
-        const res = await chai
-          .request(server)
-          .post("/users")
-          .send({ firstName: "John", lastName: "Doe" });
+        const res = await chai.request(server).post("/users").send({
+          lastName: "jean",
+          firstName: "toto",
+          email: "helloworld",
+          password: "blablabla",
+          localisation: "anglet",
+          phone_number: 10940239,
+          phone_number2: 58493029,
+          isAdmin: false,
+          schoolName: "HEC",
+          companyName: "HEC",
+          siret: "234536251",
+          qualification: "metier",
+          mobility: "USA",
+          name_organisation: "ADIE",
+          isActive: false,
+          logo: "mlkdmlqksml.png",
+        });
         res.should.have.status(201);
         res.body.should.be.a("object");
         res.body.should.have.keys([
-          "id",
-          "firstName",
+          "id",        
           "lastName",
+          "firstName",
+          "email",
+          "password",
+          "localisation",
+          "phone_number",
+          "phone_number2",
+          "isAdmin",
+          "schoolName",
+          "companyName",
+          "siret",
+          "qualification",
+          "mobility",
+          "name_organisation",
+          "isActive",
+          "logo",
           "createdAt",
           "updatedAt",
         ]);
