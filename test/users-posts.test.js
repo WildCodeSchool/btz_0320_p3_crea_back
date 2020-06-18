@@ -85,7 +85,8 @@ describe("POSTS", () => {
       try {
         const res = await await chai
           .request(server)
-          .put(`/users/posts/${post.id}`);
+          .put(`/users/posts/${post.id}`)
+          .send({title : "bonjour"});
         res.should.have.status(202);
         res.body.should.be.a("array");
       } catch (err) {

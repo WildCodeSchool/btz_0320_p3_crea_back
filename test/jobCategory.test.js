@@ -82,9 +82,10 @@ describe("JOB CATEGORY", () => {
   describe("Put one post's category", () => {
     it("should put one post's category", async () => {
       try {
-        const res = await await chai
+        const res = await chai
           .request(server)
-          .put(`/users/post/jobCategory/${category.id}`);
+          .put(`/users/post/jobCategory/${category.id}`)
+          .send({labelFr : "wcs"});
         res.should.have.status(202);
         res.body.should.be.a("array");
       } catch (err) {
@@ -95,7 +96,7 @@ describe("JOB CATEGORY", () => {
   describe("Delete one post's category", () => {
     it("should delete one post's category", async () => {
       try {
-        const res = await await chai
+        const res = await chai
           .request(server)
           .delete(`/users/post/jobCategory/${category.id}`);
         res.should.have.status(205);
