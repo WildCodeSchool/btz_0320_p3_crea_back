@@ -1,0 +1,22 @@
+GET http://localhost:8080/users/userTypes HTTP/1.1
+
+###
+POST http://localhost:8080/users/userTypes HTTP/1.1
+Content-Type: application/json
+
+{
+    "label" : "Chomeur"
+}
+
+###
+PUT http://localhost:8080/users/userTypes/5ce888ae-ee59-45c9-8f61-59e5d9af1573 HTTP/1.1
+Content-Type: application/json
+
+
+{
+    "label" :"Etudiant poil aux dents"
+}
+
+
+###
+DELETE http://localhost:8080/users/userTypes/5ce888ae-ee59-45c9-8f61-59e5d9af1573 HTTP/1.1
