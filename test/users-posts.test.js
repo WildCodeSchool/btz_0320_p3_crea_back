@@ -83,7 +83,7 @@ describe("POSTS", () => {
   describe("Put one user's post", () => {
     it("should put one user's post", async () => {
       try {
-        const res = await await chai
+        const res = await chai
           .request(server)
           .put(`/users/posts/${post.id}`)
           .send({title : "bonjour"});
@@ -97,7 +97,7 @@ describe("POSTS", () => {
   describe("Delete one user's post", () => {
     it("should delete one user's post", async () => {
       try {
-        const res = await await chai.request(server).delete(`/users/posts/${post.id}`);
+        const res = await chai.request(server).delete(`/users/posts/${post.id}`);
         res.should.have.status(205);
         res.body.should.be.a("object");
       } catch (err) {
