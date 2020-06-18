@@ -11,6 +11,16 @@ posts.get("/", async (req, res) => {
   }
 });
 
+posts.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const post = await Post.findAll({ where: { id } });
+    res.status(200).json(post);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
 posts.post("/", async (req, res) => {
   const { title, content, localisation, language } = req.body;
   try {
