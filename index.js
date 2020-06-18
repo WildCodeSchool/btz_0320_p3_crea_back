@@ -4,14 +4,14 @@ const app = express();
 const port = 8080;
 const sequelize = require("./sequelize");
 const users = require("./routes/users.route");
+const posts = require("./routes/users.posts.route");
 const jobCategory = require("./routes/job-category.route");
 const userTypes = require("./routes/userTypes.route");
-
 
 app.use(express.json());
 app.use("/users", users);
 app.use("/users/post/jobCategory", jobCategory);
-
+app.use("/users/posts", posts);
 app.use("/users/userTypes", userTypes);
 
 app.get("/", (req, res) => {
