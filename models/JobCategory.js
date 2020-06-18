@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 
 const sequelizeInstance = require("../sequelize");
 
-const TypePost = sequelizeInstance.define("TypePost", {
+const JobCategory = sequelizeInstance.define("JobCategory", {
   id: {
     type: Sequelize.UUID,
     allowNull: false,
@@ -10,17 +10,17 @@ const TypePost = sequelizeInstance.define("TypePost", {
     defaultValue: Sequelize.UUIDV4,
   },
   labelFr: {
-    type: Sequelize.STRING(30),
-    allowNull: true,
+    type: Sequelize.STRING(100),
+    allowNull: false,
   },
   labelEs: {
-    type: Sequelize.STRING(30),
-    allowNull: true,
+    type: Sequelize.STRING(100),
+    allowNull: false,
   },
   labelEus: {
-    type: Sequelize.STRING(30),
-    allowNull: true,
+    type: Sequelize.STRING(100),
+    allowNull: false,
   },
 });
 
-module.exports = TypePost;
+module.exports = JobCategory;
