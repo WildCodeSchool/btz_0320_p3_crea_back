@@ -5,10 +5,7 @@ let server = require("../index");
 const sequelize = require("../sequelize");
 const Post = require("../models/Post");
 
-const errorKeys = ["status", "message"];
-
 let post;
-let id;
 
 chai.use(chaiHtpp);
 describe("POSTS", () => {
