@@ -2,6 +2,7 @@ const express = require("express");
 const types_post = express.Router();
 const Type_post = require("../models/TypePost");
 
+//récupère tous les types de posts
 types_post.get("/", async (req, res) => {
   try {
     const types_post = await Type_post.findAll();
@@ -11,6 +12,18 @@ types_post.get("/", async (req, res) => {
   }
 });
 
+// récupère un type de posts avec son id
+types_post.get("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const type_post = await Type_post.findAll({
+      where: { id },
+    });
+    res.status(200).send(type_post);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 types_post.post("/", async (req, res) => {
   const { labelFr, labelEs, labelEus } = req.body;
   try {
