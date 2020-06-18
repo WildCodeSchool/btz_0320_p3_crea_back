@@ -49,7 +49,7 @@ types_post.delete("/:id", async (req, res) => {
     const type_post = await Type_post.destroy({
       where: { id },
     });
-    res.status(205).send("L'utilisateur a bien été effacé");
+    res.status(205).send("Le type d'annonce a bien été effacé");
   } catch (err) {
     res.status(422).json(err);
   }
