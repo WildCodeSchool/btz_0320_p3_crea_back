@@ -1,6 +1,10 @@
 GET http://localhost:8080/users/post/jobCategory HTTP/1.1
 
 ###
+GET http://localhost:8080/users/post/jobCategory/2dd72022-e4b9-49a5-b1a9-2672437bce61 HTTP/1.1
+
+
+###
 POST http://localhost:8080/users/post/jobCategory HTTP/1.1
 Content-Type: application/json
 

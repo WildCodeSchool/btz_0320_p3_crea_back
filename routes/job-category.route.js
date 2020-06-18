@@ -11,6 +11,16 @@ jobCategory.get("/", async (req, res) => {
   }
 });
 
+jobCategory.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const category = await JobCategory.findAll({ where: { id } });
+    res.status(200).json(category);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
 jobCategory.post("/", async (req, res) => {
   const { labelFr, labelEs, labelEus } = req.body;
   try {
