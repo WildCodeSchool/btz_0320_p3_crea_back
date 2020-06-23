@@ -1,10 +1,21 @@
 const express = require("express");
 const userTypes = express.Router();
 const UserType = require("../models/UserType");
+const { Connection } = require("pg");
 
 userTypes.get("/", async (req, res) => {
     try {
         const userType = await UserType.findAll();
+        res.status(200).json(userType);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
+userTypes.get("/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const userType = await UserType.findAll({ where: { id } });
         res.status(200).json(userType);
     } catch (err) {
         res.status(400).json(err);
@@ -17,7 +28,9 @@ userTypes.post("/", async (req, res) => {
         const userType = await UserType.create({
             label,
         });
-        res.status(201).json(userType);
+        res.status(201).json(userType)
+                    ;
+                    
     } catch (err) {
         res.status(422).json(err);
     }
