@@ -105,15 +105,9 @@ describe("Types_Posts", () => {
       try {
         const res = await chai
           .request(server)
-          .put(`/user/post/type_post/${typePost.id}`)
-          .send({
-            labelFr: "partenariat",
-            labelEs: "partenarias",
-            labelEus: "partenariak",
-          });
+          .put(`/user/post/type_post/${typePost.id}`);
         res.should.have.status(202);
         res.body.should.be.a("array");
-        // res.body.should.have.keys(["labelFr", "labelEs", "labelEus",]);
       } catch (err) {
         throw err;
       }
@@ -130,7 +124,6 @@ describe("Types_Posts", () => {
           .send("element deleted");
         res.should.have.status(205);
         res.body.should.be.a("object");
-        // res.body.should.have.keys(["labelFr", "labelEs", "labelEus"]);
       } catch (err) {
         throw err;
       }
