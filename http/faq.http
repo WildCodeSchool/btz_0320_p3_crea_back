@@ -1,0 +1,28 @@
+### GET ALL FAQ
+GET http://localhost:8080/faq HTTP/1.1
+
+###GET one FAQ
+GET http://localhost:8080/faq/44b6733d-a728-411e-912e-36ba03cc0967  HTTP/1.1
+
+### POST new FAQ
+POST  http://localhost:8080/faq HTTP/1.1
+Content-Type: application/json
+
+{
+    "question": "why Crea ?",
+    "answer": "because it's cool",
+    "language" : " English"
+}
+
+### PUT one FAQ
+PUT http://localhost:8080/faq/c0e99f6e-d410-44da-84fe-434ce76e9068 HTTP/1.1
+Content-Type: application/json
+
+{
+    "question": "why Crea ?",
+    "answer": "because it's very cool",
+    "language" : "Euskara"
+}
+
+### Delete FAQ 
+DELETE http://localhost:8080/faq/44b6733d-a728-411e-912e-36ba03cc0967  HTTP/1.1
