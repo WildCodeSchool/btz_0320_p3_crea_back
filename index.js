@@ -1,15 +1,18 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
+
 const port = 8080;
 const sequelize = require("./sequelize");
 const users = require("./routes/users.route");
+const auth = require("./routes/auth.route");
 const posts = require("./routes/users.posts.route");
 const jobCategory = require("./routes/job-category.route");
 const userTypes = require("./routes/userTypes.route");
 
 app.use(express.json());
 app.use("/users", users);
+app.use("/auth", auth);
 app.use("/users/post/jobCategory", jobCategory);
 app.use("/users/posts", posts);
 app.use("/users/userTypes", userTypes);
@@ -20,7 +23,7 @@ app.get("/", (req, res) => {
 
 if (process.env.NODE_ENV !== "test") {
     sequelize
-        .sync({ force: true })
+        .sync({ alter: true })
         .then(() => {
             return sequelize.authenticate();
         })

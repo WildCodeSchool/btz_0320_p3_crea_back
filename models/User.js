@@ -24,10 +24,10 @@ const User = sequelizeInstance.define("User", {
     password: {
         type: Sequelize.STRING(14),
         allowNull: false,
-        validate : {
-            max : 14,
-            min : 8,
-        }
+        validate: {
+            max: 14,
+            min: 8,
+        },
     },
     localisation: {
         type: Sequelize.STRING(50),
@@ -78,5 +78,13 @@ const User = sequelizeInstance.define("User", {
         allowNull: true,
     },
 });
+
+User.prototype.validPassword = function (password) {
+    if (password === this.password) {
+        return true;
+    } else {
+        return false;
+    }
+};
 
 module.exports = User;

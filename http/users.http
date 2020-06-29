@@ -1,4 +1,5 @@
 GET http://localhost:8080/users HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTkzNDQzNjk4LCJleHAiOjE1OTM1MzAwOTh9.OMjKyPneLMATpq9FpjM5gBqW_rGUlop_hxSxxAEjmSk
 
 ###
 POST http://localhost:8080/users HTTP/1.1
@@ -23,8 +24,16 @@ Content-Type: application/json
     "logo" : "bjisdckjs"
 }
 
-###
+###Auth
+POST http://localhost:8080/auth/login HTTP/1.1
+Content-Type: application/json
 
+{
+    "email" : "hello",
+    "password" : "hellohe"
+}
+
+###
 PUT http://localhost:8080/users/d85df18b-9722-4e65-a41c-c21e4f5a0735 HTTP/1.1
 Content-Type: application/json
 
