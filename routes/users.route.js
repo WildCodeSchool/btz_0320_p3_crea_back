@@ -95,7 +95,7 @@ users.put("/:id", async (req, res) => {
         isActive,
         logo,
       },
-      { where: {id} }
+      { where: { id } }
     );
     res.status(202).json(user);
   } catch (err) {
@@ -105,15 +105,14 @@ users.put("/:id", async (req, res) => {
 
 users.delete("/:id", async (req, res) => {
   try {
-    const {id} = req.params;
+    const { id } = req.params;
     const user = await User.destroy({
-      where: {id}
+      where: { id },
     });
-    res.status(205).send("L'utilisateur a bien été effacé")
+    res.status(205).send("L'utilisateur a bien été effacé");
   } catch (err) {
-    res.status(422).json(err)
+    res.status(422).json(err);
   }
-})
-
+});
 
 module.exports = users;
