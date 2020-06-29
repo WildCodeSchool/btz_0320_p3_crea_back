@@ -1,7 +1,7 @@
 GET http://localhost:8080/users/posts HTTP/1.1
 
 ###
-GET http://localhost:8080/users/posts/94950c38-db61-4011-9fd4-60c1d2f4201f HTTP/1.1
+GET http://localhost:8080/users/posts/863bb7ff-8d71-424c-a0fd-6331b58921c7 HTTP/1.1
 
 
 ###
@@ -10,9 +10,10 @@ Content-Type: application/json
 
 {
     "title" : "annonce",
-    "content" :"blablabla",
+    "content" :"blabla",
     "localisation" : "dax",
-    "language" : "anglais"
+    "language" : "anglais",
+    "UserId" : "0aed7098-4979-4256-9b9d-534764103fc4"
 }
 
 ###

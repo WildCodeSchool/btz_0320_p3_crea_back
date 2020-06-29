@@ -1,11 +1,22 @@
 const express = require("express");
 const users = express.Router();
 const User = require("../models/User");
+const Post = require("../models/Post")
 
 users.get("/", async (req, res) => {
   try {
     const users = await User.findAll();
     res.status(200).json(users);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+users.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findAll({ where: { id } });
+    res.status(200).json(user);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -114,5 +125,16 @@ users.delete("/:id", async (req, res) => {
     res.status(422).json(err);
   }
 });
+
+// récupérer les posts d'un utilisateur
+users.get("/:id/posts", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const posts = await Post.findAll({ where: { UserId : id} });
+    res.status(200).json(posts);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+})
 
 module.exports = users;

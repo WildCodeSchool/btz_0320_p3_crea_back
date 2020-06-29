@@ -11,6 +11,16 @@ activitiesFields.get("/", async (req, res) => {
   }
 });
 
+activitiesFields.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const activityField = await ActivityField.findAll({ where: { id } });
+    res.status(200).json(activityField);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
 activitiesFields.post("/", async (req, res) => {
   const { labelFr, labelEs, labelEus } = req.body;
   try {
