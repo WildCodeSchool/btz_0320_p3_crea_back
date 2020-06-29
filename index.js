@@ -18,8 +18,6 @@ app.use(cors());
 
 app.use("/users", users);
 app.use("/user/post/type_post", type_post);
-app.use(express.json());
-app.use("/users", users);
 app.use("/users/post/jobCategory", jobCategory);
 app.use("/users/posts", posts);
 app.use("/users/userTypes", userTypes);
