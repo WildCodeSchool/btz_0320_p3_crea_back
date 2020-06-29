@@ -9,6 +9,7 @@ const type_post = require("./routes/type_post.route");
 const posts = require("./routes/users.posts.route");
 const jobCategory = require("./routes/job-category.route");
 const userTypes = require("./routes/userTypes.route");
+const faqs = require("./routes/faq.route");
 const partners = require("./routes/partner");
 
 app.use(express.json());
@@ -22,7 +23,9 @@ app.use("/users", users);
 app.use("/users/post/jobCategory", jobCategory);
 app.use("/users/posts", posts);
 app.use("/users/userTypes", userTypes);
+app.use("/faq", faqs);
 app.use("/partners", partners);
+
 
 app.get("/", (req, res) => {
   res.status(200).send("Bienvenue sur CREA_PROJECT");
