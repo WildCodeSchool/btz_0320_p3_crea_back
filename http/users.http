@@ -1,5 +1,5 @@
 GET http://localhost:8080/users HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTkzNDQzNjk4LCJleHAiOjE1OTM1MzAwOTh9.OMjKyPneLMATpq9FpjM5gBqW_rGUlop_hxSxxAEjmSk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTkzNTAzNzcyLCJleHAiOjE1OTM1OTAxNzJ9._xsci95nhHbO231wL-c9-Zu4gibTTOWxJ_lJiH1lDq0
 
 ###
 POST http://localhost:8080/users HTTP/1.1

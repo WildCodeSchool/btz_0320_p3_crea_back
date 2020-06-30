@@ -43,7 +43,8 @@ const User = sequelizeInstance.define("User", {
     },
     isAdmin: {
         type: Sequelize.BOOLEAN,
-        allowNull: true,
+        allowNull: false,
+        defaultValue: false,
     },
     schoolName: {
         type: Sequelize.STRING(50),

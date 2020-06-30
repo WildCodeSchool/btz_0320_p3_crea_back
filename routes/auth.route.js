@@ -13,6 +13,12 @@ router.post("/login", async (req, res) => {
             where: {
                 email,
             },
+            // include : [
+            //     {
+            //         model: Role,
+            //         attributes: ["label"]
+            //     }
+            // ]
         });
         const isPasswordValid = user.validPassword(password);
         if (user && isPasswordValid) {
@@ -20,6 +26,7 @@ router.post("/login", async (req, res) => {
                 {
                     email: user.dataValues.email,
                     isAdmin: user.dataValues.isAdmin,
+                    role: user.dataValues.Role.label,
                     // UserType: user.dataValues.UserTypeLabel,
                 },
                 SECRET,
@@ -36,5 +43,7 @@ router.post("/login", async (req, res) => {
         res.status(422).json({ message: "Wrong credentials" });
     }
 });
+
+router.post("/register", async (req, res) => {});
 
 module.exports = router;

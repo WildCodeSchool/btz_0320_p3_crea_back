@@ -2,13 +2,17 @@ const express = require("express");
 const users = express.Router();
 const User = require("../models/User");
 const authRole = require("./middleware/authRole");
+const authAdmin = require("./middleware/authAdmin");
+const user = require("../routes/auth.route");
 
-users.get("/", authRole(true), async (req, res) => {
+users.get("/", authRole("true"), async (req, res) => {
     try {
+        console.log(req.user);
         if (req.user && req.user.isAdmin) {
             const users = await User.findAll();
             res.status(200).json(users);
         } else {
+            console.log("error");
             throw new Error("You are not admin ! GET THE FUCK OUT !");
         }
     } catch (err) {
@@ -16,7 +20,7 @@ users.get("/", authRole(true), async (req, res) => {
     }
 });
 
-users.post("/", async (req, res) => {
+users.post("/", authAdmin, async (req, res) => {
     const {
         lastName,
         firstName,
