@@ -93,7 +93,7 @@ users.put("/:id", async (req, res) => {
   } = req.body;
   const { id } = req.params;
   try {
-    const user = await User.update(
+    await User.update(
       {
         lastName,
         firstName,
@@ -116,6 +116,7 @@ users.put("/:id", async (req, res) => {
       },
       { where: { id } }
     );
+    const user = await User.findByPk(id)
     res.status(202).json(user);
   } catch (err) {
     res.status(422).json(err);
@@ -128,7 +129,7 @@ users.delete("/:id", async (req, res) => {
     const user = await User.destroy({
       where: { id },
     });
-    res.status(205).send("L'utilisateur a bien été effacé");
+    res.status(204).send("L'utilisateur a bien été effacé");
   } catch (err) {
     res.status(422).json(err);
   }

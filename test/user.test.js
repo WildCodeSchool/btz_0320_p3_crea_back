@@ -4,7 +4,8 @@ let should = chai.should();
 let server = require("../index");
 const sequelize = require("../sequelize");
 const User = require("../models/User");
-const Post = require("../models/Post")
+const ActivityField = require("../models/ActivityField");
+const UserType = require("../models/UserType");
 
 chai.use(chaiHtpp);
 
@@ -27,13 +28,57 @@ let userSample = {
   logo: "mlkdmlqksml.png",
 };
 
+let userKeys = [
+  "id",
+  "lastName",
+  "firstName",
+  "email",
+  "password",
+  "localisation",
+  "phone_number",
+  "phone_number2",
+  "isAdmin",
+  "schoolName",
+  "companyName",
+  "siret",
+  "qualification",
+  "mobility",
+  "name_organisation",
+  "isActive",
+  "logo",
+  "createdAt",
+  "updatedAt",
+  "ActivityFieldId",
+  "UserTypeId",
+];
+
 describe("USERS", () => {
   before(async () => {
     await sequelize.sync({ force: true });
-    await User.create(userSample);
+
+    const activityField = await ActivityField.create({
+      labelFr: "Bâtiment",
+      labelEs: "Building",
+      labelEus: "Eraikin",
+    });
+
+    activityFieldId = activityField.dataValues.id;
+
+    const type = await UserType.create({ label: "chomeur" });
+
+    userTypeId = type.dataValues.id;
+
+    const user = await User.create({
+      ...userSample,
+      ActivityFieldId: activityFieldId,
+      UserTypeId: userTypeId,
+    });
+
+    userId = user.dataValues.id;
   });
-  describe("Get all users", () => {
-    it("should return an array of users", async () => {
+
+  describe("GET ALL", () => {
+    it("should success", async () => {
       try {
         const res = await chai.request(server).get("/api/v1/users");
         res.should.have.status(200);
@@ -44,8 +89,8 @@ describe("USERS", () => {
       }
     });
   });
-  describe("Post one user", () => {
-    it("should post a new user", async () => {
+  describe("POST", () => {
+    it("should success", async () => {
       try {
         const res = await chai.request(server).post("/api/v1/users").send({
           lastName: "jean",
@@ -64,41 +109,51 @@ describe("USERS", () => {
           name_organisation: "ADIE",
           isActive: false,
           logo: "mlkdmlqksml.png",
+          ActivityFieldId: activityFieldId,
+          UserTypeId: userTypeId,
         });
         res.should.have.status(201);
         res.body.should.be.a("object");
-        res.body.should.have.keys([
-          "id",
-          "lastName",
-          "firstName",
-          "email",
-          "password",
-          "localisation",
-          "phone_number",
-          "phone_number2",
-          "isAdmin",
-          "schoolName",
-          "companyName",
-          "siret",
-          "qualification",
-          "mobility",
-          "name_organisation",
-          "isActive",
-          "logo",
-          "createdAt",
-          "updatedAt",
-        ]);
+        res.body.should.have.keys(userKeys);
       } catch (err) {
         throw err;
       }
     });
-    it("Should fail to create", async () => {
+    it("Should fail", async () => {
       try {
         const res = await chai
           .request(server)
           .post("/api/v1/users")
           .send({ lastName: "Doe" });
         res.should.have.status(422);
+        res.body.should.be.a("object");
+      } catch (err) {
+        throw err;
+      }
+    });
+  });
+  describe("PUT", () => {
+    it("should success", async () => {
+      try {
+        const res = await chai
+          .request(server)
+          .put(`/api/v1/users/${userId}`)
+          .send({ lastName: "georges" });
+        res.should.have.status(202);
+        res.body.should.be.a("object");
+        res.body.should.have.keys(userKeys);
+      } catch (err) {
+        throw err;
+      }
+    });
+  });
+  describe("DELETE", () => {
+    it("should success", async () => {
+      try {
+        const res = await chai
+          .request(server)
+          .delete(`/api/v1/users/${userId}`);
+        res.should.have.status(204);
         res.body.should.be.a("object");
       } catch (err) {
         throw err;

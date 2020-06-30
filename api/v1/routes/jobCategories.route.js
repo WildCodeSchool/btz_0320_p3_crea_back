@@ -39,7 +39,7 @@ jobCategory.put("/:id", async (req, res) => {
   const { labelFr, labelEs, labelEus } = req.body;
   const { id } = req.params;
   try {
-    const category = await JobCategory.update(
+    await JobCategory.update(
       {
         labelFr,
         labelEs,
@@ -47,6 +47,7 @@ jobCategory.put("/:id", async (req, res) => {
       },
       { where: { id } }
     );
+    const category = await JobCategory.findByPk(id);
     res.status(202).json(category);
   } catch (err) {
     res.status(422).json(err);
@@ -59,7 +60,7 @@ jobCategory.delete("/:id", async (req, res) => {
     const category = await JobCategory.destroy({
       where: { id },
     });
-    res.status(205).send("La catégorie de job a bien été effacé");
+    res.status(204).send("La catégorie de job a bien été effacé");
   } catch (err) {
     res.status(422).json(err);
   }

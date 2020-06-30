@@ -14,7 +14,7 @@ activitiesFields.get("/", async (req, res) => {
 activitiesFields.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const activityField = await ActivityField.findAll({ where: { id } });
+    const activityField = await ActivityField.findByPk(id);
     res.status(200).json(activityField);
   } catch (err) {
     res.status(400).json(err);
@@ -39,7 +39,7 @@ activitiesFields.put("/:id", async (req, res) => {
   const { labelFr, labelEs, labelEus } = req.body;
   const { id } = req.params;
   try {
-    const activityField = await ActivityField.update(
+    await ActivityField.update(
       {
         labelFr,
         labelEs,
@@ -47,6 +47,7 @@ activitiesFields.put("/:id", async (req, res) => {
       },
       { where: { id } }
     );
+    const activityField = await ActivityField.findByPk(id);
     res.status(202).json(activityField);
   } catch (err) {
     res.status(422).json(err);
@@ -59,7 +60,7 @@ activitiesFields.delete("/:id", async (req, res) => {
     const activityField = await ActivityField.destroy({
       where: { id },
     });
-    res.status(205).send("La catégorie a bien été effacé");
+    res.status(204).send("La catégorie a bien été effacé");
   } catch (err) {
     res.status(422).json(err);
   }

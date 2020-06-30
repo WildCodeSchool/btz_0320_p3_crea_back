@@ -6,10 +6,16 @@ const sequelize = require("../sequelize");
 const TypePost = require("../models/TypePost");
 
 let typePost;
-//npm install chai-http, chai && mocha
-// npm test pour lancer les tests
 
-//test create
+const typePostKeys = [
+  "labelFr",
+  "labelEs",
+  "labelEus",
+  "createdAt",
+  "updatedAt",
+  "id",
+]
+
 chai.use(chaiHtpp);
 describe("Types_Posts", () => {
   before(async () => {
@@ -19,11 +25,12 @@ describe("Types_Posts", () => {
       labelEs: "partenarias",
       labelEus: "partenariak",
     });
+    typePostId =  typePost.dataValues.id;
   });
 
   //test request all
-  describe("Get all Types_Posts", () => {
-    it("should return an array of types posts", async () => {
+  describe("GET ALL", () => {
+    it("should success", async () => {
       try {
         const res = await chai.request(server).get("/api/v1/postTypes");
         res.should.have.status(200);
@@ -36,15 +43,15 @@ describe("Types_Posts", () => {
   });
 
   // test request one
-  describe("Get all one type post", () => {
-    it("should return an array of one type post", async () => {
+  describe("GET ONE", () => {
+    it("should success", async () => {
       try {
         const res = await chai
           .request(server)
-          .get(`/api/v1/postTypes/${typePost.id}`);
+          .get(`/api/v1/postTypes/${typePostId}`);
         res.should.have.status(200);
-        res.body.should.be.a("array");
-        res.body.length.should.be.eql(1);
+        res.body.should.be.a("object");
+        res.body.should.have.keys(typePostKeys)
       } catch (err) {
         throw err;
       }
@@ -52,8 +59,8 @@ describe("Types_Posts", () => {
   });
 
   // test post one
-  describe("Post one type post", () => {
-    it("should post a new type of posts", async () => {
+  describe("POST", () => {
+    it("should success", async () => {
       try {
         const res = await chai
           .request(server)
@@ -65,20 +72,13 @@ describe("Types_Posts", () => {
           });
         res.should.have.status(201);
         res.body.should.be.a("object");
-        res.body.should.have.keys([
-          "labelFr",
-          "labelEs",
-          "labelEus",
-          "createdAt",
-          "updatedAt",
-          "id",
-        ]);
+        res.body.should.have.keys(typePostKeys);
       } catch (err) {
         throw err;
       }
     });
     //test de fail to create
-    it("Should fail to create", async () => {
+    it("Should fail", async () => {
       try {
         const res = await chai
           .request(server)
@@ -100,14 +100,15 @@ describe("Types_Posts", () => {
   });
 
   // test put
-  describe("Put one type post", () => {
+  describe("PUT", () => {
     it("should put a new type of posts", async () => {
       try {
         const res = await chai
           .request(server)
-          .put(`/api/v1/postTypes/${typePost.id}`);
+          .put(`/api/v1/postTypes/${typePostId}`);
         res.should.have.status(202);
-        res.body.should.be.a("array");
+        res.body.should.be.a("object");
+        res.body.should.have.keys(typePostKeys)
       } catch (err) {
         throw err;
       }
@@ -115,14 +116,14 @@ describe("Types_Posts", () => {
   });
 
   //test delete
-  describe("Delete one type post", () => {
-    it("should delete one type of posts", async () => {
+  describe("DELETE", () => {
+    it("should success", async () => {
       try {
         const res = await chai
           .request(server)
-          .delete(`/api/v1/postTypes/${typePost.id}`)
+          .delete(`/api/v1/postTypes/${typePostId}`)
           .send("element deleted");
-        res.should.have.status(205);
+        res.should.have.status(204);
         res.body.should.be.a("object");
       } catch (err) {
         throw err;

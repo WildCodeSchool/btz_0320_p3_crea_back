@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const post = await Post.findAll({ where: { id } });
+    const post = await Post.findByPk(id);
     res.status(200).json(post);
   } catch (err) {
     res.status(400).json(err);
@@ -59,7 +59,7 @@ router.put("/:id", async (req, res) => {
   } = req.body;
   const { id } = req.params;
   try {
-    const post = await Post.update(
+    await Post.update(
       {
         title,
         content,
@@ -71,6 +71,7 @@ router.put("/:id", async (req, res) => {
       },
       { where: { id } }
     );
+    const post = await Post.findByPk(id)
     res.status(202).json(post);
   } catch (err) {
     res.status(422).json(err);
@@ -83,7 +84,7 @@ router.delete("/:id", async (req, res) => {
     const post = await Post.destroy({
       where: { id },
     });
-    res.status(205).send("L'annonce a bien été effacée");
+    res.status(204).end();
   } catch (err) {
     res.status(422).json(err);
   }

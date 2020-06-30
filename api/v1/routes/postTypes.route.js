@@ -16,9 +16,7 @@ types_post.get("/", async (req, res) => {
 types_post.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const type_post = await Type_post.findAll({
-      where: { id },
-    });
+    const type_post = await Type_post.findByPk(id);
     res.status(200).send(type_post);
   } catch (err) {
     res.status(400).json(err);
@@ -42,7 +40,7 @@ types_post.put("/:id", async (req, res) => {
   const { labelFr, labelEs, labelEus } = req.body;
   const { id } = req.params;
   try {
-    const type_post = await Type_post.update(
+    await Type_post.update(
       {
         labelFr,
         labelEs,
@@ -50,6 +48,7 @@ types_post.put("/:id", async (req, res) => {
       },
       { where: { id } }
     );
+    const type_post = await Type_post.findByPk(id);
     res.status(202).json(type_post);
   } catch (err) {
     res.status(422).json(err);
@@ -62,7 +61,7 @@ types_post.delete("/:id", async (req, res) => {
     const type_post = await Type_post.destroy({
       where: { id },
     });
-    res.status(205).send("Le type d'annonce a bien été effacé");
+    res.status(204).end();
   } catch (err) {
     res.status(422).json(err);
   }
