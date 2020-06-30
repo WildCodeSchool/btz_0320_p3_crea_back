@@ -5,25 +5,6 @@ let server = require("../index");
 const sequelize = require("../sequelize");
 const Post = require("../models/Post");
 
-let user = {
-  lastName: "jean",
-  firstName: "toto",
-  email: "helloworld",
-  password: "blablabla",
-  localisation: "anglet",
-  phone_number: 10940239,
-  phone_number2: 58493029,
-  isAdmin: false,
-  schoolName: "HEC",
-  companyName: "HEC",
-  siret: "234536251",
-  qualification: "metier",
-  mobility: "USA",
-  name_organisation: "ADIE",
-  isActive: false,
-  logo: "mlkdmlqksml.png",
-};
-
 chai.use(chaiHtpp);
 describe("POSTS", () => {
   before(async () => {
@@ -67,7 +48,11 @@ describe("POSTS", () => {
           content: "blablabla2",
           localisation: "dax2",
           language: "anglais2",
+          // JobCategoryId: "ncjodnjcsk",
+          // TypePostId: "56165",
+          // UserId: "jbsjkb",
         });
+        console.log(res);
         res.should.have.status(201);
         res.body.should.be.a("object");
         res.body.should.have.keys([
@@ -78,6 +63,9 @@ describe("POSTS", () => {
           "language",
           "createdAt",
           "updatedAt",
+          // "JobCategoryId",
+          // "TypePostId",
+          // "UserId",
         ]);
       } catch (err) {
         throw err;
