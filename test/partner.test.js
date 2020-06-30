@@ -1,35 +1,28 @@
 const chai = require("chai");
-const chaiHttp = require("chai-http");
+const chaiHtpp = require("chai-http");
 let should = chai.should();
 let server = require("../index");
 const sequelize = require("../sequelize");
-const Faq = require("../models/Faq");
+const Partner = require("../models/Partner");
 
-chai.use(chaiHttp);
+chai.use(chaiHtpp);
 
-let faqKeys = [
-  "id",
-  "question",
-  "answer",
-  "language",
-  "createdAt",
-  "updatedAt",
-];
+const partnerKeys = ["id", "label", "url", "logo", "createdAt", "updatedAt"];
 
-describe("FAQ", () => {
+describe("PARTNERS", () => {
   before(async () => {
     await sequelize.sync({ force: true });
-     const faq = await Faq.create({
-      question: " How are You ?",
-      answer: "Fine",
-      language: "En",
+    const partner = await Partner.create({
+      label: " hello",
+      url: "Fine",
+      logo: "Ends",
     });
-    faqId = faq.dataValues.id
+    partnerId = partner.dataValues.id;
   });
   describe("GET ALL", () => {
     it("should success", async () => {
       try {
-        const res = await chai.request(server).get("/api/v1/faq");
+        const res = await chai.request(server).get("/api/v1/partners");
         res.should.have.status(200);
         res.body.should.be.a("array");
         res.body.length.should.be.eql(1);
@@ -41,10 +34,12 @@ describe("FAQ", () => {
   describe("GET ONE", () => {
     it("should success", async () => {
       try {
-        const res = await chai.request(server).get(`/api/v1/faq/${faqId}`);
+        const res = await chai
+          .request(server)
+          .get(`/api/v1/partners/${partnerId}`);
         res.should.have.status(200);
         res.body.should.be.a("object");
-        res.body.should.have.keys(faqKeys)
+        res.body.should.have.keys(partnerKeys);
       } catch (err) {
         throw err;
       }
@@ -53,24 +48,24 @@ describe("FAQ", () => {
   describe("POST", () => {
     it("should success", async () => {
       try {
-        const res = await chai.request(server).post("/api/v1/faq").send({
-          question: "Why Crea ?",
-          answer: "Beceause it's a great platform",
-          language: "Euskara",
+        const res = await chai.request(server).post("/api/v1/partners").send({
+          label: " helscslo",
+          url: "Ficdscsne",
+          logo: "Endcds",
         });
         res.should.have.status(201);
         res.body.should.be.a("object");
-        res.body.should.have.keys(faqKeys);
+        res.body.should.have.keys(partnerKeys);
       } catch (err) {
         throw err;
       }
     });
-    it("Should fail", async () => {
+    it("should fail", async () => {
       try {
         const res = await chai
           .request(server)
-          .post("/api/v1/faq")
-          .send({ question: "Doe ?" });
+          .post("/api/v1/partners")
+          .send({ label: "Doe" });
         res.should.have.status(422);
         res.body.should.be.a("object");
       } catch (err) {
@@ -83,11 +78,11 @@ describe("FAQ", () => {
       try {
         const res = await chai
           .request(server)
-          .put(`/api/v1/faq/${faqId}`)
-          .send({ title: "bonjour" });
+          .put(`/api/v1/partners/${partnerId}`)
+          .send({ label: "bonjour" });
         res.should.have.status(202);
         res.body.should.be.a("object");
-        res.body.should.have.keys(faqKeys)
+        res.body.should.have.keys(partnerKeys);
       } catch (err) {
         throw err;
       }
@@ -98,7 +93,7 @@ describe("FAQ", () => {
       try {
         const res = await chai
           .request(server)
-          .delete(`/api/v1/faq/${faqId}`);
+          .delete(`/api/v1/partners/${partnerId}`);
         res.should.have.status(204);
         res.body.should.be.a("object");
       } catch (err) {

@@ -5,22 +5,32 @@ let server = require("../index");
 const sequelize = require("../sequelize");
 const JobCategory = require("../models/JobCategory");
 
-let category;
+let categoryId;
+
+let categoryKeys = [
+  "id",
+  "labelFr",
+  "labelEs",
+  "labelEus",
+  "createdAt",
+  "updatedAt",
+];
 
 chai.use(chaiHtpp);
 describe("JOB CATEGORY", () => {
   before(async () => {
     await sequelize.sync({ force: true });
-    category = await JobCategory.create({
+    const category = await JobCategory.create({
       labelFr: "toto",
       labelEs: "jean",
       labelEus: "hello",
     });
+    categoryId = category.dataValues.id
   });
-  describe("Get all job category", () => {
-    it("should return an array of job category", async () => {
+  describe("GET ALL", () => {
+    it("should success", async () => {
       try {
-        const res = await chai.request(server).get("/users/post/jobCategory");
+        const res = await chai.request(server).get("/api/v1/jobCategories");
         res.should.have.status(200);
         res.body.should.be.a("array");
         res.body.length.should.be.eql(1);
@@ -29,24 +39,26 @@ describe("JOB CATEGORY", () => {
       }
     });
   });
-  describe("Get one job category", () => {
-    it("should return an array of one job category", async () => {
-      try {
-        const res = await chai.request(server).get(`/users/post/jobCategory/${category.id}`);
-        res.should.have.status(200);
-        res.body.should.be.a("array");
-        res.body.length.should.be.eql(1);
-      } catch (err) {
-        throw err;
-      }
-    });
-  });
-  describe("Post one job category", () => {
-    it("should post a new user", async () => {
+  describe("GET ONE", () => {
+    it("should success", async () => {
       try {
         const res = await chai
           .request(server)
-          .post("/users/post/jobCategory")
+          .get(`/api/v1/jobCategories/${categoryId}`);
+        res.should.have.status(200);
+        res.body.should.be.a("array");
+        res.body.length.should.be.eql(1);
+      } catch (err) {
+        throw err;
+      }
+    });
+  });
+  describe("POST", () => {
+    it("should success", async () => {
+      try {
+        const res = await chai
+          .request(server)
+          .post("/api/v1/jobCategories")
           .send({
             labelFr: "marcel",
             labelEs: "pagnol",
@@ -54,23 +66,16 @@ describe("JOB CATEGORY", () => {
           });
         res.should.have.status(201);
         res.body.should.be.a("object");
-        res.body.should.have.keys([
-          "id",
-          "labelFr",
-          "labelEs",
-          "labelEus",
-          "createdAt",
-          "updatedAt",
-        ]);
+        res.body.should.have.keys(categoryKeys);
       } catch (err) {
         throw err;
       }
     });
-    it("Should fail to create", async () => {
+    it("Should fail", async () => {
       try {
         const res = await chai
           .request(server)
-          .post("/users/post/jobCategory")
+          .post("/api/v1/jobCategories")
           .send({ labelFr: "Doe" });
         res.should.have.status(422);
         res.body.should.be.a("object");
@@ -79,27 +84,28 @@ describe("JOB CATEGORY", () => {
       }
     });
   });
-  describe("Put one post's category", () => {
-    it("should put one post's category", async () => {
+  describe("PUT", () => {
+    it("should success", async () => {
       try {
         const res = await chai
           .request(server)
-          .put(`/users/post/jobCategory/${category.id}`)
-          .send({labelFr : "wcs"});
+          .put(`/api/v1/jobCategories/${categoryId}`)
+          .send({ labelFr: "wcs" });
         res.should.have.status(202);
-        res.body.should.be.a("array");
+        res.body.should.be.a("object");
+        res.body.should.have.keys(categoryKeys)
       } catch (err) {
         throw err;
       }
     });
   });
-  describe("Delete one post's category", () => {
-    it("should delete one post's category", async () => {
+  describe("DELETE", () => {
+    it("should success", async () => {
       try {
         const res = await chai
           .request(server)
-          .delete(`/users/post/jobCategory/${category.id}`);
-        res.should.have.status(205);
+          .delete(`/api/v1/jobCategories/${categoryId}`);
+        res.should.have.status(204);
         res.body.should.be.a("object");
       } catch (err) {
         throw err;

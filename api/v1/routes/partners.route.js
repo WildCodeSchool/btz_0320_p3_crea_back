@@ -1,6 +1,6 @@
 const express = require("express");
 const partners = express.Router();
-const Partner = require("../models/Partner");
+const Partner = require("../../../models/Partner");
 
 partners.get("/", async (req, res) => {
   try {
@@ -14,7 +14,7 @@ partners.get("/", async (req, res) => {
 partners.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const partner = await Partner.findAll({ where: { id } });
+    const partner = await Partner.findOne({ where: { id } });
     res.status(200).json(partner);
   } catch (err) {
     res.status(400).json(err);
@@ -39,7 +39,7 @@ partners.put("/:id", async (req, res) => {
   const { label, url, logo } = req.body;
   const { id } = req.params;
   try {
-    const partner = await Partner.update(
+    await Partner.update(
       {
         label,
         url,
@@ -47,6 +47,7 @@ partners.put("/:id", async (req, res) => {
       },
       { where: { id } }
     );
+    const partner = await Partner.findByPk(id)
     res.status(202).json(partner);
   } catch (err) {
     res.status(422).json(err);
@@ -57,7 +58,7 @@ partners.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const partner = await Partner.destroy({ where: { id } });
-    res.status(205).send("Le partenaire d'utilisateur a bien été effacé");
+    res.status(204).send("Le partenaire d'utilisateur a bien été effacé");
   } catch (err) {
     res.status(422).json(err);
   }

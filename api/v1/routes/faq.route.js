@@ -1,6 +1,6 @@
 const express = require("express");
 const faqs = express.Router();
-const Faq = require("../models/Faq");
+const Faq = require("../../../models/Faq");
 
 faqs.get("/", async (req, res) => {
     try {
@@ -39,10 +39,11 @@ faqs.put("/:id", async (req, res) => {
     const { id } = req.params;
     const { question, answer, language } = req.body;
     try {
-        const faq = await Faq.update(
+        await Faq.update(
             { question, answer, language },
             { where: { id } }
         );
+        const faq = await Faq.findByPk(id)
         res.status(202).json(faq);
     } catch (err) {
         res.status(422).json(err);
@@ -53,7 +54,7 @@ faqs.delete("/:id", async (req, res) => {
     try {
         const { id } = req.params;
         const faq = await Faq.destroy({ where: { id } });
-        res.status(205).send("La question a bien été effacé");
+        res.status(204).send("La question a bien été effacé");
     } catch (err) {
         res.status(422).json(err);
     }

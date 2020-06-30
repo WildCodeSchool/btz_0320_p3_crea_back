@@ -1,11 +1,22 @@
 const express = require("express");
 const users = express.Router();
-const User = require("../models/User");
+const User = require("../../../models/User");
+const Post = require("../../../models/Post");
 
 users.get("/", async (req, res) => {
   try {
     const users = await User.findAll();
     res.status(200).json(users);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+users.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findAll({ where: { id } });
+    res.status(200).json(user);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -29,6 +40,8 @@ users.post("/", async (req, res) => {
     name_organisation,
     isActive,
     logo,
+    UserTypeId,
+    ActivityFieldId,
   } = req.body;
   try {
     const user = await User.create({
@@ -48,6 +61,8 @@ users.post("/", async (req, res) => {
       name_organisation,
       isActive,
       logo,
+      UserTypeId,
+      ActivityFieldId,
     });
     res.status(201).json(user);
   } catch (err) {
@@ -73,10 +88,12 @@ users.put("/:id", async (req, res) => {
     name_organisation,
     isActive,
     logo,
+    UserTypeId,
+    ActivityFieldId,
   } = req.body;
   const { id } = req.params;
   try {
-    const user = await User.update(
+    await User.update(
       {
         lastName,
         firstName,
@@ -94,9 +111,12 @@ users.put("/:id", async (req, res) => {
         name_organisation,
         isActive,
         logo,
+        UserTypeId,
+        ActivityFieldId,
       },
       { where: { id } }
     );
+    const user = await User.findByPk(id)
     res.status(202).json(user);
   } catch (err) {
     res.status(422).json(err);
@@ -109,9 +129,20 @@ users.delete("/:id", async (req, res) => {
     const user = await User.destroy({
       where: { id },
     });
-    res.status(205).send("L'utilisateur a bien été effacé");
+    res.status(204).send("L'utilisateur a bien été effacé");
   } catch (err) {
     res.status(422).json(err);
+  }
+});
+
+// récupérer les posts d'un utilisateur
+users.get("/:id/posts", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const posts = await Post.findAll({ where: { UserId: id } });
+    res.status(200).json(posts);
+  } catch (err) {
+    res.status(400).json(err);
   }
 });
 

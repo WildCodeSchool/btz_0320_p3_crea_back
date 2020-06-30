@@ -3,33 +3,36 @@ const chaiHttp = require("chai-http");
 let should = chai.should();
 let server = require("../index");
 const sequelize = require("../sequelize");
-const Faq = require("../models/Faq");
+const ActivityField = require("../models/ActivityField");
+const User = require("../models/User");
 
 chai.use(chaiHttp);
 
-let faqKeys = [
+const activityFieldKeys = [
   "id",
-  "question",
-  "answer",
-  "language",
+  "labelFr",
+  "labelEs",
+  "labelEus",
   "createdAt",
   "updatedAt",
-];
+]
 
-describe("FAQ", () => {
+let activityFieldId;
+
+describe("Activity field", () => {
   before(async () => {
     await sequelize.sync({ force: true });
-     const faq = await Faq.create({
-      question: " How are You ?",
-      answer: "Fine",
-      language: "En",
+    const activity = await ActivityField.create({
+      labelFr: "Bâtiment",
+      labelEs: "Building",
+      labelEus: "Eraikin",
     });
-    faqId = faq.dataValues.id
+    activityFieldId = activity.dataValues.id;
   });
   describe("GET ALL", () => {
     it("should success", async () => {
       try {
-        const res = await chai.request(server).get("/api/v1/faq");
+        const res = await chai.request(server).get("/api/v1/activityFields");
         res.should.have.status(200);
         res.body.should.be.a("array");
         res.body.length.should.be.eql(1);
@@ -41,10 +44,10 @@ describe("FAQ", () => {
   describe("GET ONE", () => {
     it("should success", async () => {
       try {
-        const res = await chai.request(server).get(`/api/v1/faq/${faqId}`);
+        const res = await chai.request(server).get(`/api/v1/activityFields/${activityFieldId}`);
         res.should.have.status(200);
         res.body.should.be.a("object");
-        res.body.should.have.keys(faqKeys)
+        res.body.should.have.keys(activityFieldKeys)
       } catch (err) {
         throw err;
       }
@@ -53,14 +56,17 @@ describe("FAQ", () => {
   describe("POST", () => {
     it("should success", async () => {
       try {
-        const res = await chai.request(server).post("/api/v1/faq").send({
-          question: "Why Crea ?",
-          answer: "Beceause it's a great platform",
-          language: "Euskara",
-        });
+        const res = await chai
+          .request(server)
+          .post("/api/v1/activityFields")
+          .send({
+            labelFr: "Informatique",
+            labelEs: "Data processing",
+            labelEus: "Informatika",
+          });
         res.should.have.status(201);
         res.body.should.be.a("object");
-        res.body.should.have.keys(faqKeys);
+        res.body.should.have.keys(activityFieldKeys);
       } catch (err) {
         throw err;
       }
@@ -69,9 +75,9 @@ describe("FAQ", () => {
       try {
         const res = await chai
           .request(server)
-          .post("/api/v1/faq")
+          .post("/activityFields")
           .send({ question: "Doe ?" });
-        res.should.have.status(422);
+        res.should.have.status(404);
         res.body.should.be.a("object");
       } catch (err) {
         throw err;
@@ -83,11 +89,11 @@ describe("FAQ", () => {
       try {
         const res = await chai
           .request(server)
-          .put(`/api/v1/faq/${faqId}`)
+          .put(`/api/v1/activityFields/${activityFieldId}`)
           .send({ title: "bonjour" });
         res.should.have.status(202);
         res.body.should.be.a("object");
-        res.body.should.have.keys(faqKeys)
+        res.body.should.have.keys(activityFieldKeys)
       } catch (err) {
         throw err;
       }
@@ -98,7 +104,7 @@ describe("FAQ", () => {
       try {
         const res = await chai
           .request(server)
-          .delete(`/api/v1/faq/${faqId}`);
+          .delete(`/api/v1/activityFields/${activityFieldId}`);
         res.should.have.status(204);
         res.body.should.be.a("object");
       } catch (err) {
