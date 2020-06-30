@@ -4,12 +4,14 @@ let should = chai.should();
 let server = require("../index");
 const sequelize = require("../sequelize");
 const ActivityField = require("../models/ActivityField");
+const User = require("../models/User");
 
 chai.use(chaiHttp);
+
 describe("Activity field", () => {
   before(async () => {
     await sequelize.sync({ force: true });
-    await ActivityField.create({
+    const activity = await ActivityField.create({
       labelFr: "Bâtiment",
       labelEs: "Building",
       labelEus: "Eraikin",
@@ -30,11 +32,14 @@ describe("Activity field", () => {
   describe("Post one Activity field", () => {
     it("should post a new Activity field", async () => {
       try {
-        const res = await chai.request(server).post("/api/v1/activityFields").send({
-          labelFr: "Informatique",
-          labelEs: "Data processing",
-          labelEus: "Informatika",
-        });
+        const res = await chai
+          .request(server)
+          .post("/api/v1/activityFields")
+          .send({
+            labelFr: "Informatique",
+            labelEs: "Data processing",
+            labelEus: "Informatika",
+          });
         res.should.have.status(201);
         res.body.should.be.a("object");
         res.body.should.have.keys([
@@ -55,7 +60,7 @@ describe("Activity field", () => {
           .request(server)
           .post("/activityFields")
           .send({ question: "Doe ?" });
-        res.should.have.status(422);
+        res.should.have.status(404);
         res.body.should.be.a("object");
       } catch (err) {
         throw err;

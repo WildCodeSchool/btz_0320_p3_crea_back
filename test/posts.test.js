@@ -5,7 +5,24 @@ let server = require("../index");
 const sequelize = require("../sequelize");
 const Post = require("../models/Post");
 
-let post;
+let user = {
+  lastName: "jean",
+  firstName: "toto",
+  email: "helloworld",
+  password: "blablabla",
+  localisation: "anglet",
+  phone_number: 10940239,
+  phone_number2: 58493029,
+  isAdmin: false,
+  schoolName: "HEC",
+  companyName: "HEC",
+  siret: "234536251",
+  qualification: "metier",
+  mobility: "USA",
+  name_organisation: "ADIE",
+  isActive: false,
+  logo: "mlkdmlqksml.png",
+};
 
 chai.use(chaiHtpp);
 describe("POSTS", () => {
@@ -17,7 +34,6 @@ describe("POSTS", () => {
       localisation: "dax",
       language: "anglais",
     });
-  
   });
   describe("Get all users posts", () => {
     it("should return an array of users posts", async () => {
@@ -86,7 +102,7 @@ describe("POSTS", () => {
         const res = await chai
           .request(server)
           .put(`/api/v1/posts/${post.id}`)
-          .send({title : "bonjour"});
+          .send({ title: "bonjour" });
         res.should.have.status(202);
         res.body.should.be.a("array");
       } catch (err) {
@@ -97,7 +113,9 @@ describe("POSTS", () => {
   describe("Delete one user's post", () => {
     it("should delete one user's post", async () => {
       try {
-        const res = await chai.request(server).delete(`/api/v1/posts/${post.id}`);
+        const res = await chai
+          .request(server)
+          .delete(`/api/v1/posts/${post.id}`);
         res.should.have.status(205);
         res.body.should.be.a("object");
       } catch (err) {

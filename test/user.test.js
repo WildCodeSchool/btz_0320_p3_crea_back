@@ -4,29 +4,33 @@ let should = chai.should();
 let server = require("../index");
 const sequelize = require("../sequelize");
 const User = require("../models/User");
+const Post = require("../models/Post")
 
 chai.use(chaiHtpp);
+
+let userSample = {
+  lastName: "jean",
+  firstName: "toto",
+  email: "helloworld",
+  password: "blablabla",
+  localisation: "anglet",
+  phone_number: 10940239,
+  phone_number2: 58493029,
+  isAdmin: false,
+  schoolName: "HEC",
+  companyName: "HEC",
+  siret: "234536251",
+  qualification: "metier",
+  mobility: "USA",
+  name_organisation: "ADIE",
+  isActive: false,
+  logo: "mlkdmlqksml.png",
+};
+
 describe("USERS", () => {
   before(async () => {
     await sequelize.sync({ force: true });
-    await User.create({
-      lastName: "toto",
-      firstName: "jean",
-      email: "hello",
-      password: "hellohe",
-      localisation: "vielle",
-      phone_number: 556325365,
-      phone_number2: 558547854,
-      isAdmin: true,
-      schoolName: "wcs",
-      companyName: "wcs",
-      siret: "211680374",
-      qualification: "job",
-      mobility: "france",
-      name_organisation: "wcs",
-      isActive: false,
-      logo: "bjisdckjs",
-    });
+    await User.create(userSample);
   });
   describe("Get all users", () => {
     it("should return an array of users", async () => {
@@ -64,7 +68,7 @@ describe("USERS", () => {
         res.should.have.status(201);
         res.body.should.be.a("object");
         res.body.should.have.keys([
-          "id",        
+          "id",
           "lastName",
           "firstName",
           "email",

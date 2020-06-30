@@ -57,7 +57,7 @@ describe("Types_Posts", () => {
       try {
         const res = await chai
           .request(server)
-          .post("/user/post/postTypes")
+          .post("/api/v1/postTypes")
           .send({
             labelFr: "partenariat",
             labelEs: "partenarias",

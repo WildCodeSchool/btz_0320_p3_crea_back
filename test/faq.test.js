@@ -55,7 +55,7 @@ describe("FAQ", () => {
                     .request(server)
                     .post("/faq")
                     .send({ question: "Doe ?" });
-                res.should.have.status(422);
+                res.should.have.status(404);
                 res.body.should.be.a("object");
             } catch (err) {
                 throw err;
