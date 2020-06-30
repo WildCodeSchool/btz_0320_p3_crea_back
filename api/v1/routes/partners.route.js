@@ -1,6 +1,6 @@
 const express = require("express");
 const partners = express.Router();
-const Partner = require("../models/Partner");
+const Partner = require("../../../models/Partner");
 
 partners.get("/", async (req, res) => {
   try {

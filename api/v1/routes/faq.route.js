@@ -1,6 +1,6 @@
 const express = require("express");
 const faqs = express.Router();
-const Faq = require("../models/Faq");
+const Faq = require("../../../models/Faq");
 
 faqs.get("/", async (req, res) => {
     try {

@@ -6,8 +6,8 @@ const TypePost = require("./models/TypePost");
 const JobCategory = require("./models/JobCategory");
 const Reply = require("./models/Reply");
 
-User.hasMany(Post);
-Post.belongsTo(User);
+User.hasMany(Post, { foreignKey: { allowNull: false }});
+Post.belongsTo(User, { foreignKey: { allowNull: false }});
 
 User.belongsToMany(Post, { through: Reply });
 Post.belongsToMany(User, { through: Reply });
@@ -15,12 +15,12 @@ Post.belongsToMany(User, { through: Reply });
 // User.hasOne(Activity);
 // Activity.belongsToMany(User);
 
-User.hasOne(Type);
-Type.belongsTo(User);
+User.hasOne(Type, { foreignKey: { allowNull: false }});
+Type.belongsTo(User, { foreignKey: { allowNull: false }});
 
-Post.hasOne(TypePost);
-TypePost.belongsTo(Post);
+Post.hasOne(TypePost, { foreignKey: { allowNull: false }});
+TypePost.belongsTo(Post, { foreignKey: { allowNull: false }});
 
-Post.hasOne(JobCategory);
-JobCategory.belongsTo(Post);
+Post.hasOne(JobCategory, { foreignKey: { allowNull: false }});
+JobCategory.belongsTo(Post, { foreignKey: { allowNull: false }});
 

@@ -1,6 +1,6 @@
 const express = require("express");
 const types_post = express.Router();
-const Type_post = require("../models/TypePost");
+const Type_post = require("../../../models/TypePost");
 
 //récupère tous les types de posts
 types_post.get("/", async (req, res) => {

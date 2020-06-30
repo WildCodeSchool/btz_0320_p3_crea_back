@@ -1,6 +1,6 @@
 const express = require("express");
 const activitiesFields = express.Router();
-const ActivityField = require("../models/ActivityField");
+const ActivityField = require("../../../models/ActivityField");
 
 activitiesFields.get("/", async (req, res) => {
   try {

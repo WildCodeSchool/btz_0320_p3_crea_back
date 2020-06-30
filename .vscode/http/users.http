@@ -2,7 +2,7 @@ GET http://localhost:8080/users HTTP/1.1
 
 ####
 
-GET http://localhost:8080/users/d1119986-e8f6-4cdf-938d-c9983127a780 HTTP/1.1
+GET http://localhost:8080/users/b936fa4e-c26a-4bb0-8013-094da84b35f2 HTTP/1.1
 
 
 ###
@@ -10,8 +10,8 @@ POST http://localhost:8080/users HTTP/1.1
 Content-Type: application/json
 
 {
-    "lastName" : "toto",
-    "firstName" : "jean",
+    "lastName" : "Nicolas",
+    "firstName" : "Pierre",
     "email" : "hello",
     "password" : "hellohe",
     "localisation" : "vielle",
@@ -34,8 +34,8 @@ PUT http://localhost:8080/users/d85df18b-9722-4e65-a41c-c21e4f5a0735 HTTP/1.1
 Content-Type: application/json
 
 {
-    "lastName" : "jean",
-    "firstName" : "toto",
+    "lastName" : "Nicolas",
+    "firstName" : "Pierre",
     "email" : "helloworld",
     "password" : "blablabla",
     "localisation" : "anglet",
@@ -55,3 +55,6 @@ Content-Type: application/json
 ###
 
 DELETE http://localhost:8080/users/c5e5dca9-00c5-405f-8146-ca97da2c0c97 HTTP/1.1
+
+###
+GET http://localhost:8080/users/05f78664-b0e1-43bf-b6bc-ad7312cdbdd5/posts HTTP/1.1

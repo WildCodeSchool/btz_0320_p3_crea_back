@@ -1,8 +1,10 @@
 const express = require("express");
-const posts = express.Router();
-const Post = require("../models/Post");
+const Post = require("../../../models/Post");
+const router = express.Router();
 
-posts.get("/", async (req, res) => {
+
+
+router.get("/", async (req, res) => {
   try {
     const post = await Post.findAll();
     res.status(200).json(post);
@@ -11,7 +13,7 @@ posts.get("/", async (req, res) => {
   }
 });
 
-posts.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const post = await Post.findAll({ where: { id } });
@@ -21,14 +23,15 @@ posts.get("/:id", async (req, res) => {
   }
 });
 
-posts.post("/", async (req, res) => {
-  const { title, content, localisation, language } = req.body;
+router.post("/", async (req, res) => {
+  const { title, content, localisation, language, UserId } = req.body;
   try {
     const post = await Post.create({
       title,
       content,
       localisation,
       language,
+      UserId
     });
     res.status(201).json(post);
   } catch (err) {
@@ -36,7 +39,7 @@ posts.post("/", async (req, res) => {
   }
 });
 
-posts.put("/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   const { title, content, localisation, language } = req.body;
   const { id } = req.params;
   try {
@@ -50,7 +53,7 @@ posts.put("/:id", async (req, res) => {
   }
 });
 
-posts.delete("/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const post = await Post.destroy({
@@ -62,4 +65,4 @@ posts.delete("/:id", async (req, res) => {
   }
 });
 
-module.exports = posts;
+module.exports = router;

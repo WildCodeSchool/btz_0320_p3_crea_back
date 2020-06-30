@@ -1,6 +1,6 @@
 const express = require("express");
 const jobCategory = express.Router();
-const JobCategory = require("../models/JobCategory");
+const JobCategory = require("../../../models/JobCategory");
 
 jobCategory.get("/", async (req, res) => {
   try {

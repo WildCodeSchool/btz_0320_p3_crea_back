@@ -1,7 +1,7 @@
 const express = require("express");
 const users = express.Router();
-const User = require("../models/User");
-const Post = require("../models/Post")
+const User = require("../../../models/User");
+const Post = require("../../../models/Post");
 
 users.get("/", async (req, res) => {
   try {
@@ -130,11 +130,13 @@ users.delete("/:id", async (req, res) => {
 users.get("/:id/posts", async (req, res) => {
   try {
     const { id } = req.params;
-    const posts = await Post.findAll({ where: { UserId : id} });
+    const posts = await Post.findAll({ where: { UserId: id } });
     res.status(200).json(posts);
   } catch (err) {
     res.status(400).json(err);
   }
-})
+});
+
+
 
 module.exports = users;

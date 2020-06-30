@@ -1,6 +1,6 @@
 const express = require("express");
 const userTypes = express.Router();
-const UserType = require("../models/UserType");
+const UserType = require("../../../models/UserType");
 const { Connection } = require("pg");
 
 userTypes.get("/", async (req, res) => {
