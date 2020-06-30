@@ -18,7 +18,7 @@ describe("USERS_TYPES", () => {
       try {
         const res = await chai
           .request(server)
-          .get(`/users/userTypes/${userTypeTest.id}`);
+          .get(`/api/v1/userTypes/${userTypeTest.id}`);
         res.should.have.status(200);
         res.body.should.be.a("array");
         res.body.length.should.be.eql(1);
@@ -30,7 +30,7 @@ describe("USERS_TYPES", () => {
   describe("Get all UserTypes", () => {
     it("should return an array of usersTypes", async () => {
       try {
-        const res = await chai.request(server).get("/users/userTypes");
+        const res = await chai.request(server).get("/api/v1/userTypes");
         res.should.have.status(200);
         res.body.should.be.a("array");
         res.body.length.should.be.eql(1);
@@ -42,7 +42,7 @@ describe("USERS_TYPES", () => {
   describe("Post one userType", () => {
     it("should post a new userType", async () => {
       try {
-        const res = await chai.request(server).post("/users/userTypes").send({
+        const res = await chai.request(server).post("/api/v1/userTypes").send({
           label: "new toto label",
         });
         res.should.have.status(201);
@@ -56,7 +56,7 @@ describe("USERS_TYPES", () => {
       try {
         const res = await chai
           .request(server)
-          .post("/users/userTypes")
+          .post("/api/v1/userTypes")
           .send({ noLabel: "nolabel" });
         res.should.have.status(422);
         res.body.should.be.a("object");
@@ -68,7 +68,7 @@ describe("USERS_TYPES", () => {
   describe("Put UserTypes", () => {
     it("should return an array of usersTypes", async () => {
       try {
-        const res = await chai.request(server).put(`/users/userTypes/${userTypeTest.id}`).send({
+        const res = await chai.request(server).put(`/api/v1/userTypes/${userTypeTest.id}`).send({
           label: "Capitalist"
         });
         res.should.have.status(202);
@@ -82,7 +82,7 @@ describe("USERS_TYPES", () => {
   describe("Delete UserTypes", () => {
     it("should return an object of usersTypes", async () => {
       try {
-        const res = await chai.request(server).delete(`/users/userTypes/${userTypeTest.id}`)
+        const res = await chai.request(server).delete(`/api/v1/userTypes/${userTypeTest.id}`)
         res.should.have.status(205);
         res.body.should.be.a("object");
       } catch (err) {

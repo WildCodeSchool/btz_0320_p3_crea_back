@@ -40,6 +40,8 @@ users.post("/", async (req, res) => {
     name_organisation,
     isActive,
     logo,
+    UserTypeId,
+    ActivityFieldId,
   } = req.body;
   try {
     const user = await User.create({
@@ -59,6 +61,8 @@ users.post("/", async (req, res) => {
       name_organisation,
       isActive,
       logo,
+      UserTypeId,
+      ActivityFieldId,
     });
     res.status(201).json(user);
   } catch (err) {
@@ -84,6 +88,8 @@ users.put("/:id", async (req, res) => {
     name_organisation,
     isActive,
     logo,
+    UserTypeId,
+    ActivityFieldId,
   } = req.body;
   const { id } = req.params;
   try {
@@ -105,6 +111,8 @@ users.put("/:id", async (req, res) => {
         name_organisation,
         isActive,
         logo,
+        UserTypeId,
+        ActivityFieldId,
       },
       { where: { id } }
     );
@@ -136,7 +144,5 @@ users.get("/:id/posts", async (req, res) => {
     res.status(400).json(err);
   }
 });
-
-
 
 module.exports = users;

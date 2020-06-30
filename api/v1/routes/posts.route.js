@@ -2,8 +2,6 @@ const express = require("express");
 const Post = require("../../../models/Post");
 const router = express.Router();
 
-
-
 router.get("/", async (req, res) => {
   try {
     const post = await Post.findAll();
@@ -24,14 +22,24 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { title, content, localisation, language, UserId } = req.body;
+  const {
+    title,
+    content,
+    localisation,
+    language,
+    UserId,
+    TypePostId,
+    JobCategoryId,
+  } = req.body;
   try {
     const post = await Post.create({
       title,
       content,
       localisation,
       language,
-      UserId
+      UserId,
+      TypePostId,
+      JobCategoryId,
     });
     res.status(201).json(post);
   } catch (err) {
@@ -40,11 +48,27 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/:id", async (req, res) => {
-  const { title, content, localisation, language } = req.body;
+  const {
+    title,
+    content,
+    localisation,
+    language,
+    UserId,
+    TypePostId,
+    JobCategoryId,
+  } = req.body;
   const { id } = req.params;
   try {
     const post = await Post.update(
-      { title, content, localisation, language },
+      {
+        title,
+        content,
+        localisation,
+        language,
+        UserId,
+        TypePostId,
+        JobCategoryId,
+      },
       { where: { id } }
     );
     res.status(202).json(post);

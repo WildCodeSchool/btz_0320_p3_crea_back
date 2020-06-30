@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 
 const sequlizeInstance = require("../sequelize");
 
-const ActivityField = sequlizeInstance.define("Faq", {
+const ActivityField = sequlizeInstance.define("ActivityField", {
   id: {
     type: Sequelize.UUID,
     allowNull: false,

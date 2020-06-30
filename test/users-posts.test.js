@@ -22,7 +22,7 @@ describe("POSTS", () => {
   describe("Get all users posts", () => {
     it("should return an array of users posts", async () => {
       try {
-        const res = await chai.request(server).get("/users/posts");
+        const res = await chai.request(server).get("/api/v1/posts");
         res.should.have.status(200);
         res.body.should.be.a("array");
         res.body.length.should.be.eql(1);
@@ -34,7 +34,7 @@ describe("POSTS", () => {
   describe("Get one user's post", () => {
     it("should return an array of one user's posts", async () => {
       try {
-        const res = await chai.request(server).get(`/users/posts/${post.id}`);
+        const res = await chai.request(server).get(`/api/v1/posts/${post.id}`);
         res.should.have.status(200);
         res.body.should.be.a("array");
         res.body.length.should.be.eql(1);
@@ -46,7 +46,7 @@ describe("POSTS", () => {
   describe("Post one users post", () => {
     it("should post a new user's post", async () => {
       try {
-        const res = await chai.request(server).post("/users/posts").send({
+        const res = await chai.request(server).post("/api/v1/posts").send({
           title: "annonce2",
           content: "blablabla2",
           localisation: "dax2",
@@ -71,7 +71,7 @@ describe("POSTS", () => {
       try {
         const res = await chai
           .request(server)
-          .post("/users/posts")
+          .post("/api/v1/posts")
           .send({ title: "Doe" });
         res.should.have.status(422);
         res.body.should.be.a("object");
@@ -85,7 +85,7 @@ describe("POSTS", () => {
       try {
         const res = await chai
           .request(server)
-          .put(`/users/posts/${post.id}`)
+          .put(`/api/v1/posts/${post.id}`)
           .send({title : "bonjour"});
         res.should.have.status(202);
         res.body.should.be.a("array");
@@ -97,7 +97,7 @@ describe("POSTS", () => {
   describe("Delete one user's post", () => {
     it("should delete one user's post", async () => {
       try {
-        const res = await chai.request(server).delete(`/users/posts/${post.id}`);
+        const res = await chai.request(server).delete(`/api/v1/posts/${post.id}`);
         res.should.have.status(205);
         res.body.should.be.a("object");
       } catch (err) {

@@ -18,7 +18,7 @@ describe("FAQ", () => {
     describe("Get all FAQ", () => {
         it("shoul return an array of faqs", async () => {
             try {
-                const res = await chai.request(server).get("/faq");
+                const res = await chai.request(server).get("/api/v1/faq");
                 res.should.have.status(200);
                 res.body.should.be.a("array");
                 res.body.length.should.be.eql(1);
@@ -30,7 +30,7 @@ describe("FAQ", () => {
     describe("Post one faq", () => {
         it("should post a new faq", async () => {
             try {
-                const res = await chai.request(server).post("/faq").send({
+                const res = await chai.request(server).post("/api/v1/faq").send({
                     question: "Why Crea ?",
                     answer: "Beceause it's a great platform",
                     language: "Euskara",

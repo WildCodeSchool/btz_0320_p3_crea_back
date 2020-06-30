@@ -31,7 +31,7 @@ describe("USERS", () => {
   describe("Get all users", () => {
     it("should return an array of users", async () => {
       try {
-        const res = await chai.request(server).get("/users");
+        const res = await chai.request(server).get("/api/v1/users");
         res.should.have.status(200);
         res.body.should.be.a("array");
         res.body.length.should.be.eql(1);
@@ -43,7 +43,7 @@ describe("USERS", () => {
   describe("Post one user", () => {
     it("should post a new user", async () => {
       try {
-        const res = await chai.request(server).post("/users").send({
+        const res = await chai.request(server).post("/api/v1/users").send({
           lastName: "jean",
           firstName: "toto",
           email: "helloworld",
@@ -92,7 +92,7 @@ describe("USERS", () => {
       try {
         const res = await chai
           .request(server)
-          .post("/users")
+          .post("/api/v1/users")
           .send({ lastName: "Doe" });
         res.should.have.status(422);
         res.body.should.be.a("object");

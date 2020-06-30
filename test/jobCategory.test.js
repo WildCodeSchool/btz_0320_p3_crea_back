@@ -20,7 +20,7 @@ describe("JOB CATEGORY", () => {
   describe("Get all job category", () => {
     it("should return an array of job category", async () => {
       try {
-        const res = await chai.request(server).get("/users/post/jobCategory");
+        const res = await chai.request(server).get("/api/v1/jobCategories");
         res.should.have.status(200);
         res.body.should.be.a("array");
         res.body.length.should.be.eql(1);
@@ -32,7 +32,7 @@ describe("JOB CATEGORY", () => {
   describe("Get one job category", () => {
     it("should return an array of one job category", async () => {
       try {
-        const res = await chai.request(server).get(`/users/post/jobCategory/${category.id}`);
+        const res = await chai.request(server).get(`/api/v1/jobCategories/${category.id}`);
         res.should.have.status(200);
         res.body.should.be.a("array");
         res.body.length.should.be.eql(1);
@@ -46,7 +46,7 @@ describe("JOB CATEGORY", () => {
       try {
         const res = await chai
           .request(server)
-          .post("/users/post/jobCategory")
+          .post("/api/v1/jobCategories")
           .send({
             labelFr: "marcel",
             labelEs: "pagnol",
@@ -70,7 +70,7 @@ describe("JOB CATEGORY", () => {
       try {
         const res = await chai
           .request(server)
-          .post("/users/post/jobCategory")
+          .post("/api/v1/jobCategories")
           .send({ labelFr: "Doe" });
         res.should.have.status(422);
         res.body.should.be.a("object");
@@ -84,7 +84,7 @@ describe("JOB CATEGORY", () => {
       try {
         const res = await chai
           .request(server)
-          .put(`/users/post/jobCategory/${category.id}`)
+          .put(`/api/v1/jobCategories/${category.id}`)
           .send({labelFr : "wcs"});
         res.should.have.status(202);
         res.body.should.be.a("array");
@@ -98,7 +98,7 @@ describe("JOB CATEGORY", () => {
       try {
         const res = await chai
           .request(server)
-          .delete(`/users/post/jobCategory/${category.id}`);
+          .delete(`/api/v1/jobCategories/${category.id}`);
         res.should.have.status(205);
         res.body.should.be.a("object");
       } catch (err) {

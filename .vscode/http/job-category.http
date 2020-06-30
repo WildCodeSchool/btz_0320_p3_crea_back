@@ -1,11 +1,11 @@
-GET http://localhost:8080/users/post/jobCategory HTTP/1.1
+GET http://localhost:8080/api/v1/jobCategories HTTP/1.1
 
 ###
-GET http://localhost:8080/users/post/jobCategory/2dd72022-e4b9-49a5-b1a9-2672437bce61 HTTP/1.1
+GET http://localhost:8080/api/v1/jobCategories/2dd72022-e4b9-49a5-b1a9-2672437bce61 HTTP/1.1
 
 
 ###
-POST http://localhost:8080/users/post/jobCategory HTTP/1.1
+POST http://localhost:8080/api/v1/jobCategories HTTP/1.1
 Content-Type: application/json
 
 {
@@ -16,7 +16,7 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:8080/users/post/jobCategory/21c6179f-8e9d-4ad7-a3ae-a1a7689f53b4 HTTP/1.1
+PUT http://localhost:8080/api/v1/jobCategories/21c6179f-8e9d-4ad7-a3ae-a1a7689f53b4 HTTP/1.1
 Content-Type: application/json
 
 {
@@ -27,4 +27,4 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:8080/users/post/jobCategory/21c6179f-8e9d-4ad7-a3ae-a1a7689f53b4 HTTP/1.1
+DELETE http://localhost:8080/api/v1/jobCategories/21c6179f-8e9d-4ad7-a3ae-a1a7689f53b4 HTTP/1.1

@@ -25,7 +25,7 @@ describe("Types_Posts", () => {
   describe("Get all Types_Posts", () => {
     it("should return an array of types posts", async () => {
       try {
-        const res = await chai.request(server).get("/user/post/type_post");
+        const res = await chai.request(server).get("/api/v1/postTypes");
         res.should.have.status(200);
         res.body.should.be.a("array");
         res.body.length.should.be.eql(1);
@@ -41,7 +41,7 @@ describe("Types_Posts", () => {
       try {
         const res = await chai
           .request(server)
-          .get(`/user/post/type_post/${typePost.id}`);
+          .get(`/api/v1/postTypes/${typePost.id}`);
         res.should.have.status(200);
         res.body.should.be.a("array");
         res.body.length.should.be.eql(1);
@@ -57,7 +57,7 @@ describe("Types_Posts", () => {
       try {
         const res = await chai
           .request(server)
-          .post("/user/post/type_post")
+          .post("/user/post/postTypes")
           .send({
             labelFr: "partenariat",
             labelEs: "partenarias",
@@ -82,7 +82,7 @@ describe("Types_Posts", () => {
       try {
         const res = await chai
           .request(server)
-          .post("/user/post/type_post")
+          .post("/api/v1/postTypes")
           .send({
             labelFr:
               "ldksjendhejfkdksjdkfjdncjdklskdjakzelazkezaezadsqdssqdsqfffdsfdsf",
@@ -105,7 +105,7 @@ describe("Types_Posts", () => {
       try {
         const res = await chai
           .request(server)
-          .put(`/user/post/type_post/${typePost.id}`);
+          .put(`/api/v1/postTypes/${typePost.id}`);
         res.should.have.status(202);
         res.body.should.be.a("array");
       } catch (err) {
@@ -120,7 +120,7 @@ describe("Types_Posts", () => {
       try {
         const res = await chai
           .request(server)
-          .delete(`/user/post/type_post/${typePost.id}`)
+          .delete(`/api/v1/postTypes/${typePost.id}`)
           .send("element deleted");
         res.should.have.status(205);
         res.body.should.be.a("object");
