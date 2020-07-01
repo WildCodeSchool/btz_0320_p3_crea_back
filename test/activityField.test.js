@@ -1,36 +1,38 @@
 const chai = require("chai");
-const chaiHtpp = require("chai-http");
+const chaiHttp = require("chai-http");
 let should = chai.should();
 let server = require("../index");
 const sequelize = require("../sequelize");
-const JobCategory = require("../models/JobCategory");
+const ActivityField = require("../models/ActivityField");
+const User = require("../models/User");
 
-let categoryId;
+chai.use(chaiHttp);
 
-let categoryKeys = [
+const activityFieldKeys = [
   "id",
   "labelFr",
   "labelEs",
   "labelEus",
   "createdAt",
   "updatedAt",
-];
+]
 
-chai.use(chaiHtpp);
-describe("JOB CATEGORY", () => {
+let activityFieldId;
+
+describe("Activity field", () => {
   before(async () => {
     await sequelize.sync({ force: true });
-    const category = await JobCategory.create({
-      labelFr: "toto",
-      labelEs: "jean",
-      labelEus: "hello",
+    const activity = await ActivityField.create({
+      labelFr: "Bâtiment",
+      labelEs: "Building",
+      labelEus: "Eraikin",
     });
-    categoryId = category.dataValues.id
+    activityFieldId = activity.dataValues.id;
   });
   describe("GET ALL", () => {
     it("should success", async () => {
       try {
-        const res = await chai.request(server).get("/api/v1/jobCategories");
+        const res = await chai.request(server).get("/api/v1/activityFields");
         res.should.have.status(200);
         res.body.should.be.a("array");
         res.body.length.should.be.eql(1);
@@ -42,12 +44,10 @@ describe("JOB CATEGORY", () => {
   describe("GET ONE", () => {
     it("should success", async () => {
       try {
-        const res = await chai
-          .request(server)
-          .get(`/api/v1/jobCategories/${categoryId}`);
+        const res = await chai.request(server).get(`/api/v1/activityFields/${activityFieldId}`);
         res.should.have.status(200);
-        res.body.should.be.a("array");
-        res.body.length.should.be.eql(1);
+        res.body.should.be.a("object");
+        res.body.should.have.keys(activityFieldKeys)
       } catch (err) {
         throw err;
       }
@@ -58,15 +58,15 @@ describe("JOB CATEGORY", () => {
       try {
         const res = await chai
           .request(server)
-          .post("/api/v1/jobCategories")
+          .post("/api/v1/activityFields")
           .send({
-            labelFr: "marcel",
-            labelEs: "pagnol",
-            labelEus: "margaux",
+            labelFr: "Informatique",
+            labelEs: "Data processing",
+            labelEus: "Informatika",
           });
         res.should.have.status(201);
         res.body.should.be.a("object");
-        res.body.should.have.keys(categoryKeys);
+        res.body.should.have.keys(activityFieldKeys);
       } catch (err) {
         throw err;
       }
@@ -75,9 +75,9 @@ describe("JOB CATEGORY", () => {
       try {
         const res = await chai
           .request(server)
-          .post("/api/v1/jobCategories")
-          .send({ labelFr: "Doe" });
-        res.should.have.status(422);
+          .post("/activityFields")
+          .send({ question: "Doe ?" });
+        res.should.have.status(404);
         res.body.should.be.a("object");
       } catch (err) {
         throw err;
@@ -89,11 +89,11 @@ describe("JOB CATEGORY", () => {
       try {
         const res = await chai
           .request(server)
-          .put(`/api/v1/jobCategories/${categoryId}`)
-          .send({ labelFr: "wcs" });
+          .put(`/api/v1/activityFields/${activityFieldId}`)
+          .send({ title: "bonjour" });
         res.should.have.status(202);
         res.body.should.be.a("object");
-        res.body.should.have.keys(categoryKeys)
+        res.body.should.have.keys(activityFieldKeys)
       } catch (err) {
         throw err;
       }
@@ -104,7 +104,7 @@ describe("JOB CATEGORY", () => {
       try {
         const res = await chai
           .request(server)
-          .delete(`/api/v1/jobCategories/${categoryId}`);
+          .delete(`/api/v1/activityFields/${activityFieldId}`);
         res.should.have.status(204);
         res.body.should.be.a("object");
       } catch (err) {

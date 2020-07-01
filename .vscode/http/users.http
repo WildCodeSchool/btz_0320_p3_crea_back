@@ -1,13 +1,22 @@
+<<<<<<< HEAD:http/users.http
 GET http://localhost:8080/users HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTkzNTAzNzcyLCJleHAiOjE1OTM1OTAxNzJ9._xsci95nhHbO231wL-c9-Zu4gibTTOWxJ_lJiH1lDq0
+=======
+GET http://localhost:8080/api/v1/users HTTP/1.1
+
+####
+
+GET http://localhost:8080/api/v1/users/b936fa4e-c26a-4bb0-8013-094da84b35f2 HTTP/1.1
+
+>>>>>>> 24994d3373f16a3ba99ed71bc1f605de3b425fa0:.vscode/http/users.http
 
 ###
-POST http://localhost:8080/users HTTP/1.1
+POST http://localhost:8080/api/v1/users HTTP/1.1
 Content-Type: application/json
 
 {
-    "lastName" : "toto",
-    "firstName" : "jean",
+    "lastName" : "Nicolas",
+    "firstName" : "Pierre",
     "email" : "hello",
     "password" : "hellohe",
     "localisation" : "vielle",
@@ -21,25 +30,21 @@ Content-Type: application/json
     "mobility" : "france",
     "name_organisation" : "wcs",
     "isActive" : false,
-    "logo" : "bjisdckjs"
+    "logo" : "bjisdckjs",
+    "ActivityFieldId" : "c58c9548-2361-4954-8e85-a32171dd757d",
+    "UserTypeId" : "332ed989-8117-4e7f-930a-9bda7b7e9c10"
 }
 
 ###Auth
 POST http://localhost:8080/auth/login HTTP/1.1
 Content-Type: application/json
 
-{
-    "email" : "hello",
-    "password" : "hellohe"
-}
-
-###
-PUT http://localhost:8080/users/d85df18b-9722-4e65-a41c-c21e4f5a0735 HTTP/1.1
+PUT http://localhost:8080/api/v1/users/d85df18b-9722-4e65-a41c-c21e4f5a0735 HTTP/1.1
 Content-Type: application/json
 
 {
-    "lastName" : "jean",
-    "firstName" : "toto",
+    "lastName" : "Nicolas",
+    "firstName" : "Pierre",
     "email" : "helloworld",
     "password" : "blablabla",
     "localisation" : "anglet",
@@ -58,4 +63,7 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:8080/users/c5e5dca9-00c5-405f-8146-ca97da2c0c97 HTTP/1.1
+DELETE http://localhost:8080/api/v1/users/c5e5dca9-00c5-405f-8146-ca97da2c0c97 HTTP/1.1
+
+###
+GET http://localhost:8080/api/v1/users/05f78664-b0e1-43bf-b6bc-ad7312cdbdd5/posts HTTP/1.1

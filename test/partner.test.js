@@ -3,34 +3,35 @@ const chaiHtpp = require("chai-http");
 let should = chai.should();
 let server = require("../index");
 const sequelize = require("../sequelize");
-const JobCategory = require("../models/JobCategory");
+const Partner = require("../models/Partner");
 
-let categoryId;
+chai.use(chaiHtpp);
 
-let categoryKeys = [
+const partnerKeys = [
   "id",
-  "labelFr",
-  "labelEs",
-  "labelEus",
+  "label",
+  "url",
+  "logo",
+  "favorite",
   "createdAt",
   "updatedAt",
 ];
 
-chai.use(chaiHtpp);
-describe("JOB CATEGORY", () => {
+describe("PARTNERS", () => {
   before(async () => {
     await sequelize.sync({ force: true });
-    const category = await JobCategory.create({
-      labelFr: "toto",
-      labelEs: "jean",
-      labelEus: "hello",
+    const partner = await Partner.create({
+      label: " hello",
+      url: "Fine",
+      logo: "Ends",
+      favorite: "ok",
     });
-    categoryId = category.dataValues.id
+    partnerId = partner.dataValues.id;
   });
   describe("GET ALL", () => {
     it("should success", async () => {
       try {
-        const res = await chai.request(server).get("/api/v1/jobCategories");
+        const res = await chai.request(server).get("/api/v1/partners");
         res.should.have.status(200);
         res.body.should.be.a("array");
         res.body.length.should.be.eql(1);
@@ -44,10 +45,10 @@ describe("JOB CATEGORY", () => {
       try {
         const res = await chai
           .request(server)
-          .get(`/api/v1/jobCategories/${categoryId}`);
+          .get(`/api/v1/partners/${partnerId}`);
         res.should.have.status(200);
-        res.body.should.be.a("array");
-        res.body.length.should.be.eql(1);
+        res.body.should.be.a("object");
+        res.body.should.have.keys(partnerKeys);
       } catch (err) {
         throw err;
       }
@@ -56,27 +57,25 @@ describe("JOB CATEGORY", () => {
   describe("POST", () => {
     it("should success", async () => {
       try {
-        const res = await chai
-          .request(server)
-          .post("/api/v1/jobCategories")
-          .send({
-            labelFr: "marcel",
-            labelEs: "pagnol",
-            labelEus: "margaux",
-          });
+        const res = await chai.request(server).post("/api/v1/partners").send({
+          label: " helscslo",
+          url: "Ficdscsne",
+          logo: "Endcds",
+          favorite: "favorite",
+        });
         res.should.have.status(201);
         res.body.should.be.a("object");
-        res.body.should.have.keys(categoryKeys);
+        res.body.should.have.keys(partnerKeys);
       } catch (err) {
         throw err;
       }
     });
-    it("Should fail", async () => {
+    it("should fail", async () => {
       try {
         const res = await chai
           .request(server)
-          .post("/api/v1/jobCategories")
-          .send({ labelFr: "Doe" });
+          .post("/api/v1/partners")
+          .send({ label: "Doe" });
         res.should.have.status(422);
         res.body.should.be.a("object");
       } catch (err) {
@@ -89,11 +88,11 @@ describe("JOB CATEGORY", () => {
       try {
         const res = await chai
           .request(server)
-          .put(`/api/v1/jobCategories/${categoryId}`)
-          .send({ labelFr: "wcs" });
+          .put(`/api/v1/partners/${partnerId}`)
+          .send({ label: "bonjour" });
         res.should.have.status(202);
         res.body.should.be.a("object");
-        res.body.should.have.keys(categoryKeys)
+        res.body.should.have.keys(partnerKeys);
       } catch (err) {
         throw err;
       }
@@ -104,7 +103,7 @@ describe("JOB CATEGORY", () => {
       try {
         const res = await chai
           .request(server)
-          .delete(`/api/v1/jobCategories/${categoryId}`);
+          .delete(`/api/v1/partners/${partnerId}`);
         res.should.have.status(204);
         res.body.should.be.a("object");
       } catch (err) {
