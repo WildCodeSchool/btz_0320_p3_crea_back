@@ -7,7 +7,15 @@ const Partner = require("../models/Partner");
 
 chai.use(chaiHtpp);
 
-const partnerKeys = ["id", "label", "url", "logo", "createdAt", "updatedAt"];
+const partnerKeys = [
+  "id",
+  "label",
+  "url",
+  "logo",
+  "favorite",
+  "createdAt",
+  "updatedAt",
+];
 
 describe("PARTNERS", () => {
   before(async () => {
@@ -16,6 +24,7 @@ describe("PARTNERS", () => {
       label: " hello",
       url: "Fine",
       logo: "Ends",
+      favorite: "ok",
     });
     partnerId = partner.dataValues.id;
   });
@@ -52,6 +61,7 @@ describe("PARTNERS", () => {
           label: " helscslo",
           url: "Ficdscsne",
           logo: "Endcds",
+          favorite: "favorite",
         });
         res.should.have.status(201);
         res.body.should.be.a("object");

@@ -22,12 +22,13 @@ partners.get("/:id", async (req, res) => {
 });
 
 partners.post("/", async (req, res) => {
-  const { label, url, logo } = req.body;
+  const { label, url, logo, favorite } = req.body;
   try {
     const partner = await Partner.create({
       label,
       url,
       logo,
+      favorite,
     });
     res.status(201).json(partner);
   } catch (err) {
@@ -36,7 +37,7 @@ partners.post("/", async (req, res) => {
 });
 
 partners.put("/:id", async (req, res) => {
-  const { label, url, logo } = req.body;
+  const { label, url, logo, favorite } = req.body;
   const { id } = req.params;
   try {
     await Partner.update(
@@ -44,10 +45,11 @@ partners.put("/:id", async (req, res) => {
         label,
         url,
         logo,
+        favorite,
       },
       { where: { id } }
     );
-    const partner = await Partner.findByPk(id)
+    const partner = await Partner.findByPk(id);
     res.status(202).json(partner);
   } catch (err) {
     res.status(422).json(err);

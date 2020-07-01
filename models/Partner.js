@@ -21,6 +21,10 @@ const Partner = sequelizeInstance.define("Partner", {
     type: Sequelize.STRING(200),
     allowNull: true,
   },
+  favorite: {
+    type: Sequelize.STRING(200),
+    allowNull: true,
+  },
 });
 
 module.exports = Partner;
