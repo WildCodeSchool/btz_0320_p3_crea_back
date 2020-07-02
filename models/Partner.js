@@ -25,6 +25,10 @@ const Partner = sequelizeInstance.define("Partner", {
     type: Sequelize.STRING(200),
     allowNull: true,
   },
+  description: {
+    type: Sequelize.TEXT,
+    allowNull: true,
+  },
 });
 
 module.exports = Partner;
