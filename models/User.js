@@ -41,11 +41,11 @@ const User = sequelizeInstance.define("User", {
         type: Sequelize.INTEGER(15),
         allowNull: true,
     },
-    isAdmin: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-        defaultValue: false,
-    },
+    // isAdmin: {
+    //     type: Sequelize.BOOLEAN,
+    //     allowNull: false,
+    //     defaultValue: false,
+    // },
     schoolName: {
         type: Sequelize.STRING(50),
         allowNull: true,
@@ -81,6 +81,7 @@ const User = sequelizeInstance.define("User", {
 });
 
 User.prototype.validPassword = function (password) {
+ 
     if (password === this.password) {
         return true;
     } else {

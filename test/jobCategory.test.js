@@ -4,8 +4,9 @@ let should = chai.should();
 let server = require("../index");
 const sequelize = require("../sequelize");
 const JobCategory = require("../models/JobCategory");
+const { adminToken, userToken } = require("../testSamples");
 
-let categoryId;
+chai.use(chaiHtpp);
 
 let categoryKeys = [
   "id",
@@ -16,7 +17,8 @@ let categoryKeys = [
   "updatedAt",
 ];
 
-chai.use(chaiHtpp);
+let categoryId;
+
 describe("JOB CATEGORY", () => {
   before(async () => {
     await sequelize.sync({ force: true });
@@ -25,12 +27,28 @@ describe("JOB CATEGORY", () => {
       labelEs: "jean",
       labelEus: "hello",
     });
-    categoryId = category.dataValues.id
+    categoryId = category.dataValues.id;
   });
   describe("GET ALL", () => {
-    it("should success", async () => {
+    it("ADMIN should success", async () => {
       try {
-        const res = await chai.request(server).get("/api/v1/jobCategories");
+        const res = await chai
+          .request(server)
+          .get("/api/v1/jobCategories")
+          .set("Authorization", `Bearer ${adminToken}`);
+        res.should.have.status(200);
+        res.body.should.be.a("array");
+        res.body.length.should.be.eql(1);
+      } catch (err) {
+        throw err;
+      }
+    });
+    it("USER should success", async () => {
+      try {
+        const res = await chai
+          .request(server)
+          .get("/api/v1/jobCategories")
+          .set("Authorization", `Bearer ${userToken}`);
         res.should.have.status(200);
         res.body.should.be.a("array");
         res.body.length.should.be.eql(1);
@@ -40,11 +58,25 @@ describe("JOB CATEGORY", () => {
     });
   });
   describe("GET ONE", () => {
-    it("should success", async () => {
+    it(" ADMIN should success", async () => {
       try {
         const res = await chai
           .request(server)
-          .get(`/api/v1/jobCategories/${categoryId}`);
+          .get(`/api/v1/jobCategories/${categoryId}`)
+          .set("Authorization", `Bearer ${adminToken}`);
+        res.should.have.status(200);
+        res.body.should.be.a("array");
+        res.body.length.should.be.eql(1);
+      } catch (err) {
+        throw err;
+      }
+    });
+    it("USER should success", async () => {
+      try {
+        const res = await chai
+          .request(server)
+          .get(`/api/v1/jobCategories/${categoryId}`)
+          .set("Authorization", `Bearer ${userToken}`);
         res.should.have.status(200);
         res.body.should.be.a("array");
         res.body.length.should.be.eql(1);
@@ -54,11 +86,12 @@ describe("JOB CATEGORY", () => {
     });
   });
   describe("POST", () => {
-    it("should success", async () => {
+    it("ADMIN should success", async () => {
       try {
         const res = await chai
           .request(server)
           .post("/api/v1/jobCategories")
+          .set("Authorization", `Bearer ${adminToken}`)
           .send({
             labelFr: "marcel",
             labelEs: "pagnol",
@@ -71,11 +104,12 @@ describe("JOB CATEGORY", () => {
         throw err;
       }
     });
-    it("Should fail", async () => {
+    it("ADMIN Should fail", async () => {
       try {
         const res = await chai
           .request(server)
           .post("/api/v1/jobCategories")
+          .set("Authorization", `Bearer ${adminToken}`)
           .send({ labelFr: "Doe" });
         res.should.have.status(422);
         res.body.should.be.a("object");
@@ -83,17 +117,62 @@ describe("JOB CATEGORY", () => {
         throw err;
       }
     });
+    it("USER should fail", async () => {
+      try {
+        const res = await chai
+          .request(server)
+          .post("/api/v1/jobCategories")
+          .set("Authorization", `Bearer ${userToken}`)
+          .send({
+            labelFr: "Informatique",
+            labelEs: "Data processing",
+            labelEus: "Informatika",
+          });
+        res.should.have.status(403);
+        res.body.should.be.a("object");
+      } catch (err) {
+        throw err;
+      }
+    });
   });
   describe("PUT", () => {
-    it("should success", async () => {
+    it("ADMIN should success", async () => {
       try {
         const res = await chai
           .request(server)
           .put(`/api/v1/jobCategories/${categoryId}`)
+          .set("Authorization", `Bearer ${adminToken}`)
           .send({ labelFr: "wcs" });
         res.should.have.status(202);
         res.body.should.be.a("object");
-        res.body.should.have.keys(categoryKeys)
+        res.body.should.have.keys(categoryKeys);
+      } catch (err) {
+        throw err;
+      }
+    });
+    it("ADMIN should failed", async () => {
+      try {
+        const res = await chai
+          .request(server)
+          .put(`/api/v1/jobCategories/${categoryId}`)
+          .set("Authorization", `Bearer ${adminToken}`)
+          .send({ hello: "bonjour" });
+        res.should.have.status(202);
+        res.body.should.be.a("object");
+        res.body.should.have.keys(categoryKeys);
+      } catch (err) {
+        throw err;
+      }
+    });
+    it("USER should fail", async () => {
+      try {
+        const res = await chai
+          .request(server)
+          .put(`/api/v1/jobCategories/${categoryId}`)
+          .set("Authorization", `Bearer ${userToken}`)
+          .send({ labelFr: "georges" });
+        res.should.have.status(403);
+        res.body.should.be.a("object");
       } catch (err) {
         throw err;
       }
@@ -104,8 +183,21 @@ describe("JOB CATEGORY", () => {
       try {
         const res = await chai
           .request(server)
-          .delete(`/api/v1/jobCategories/${categoryId}`);
+          .delete(`/api/v1/jobCategories/${categoryId}`)
+          .set("Authorization", `Bearer ${adminToken}`);
         res.should.have.status(204);
+        res.body.should.be.a("object");
+      } catch (err) {
+        throw err;
+      }
+    });
+    it("USER should fail", async () => {
+      try {
+        const res = await chai
+          .request(server)
+          .delete(`/api/v1/activityFields/${categoryId}`)
+          .set("Authorization", `Bearer ${userToken}`);
+        res.should.have.status(403);
         res.body.should.be.a("object");
       } catch (err) {
         throw err;

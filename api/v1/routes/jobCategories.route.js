@@ -1,8 +1,9 @@
 const express = require("express");
 const jobCategory = express.Router();
 const JobCategory = require("../../../models/JobCategory");
+const authRole = require("../../../middleware/authRole");
 
-jobCategory.get("/", async (req, res) => {
+jobCategory.get("/",authRole(["ADMIN", "USER"]), async (req, res) => {
   try {
     const category = await JobCategory.findAll();
     res.status(200).json(category);
@@ -11,7 +12,7 @@ jobCategory.get("/", async (req, res) => {
   }
 });
 
-jobCategory.get("/:id", async (req, res) => {
+jobCategory.get("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
   try {
     const { id } = req.params;
     const category = await JobCategory.findAll({ where: { id } });
@@ -21,7 +22,7 @@ jobCategory.get("/:id", async (req, res) => {
   }
 });
 
-jobCategory.post("/", async (req, res) => {
+jobCategory.post("/", authRole("ADMIN"), async (req, res) => {
   const { labelFr, labelEs, labelEus } = req.body;
   try {
     const category = await JobCategory.create({
@@ -35,7 +36,7 @@ jobCategory.post("/", async (req, res) => {
   }
 });
 
-jobCategory.put("/:id", async (req, res) => {
+jobCategory.put("/:id", authRole("ADMIN"), async (req, res) => {
   const { labelFr, labelEs, labelEus } = req.body;
   const { id } = req.params;
   try {
@@ -54,7 +55,7 @@ jobCategory.put("/:id", async (req, res) => {
   }
 });
 
-jobCategory.delete("/:id", async (req, res) => {
+jobCategory.delete("/:id", authRole("ADMIN"), async (req, res) => {
   try {
     const { id } = req.params;
     const category = await JobCategory.destroy({

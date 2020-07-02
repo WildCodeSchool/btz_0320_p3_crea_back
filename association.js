@@ -1,22 +1,23 @@
 const User = require("./models/User");
-const Type = require("./models/UserType");
+const Role = require("./models/Role");
+const UserType = require("./models/UserType");
 const Activity = require("./models/ActivityField")
 const Post = require("./models/Post");
 const TypePost = require("./models/TypePost");
 const JobCategory = require("./models/JobCategory");
 const Reply = require("./models/Reply");
 
-User.hasMany(Post, { foreignKey: { allowNull: false}, onDelete : "CASCADE"});
-Post.belongsTo(User, { foreignKey: { allowNull: false }});
+User.hasMany(Post, { foreignKey: { allowNull: false}});
+Post.belongsTo(User, { foreignKey: { allowNull: false }, onDelete : "CASCADE"});
 
 User.belongsToMany(Post, { through: Reply });
 Post.belongsToMany(User, { through: Reply });
 
-User.belongsTo(Activity);
-Activity.hasMany(User);
+User.belongsTo(Activity, { foreignKey: { allowNull: true }});
+Activity.hasMany(User, { foreignKey: { allowNull: true }});
 
-Type.hasMany(User, { foreignKey: { allowNull: false }});
-User.belongsTo(Type, { foreignKey: { allowNull: false }});
+UserType.hasMany(User, { foreignKey: { allowNull: true }});
+User.belongsTo(UserType, { foreignKey: { allowNull: true }});
 
 TypePost.hasMany(Post, { foreignKey: { allowNull: false }});
 Post.belongsTo(TypePost, { foreignKey: { allowNull: false }});
@@ -24,3 +25,5 @@ Post.belongsTo(TypePost, { foreignKey: { allowNull: false }});
 JobCategory.hasMany(Post, { foreignKey: { allowNull: false }});
 Post.belongsTo(JobCategory, { foreignKey: { allowNull: false }});
 
+User.belongsTo(Role, {foreignKey: { allowNull: true }})
+Role.hasMany(User)

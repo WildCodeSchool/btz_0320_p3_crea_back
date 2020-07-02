@@ -4,12 +4,13 @@ let should = chai.should();
 let server = require("../index");
 const sequelize = require("../sequelize");
 const Partner = require("../models/Partner");
-
+const { adminToken, userToken } = require("../testSamples");
 chai.use(chaiHtpp);
 
 const partnerKeys = [
   "id",
   "label",
+  "description",
   "url",
   "logo",
   "favorite",
@@ -17,11 +18,14 @@ const partnerKeys = [
   "updatedAt",
 ];
 
+let partnerId;
+
 describe("PARTNERS", () => {
   before(async () => {
     await sequelize.sync({ force: true });
     const partner = await Partner.create({
       label: " hello",
+      description: "blablablabla",
       url: "Fine",
       logo: "Ends",
       favorite: "ok",
@@ -29,9 +33,25 @@ describe("PARTNERS", () => {
     partnerId = partner.dataValues.id;
   });
   describe("GET ALL", () => {
-    it("should success", async () => {
+    it("ADMIN should success", async () => {
       try {
-        const res = await chai.request(server).get("/api/v1/partners");
+        const res = await chai
+          .request(server)
+          .get("/api/v1/partners")
+          .set("Authorization", `Bearer ${adminToken}`);
+        res.should.have.status(200);
+        res.body.should.be.a("array");
+        res.body.length.should.be.eql(1);
+      } catch (err) {
+        throw err;
+      }
+    });
+    it("USER should success", async () => {
+      try {
+        const res = await chai
+          .request(server)
+          .get("/api/v1/partners")
+          .set("Authorization", `Bearer ${userToken}`);
         res.should.have.status(200);
         res.body.should.be.a("array");
         res.body.length.should.be.eql(1);
@@ -41,11 +61,25 @@ describe("PARTNERS", () => {
     });
   });
   describe("GET ONE", () => {
-    it("should success", async () => {
+    it("ADMIN should success", async () => {
       try {
         const res = await chai
           .request(server)
-          .get(`/api/v1/partners/${partnerId}`);
+          .get(`/api/v1/partners/${partnerId}`)
+          .set("Authorization", `Bearer ${adminToken}`);
+        res.should.have.status(200);
+        res.body.should.be.a("object");
+        res.body.should.have.keys(partnerKeys);
+      } catch (err) {
+        throw err;
+      }
+    });
+    it("USER should success", async () => {
+      try {
+        const res = await chai
+          .request(server)
+          .get(`/api/v1/partners/${partnerId}`)
+          .set("Authorization", `Bearer ${userToken}`);
         res.should.have.status(200);
         res.body.should.be.a("object");
         res.body.should.have.keys(partnerKeys);
@@ -55,14 +89,19 @@ describe("PARTNERS", () => {
     });
   });
   describe("POST", () => {
-    it("should success", async () => {
+    it("ADMIN should success", async () => {
       try {
-        const res = await chai.request(server).post("/api/v1/partners").send({
-          label: " helscslo",
-          url: "Ficdscsne",
-          logo: "Endcds",
-          favorite: "favorite",
-        });
+        const res = await chai
+          .request(server)
+          .post("/api/v1/partners")
+          .send({
+            label: " helscslo",
+            description: "bcjkdsbckjdsbck",
+            url: "Ficdscsne",
+            logo: "Endcds",
+            favorite: "favorite",
+          })
+          .set("Authorization", `Bearer ${adminToken}`);
         res.should.have.status(201);
         res.body.should.be.a("object");
         res.body.should.have.keys(partnerKeys);
@@ -70,13 +109,46 @@ describe("PARTNERS", () => {
         throw err;
       }
     });
-    it("should fail", async () => {
+    it("ADMIN should fail", async () => {
       try {
         const res = await chai
           .request(server)
           .post("/api/v1/partners")
-          .send({ label: "Doe" });
+          .send({ label: "Doe" })
+          .set("Authorization", `Bearer ${adminToken}`);
         res.should.have.status(422);
+        res.body.should.be.a("object");
+      } catch (err) {
+        throw err;
+      }
+    });
+    it("USER should fail", async () => {
+      try {
+        const res = await chai
+          .request(server)
+          .post("/api/v1/partners")
+          .send({
+            label: "helscslo",
+            description:"bcjsbckjds",
+            url: "Ficdscsne",
+            logo: "Endcds",
+            favorite: "favorite",
+          })
+          .set("Authorization", `Bearer ${userToken}`);
+        res.should.have.status(403);
+        res.body.should.be.a("object");
+      } catch (err) {
+        throw err;
+      }
+    });
+    it("USER should fail", async () => {
+      try {
+        const res = await chai
+          .request(server)
+          .post("/api/v1/partners")
+          .send({ label: "Doe" })
+          .set("Authorization", `Bearer ${userToken}`);
+        res.should.have.status(403);
         res.body.should.be.a("object");
       } catch (err) {
         throw err;
@@ -84,12 +156,13 @@ describe("PARTNERS", () => {
     });
   });
   describe("PUT", () => {
-    it("should success", async () => {
+    it("ADMIN should success", async () => {
       try {
         const res = await chai
           .request(server)
           .put(`/api/v1/partners/${partnerId}`)
-          .send({ label: "bonjour" });
+          .send({ label: "bonjour" })
+          .set("Authorization", `Bearer ${adminToken}`);
         res.should.have.status(202);
         res.body.should.be.a("object");
         res.body.should.have.keys(partnerKeys);
@@ -97,14 +170,39 @@ describe("PARTNERS", () => {
         throw err;
       }
     });
-  });
-  describe("DELETE", () => {
-    it("should success", async () => {
+    it("USER should fail", async () => {
       try {
         const res = await chai
           .request(server)
-          .delete(`/api/v1/partners/${partnerId}`);
+          .put(`/api/v1/partners/${partnerId}`)
+          .send({ label: "bonjour" })
+          .set("Authorization", `Bearer ${userToken}`);
+        res.should.have.status(403);
+      } catch (err) {
+        throw err;
+      }
+    });
+  });
+  describe("DELETE", () => {
+    it("ADMIN should success", async () => {
+      try {
+        const res = await chai
+          .request(server)
+          .delete(`/api/v1/partners/${partnerId}`)
+          .set("Authorization", `Bearer ${adminToken}`);
         res.should.have.status(204);
+        res.body.should.be.a("object");
+      } catch (err) {
+        throw err;
+      }
+    });
+    it("USER should fail", async () => {
+      try {
+        const res = await chai
+          .request(server)
+          .delete(`/api/v1/partners/${partnerId}`)
+          .set("Authorization", `Bearer ${userToken}`);
+        res.should.have.status(403);
         res.body.should.be.a("object");
       } catch (err) {
         throw err;

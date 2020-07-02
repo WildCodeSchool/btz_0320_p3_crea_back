@@ -1,38 +1,40 @@
 const express = require("express");
-const users = express.Router();
-const User = require("../models/User");
-const authRole = require("./middleware/authRole");
-const authAdmin = require("./middleware/authAdmin");
+
+const authRole = require("../../../middleware/authRole");
 const user = require("../routes/auth.route");
 const User = require("../../../models/User");
 const Post = require("../../../models/Post");
 
-users.get("/", authRole("true"), async (req, res) => {
-    try {
-        console.log(req.user);
-        if (req.user && req.user.isAdmin) {
-            const users = await User.findAll();
-            res.status(200).json(users);
-        } else {
-            console.log("error");
-            throw new Error("You are not admin ! GET THE FUCK OUT !");
-        }
-    } catch (err) {
-        res.status(400).json(err);
-    }
-});
+const router = express.Router();
 
-users.get("/:id", async (req, res) => {
+router.get("/", authRole("ADMIN"), async (req, res) => {
   try {
-    const { id } = req.params;
-    const user = await User.findAll({ where: { id } });
-    res.status(200).json(user);
+    if (req.user) {
+      const users = await User.findAll();
+      res.status(200).json(users);
+    } else {
+      throw new Error("You are not admin!");
+    }
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
-users.post("/", async (req, res) => {
+router.get("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (req.user.role === "USER" && req.user.id !== id) {
+      res.status(401).json({ message: "You are not allowed to access this" });
+    } else {
+      const user = await User.findOne({ where: { id } });
+      res.status(200).json(user);
+    }
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+router.post("/", authRole("ADMIN"), async (req, res) => {
   const {
     lastName,
     firstName,
@@ -41,7 +43,6 @@ users.post("/", async (req, res) => {
     localisation,
     phone_number,
     phone_number2,
-    isAdmin,
     schoolName,
     companyName,
     siret,
@@ -52,6 +53,7 @@ users.post("/", async (req, res) => {
     logo,
     UserTypeId,
     ActivityFieldId,
+    RoleId,
   } = req.body;
   try {
     const user = await User.create({
@@ -62,7 +64,6 @@ users.post("/", async (req, res) => {
       localisation,
       phone_number,
       phone_number2,
-      isAdmin,
       schoolName,
       companyName,
       siret,
@@ -73,6 +74,7 @@ users.post("/", async (req, res) => {
       logo,
       UserTypeId,
       ActivityFieldId,
+      RoleId,
     });
     res.status(201).json(user);
   } catch (err) {
@@ -80,7 +82,7 @@ users.post("/", async (req, res) => {
   }
 });
 
-users.put("/:id", async (req, res) => {
+router.put("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
   const {
     lastName,
     firstName,
@@ -89,7 +91,6 @@ users.put("/:id", async (req, res) => {
     localisation,
     phone_number,
     phone_number2,
-    isAdmin,
     schoolName,
     companyName,
     siret,
@@ -100,9 +101,13 @@ users.put("/:id", async (req, res) => {
     logo,
     UserTypeId,
     ActivityFieldId,
+    RoleId,
   } = req.body;
   const { id } = req.params;
   try {
+    if (req.user.role === "USER" && req.user.id !== id) {
+      res.status(401).json({ message: "You are not allowed to modify this" });
+    }
     await User.update(
       {
         lastName,
@@ -112,7 +117,6 @@ users.put("/:id", async (req, res) => {
         localisation,
         phone_number,
         phone_number2,
-        isAdmin,
         schoolName,
         companyName,
         siret,
@@ -123,19 +127,23 @@ users.put("/:id", async (req, res) => {
         logo,
         UserTypeId,
         ActivityFieldId,
+        RoleId,
       },
       { where: { id } }
     );
-    const user = await User.findByPk(id)
+    const user = await User.findByPk(id);
     res.status(202).json(user);
   } catch (err) {
     res.status(422).json(err);
   }
 });
 
-users.delete("/:id", async (req, res) => {
+router.delete("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
   try {
     const { id } = req.params;
+    if (req.user.role === "USER" && req.user.id !== id) {
+      res.status(401).json({ message: "You are not allowed to delete this" });
+    }
     const user = await User.destroy({
       where: { id },
     });
@@ -146,9 +154,12 @@ users.delete("/:id", async (req, res) => {
 });
 
 // récupérer les posts d'un utilisateur
-users.get("/:id/posts", async (req, res) => {
+router.get("/:id/posts", authRole(["ADMIN", "USER"]), async (req, res) => {
   try {
     const { id } = req.params;
+    if (req.user.role === "USER" && req.user.id !== id) {
+      res.status(401).json({ message: "You are not allowed to delete this" });
+    }
     const posts = await Post.findAll({ where: { UserId: id } });
     res.status(200).json(posts);
   } catch (err) {
@@ -156,4 +167,4 @@ users.get("/:id/posts", async (req, res) => {
   }
 });
 
-module.exports = users;
+module.exports = router;

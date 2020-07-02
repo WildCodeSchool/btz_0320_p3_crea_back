@@ -1,8 +1,9 @@
 const express = require("express");
 const faqs = express.Router();
 const Faq = require("../../../models/Faq");
+const authRole = require("../../../middleware/authRole");
 
-faqs.get("/", async (req, res) => {
+faqs.get("/", authRole(["ADMIN", "USER"]), async (req, res) => {
     try {
         const faqs = await Faq.findAll();
         res.status(200).json(faqs);
@@ -11,7 +12,7 @@ faqs.get("/", async (req, res) => {
     }
 });
 
-faqs.get("/:id", async (req, res) => {
+faqs.get("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
     const { id } = req.params;
     try {
         const faq = await Faq.findOne({ where: { id } });
@@ -21,7 +22,7 @@ faqs.get("/:id", async (req, res) => {
     }
 });
 
-faqs.post("/", async (req, res) => {
+faqs.post("/", authRole("ADMIN"), async (req, res) => {
     const { question, answer, language } = req.body;
     try {
         const faq = await Faq.create({
@@ -35,7 +36,7 @@ faqs.post("/", async (req, res) => {
     }
 });
 
-faqs.put("/:id", async (req, res) => {
+faqs.put("/:id", authRole("ADMIN"), async (req, res) => {
     const { id } = req.params;
     const { question, answer, language } = req.body;
     try {
@@ -50,7 +51,7 @@ faqs.put("/:id", async (req, res) => {
     }
 });
 
-faqs.delete("/:id", async (req, res) => {
+faqs.delete("/:id",authRole("ADMIN"), async (req, res) => {
     try {
         const { id } = req.params;
         const faq = await Faq.destroy({ where: { id } });

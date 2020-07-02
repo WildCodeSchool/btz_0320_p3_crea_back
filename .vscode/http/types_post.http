@@ -5,6 +5,7 @@ GET http://localhost:8080/api/v1/postTypes/2464b82e-838f-4199-9fef-c5446756f6d5 
 
 ###
 POST http://localhost:8080/api/v1/postTypes HTTP/1.1
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkyNjdjNjZiLWQyOTEtNGU4Ny1hNTM3LTdhYWQ1NzQxYzA4OSIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5MzcwNzYxNSwiZXhwIjoxNTkzNzk0MDE1fQ.aRdEG2fnnGd7u3FELZOMXT99lmTOSs8wFqd4jjhBlUQ
 Content-Type: application/json
 
 {

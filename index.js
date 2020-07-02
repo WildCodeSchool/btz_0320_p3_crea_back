@@ -1,19 +1,19 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const port = 8080;
 
 const sequelize = require("./sequelize");
 require("./association");
-const api = require("./api/v1") 
-const auth = require("./routes/auth.route");
+const Role = require("./models/Role");
+const User = require("./models/User");
 
+const api = require("./api/v1");
+const port = 8080;
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 
-app.use("/auth", auth);
 app.use("/api/v1", api);
 
 app.get("/", (req, res) => {
@@ -21,22 +21,56 @@ app.get("/", (req, res) => {
 });
 
 if (process.env.NODE_ENV !== "test") {
-    sequelize
-        .sync({ alter: true })
-        .then(() => {
-            return sequelize.authenticate();
-        })
-        .then(() => {
-            app.listen(port, (err) => {
-                if (err) {
-                    throw new Error("Something really bad happened ...");
-                }
-                console.log(`Server is listening on ${port}`);
-            });
-        })
-        .catch((err) => {
-            console.log("enable to join database", err.message);
-        });
+  sequelize
+    .sync()
+    .then(() => {
+      return sequelize.authenticate();
+    })
+    .then(() => {
+      // we create two roles only if they don't exists
+      return Promise.all([
+        Role.findCreateFind({ where: { label: "ADMIN" } }),
+        Role.findCreateFind({ where: { label: "USER" } }),
+      ]);
+    })
+    .then(([admin, user]) => {
+      // then we create two users for testing
+      return [
+        User.findCreateFind({
+          where: { email: "admin@dev.com" },
+          defaults: {
+            password: "admin",
+            firstName: "admin",
+            lastName: "admin",
+            localisation: "admin",
+            phone_number: 0656565656,
+            RoleId: admin[0].id,
+          },
+        }),
+        User.findCreateFind({
+          where: { email: "user@dev.com" },
+          defaults: {
+            password: "user",
+            firstName: "user",
+            lastName: "user",
+            localisation: "user",
+            phone_number: 0656565656,
+            RoleId: user[0].id,
+          },
+        }),
+      ];
+    })
+    .then(() => {
+      app.listen(port, (err) => {
+        if (err) {
+          throw new Error("Something really bad happened ...");
+        }
+        console.log(`Server is listening on ${port}`);
+      });
+    })
+    .catch((err) => {
+      console.log("unable to join database", err.message);
+    });
 }
 
 module.exports = app;
