@@ -1,4 +1,5 @@
 GET http://localhost:8080/api/v1/jobCategories HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjNTIyZTJlLTM4ODQtNGU4Ny1hN2QzLTc4ZmVjOWY1MzJkZiIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5Mzc2NDU5MSwiZXhwIjoxNTkzODUwOTkxfQ.RjZAiICm3DeK29k9yxzW_ahOgeuObtqZzYFF6w0lR9Q
 
 ###
 GET http://localhost:8080/api/v1/jobCategories/2dd72022-e4b9-49a5-b1a9-2672437bce61 HTTP/1.1
@@ -6,7 +7,7 @@ GET http://localhost:8080/api/v1/jobCategories/2dd72022-e4b9-49a5-b1a9-2672437bc
 
 ###
 POST http://localhost:8080/api/v1/jobCategories HTTP/1.1
-Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkyNjdjNjZiLWQyOTEtNGU4Ny1hNTM3LTdhYWQ1NzQxYzA4OSIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5MzcwNzYxNSwiZXhwIjoxNTkzNzk0MDE1fQ.aRdEG2fnnGd7u3FELZOMXT99lmTOSs8wFqd4jjhBlUQ
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjNTIyZTJlLTM4ODQtNGU4Ny1hN2QzLTc4ZmVjOWY1MzJkZiIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5Mzc2NDU5MSwiZXhwIjoxNTkzODUwOTkxfQ.RjZAiICm3DeK29k9yxzW_ahOgeuObtqZzYFF6w0lR9Q
 Content-Type: application/json
 
 {

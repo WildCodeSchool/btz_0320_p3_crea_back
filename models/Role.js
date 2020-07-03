@@ -10,7 +10,7 @@ const Role = sequelizeInstance.define("Role", {
         defaultValue: Sequelize.UUIDV4,
     },
     label: {
-        type: Sequelize.STRING, 
+        type: Sequelize.STRING,
         allowNull: false,
     },
 });

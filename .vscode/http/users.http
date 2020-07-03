@@ -1,5 +1,5 @@
 GET http://localhost:8080/api/v1/users HTTP/1.1
-Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkyNjdjNjZiLWQyOTEtNGU4Ny1hNTM3LTdhYWQ1NzQxYzA4OSIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5MzcwNzYxNSwiZXhwIjoxNTkzNzk0MDE1fQ.aRdEG2fnnGd7u3FELZOMXT99lmTOSs8wFqd4jjhBlUQ
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjNTIyZTJlLTM4ODQtNGU4Ny1hN2QzLTc4ZmVjOWY1MzJkZiIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5Mzc2NDU5MSwiZXhwIjoxNTkzODUwOTkxfQ.RjZAiICm3DeK29k9yxzW_ahOgeuObtqZzYFF6w0lR9Q
 
 ####
 
@@ -26,8 +26,8 @@ Content-Type: application/json
     "name_organisation" : "wcs",
     "isActive" : false,
     "logo" : "bjisdckjs",
-    "ActivityFieldId" : "94a5efb5-2d7f-4b43-b9ef-2d4d5d73d89c",
-    "UserTypeId" : "9ab5c3a9-6073-4a45-829e-f684ef5f770f"
+    "ActivityFieldId" : "07dac2cd-63d1-4b3f-9795-db9ee36f37a3",
+    "UserTypeId" : "6f73feb0-2e71-48c9-8077-686717f005e0"
 }
 
 ###Auth
@@ -35,8 +35,8 @@ POST http://localhost:8080/api/v1/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email" : "admin@dev.com",
-    "password" : "admin"
+    "email" : "user@dev.com",
+    "password" : "user"
 }
 
 ###register
@@ -44,12 +44,12 @@ POST http://localhost:8080/api/v1/auth/register HTTP/1.1
 Content-Type: application/json
 
 {
-    "lastName" : "maxime",
-    "firstName" : "reloue",
-    "email" : "reloue@je.fr",
-    "password" : "reloue2",
+    "lastName" : "user",
+    "firstName" : "user",
+    "email" : "user@dev.com",
+    "password" : "user",
     "localisation" : "vielle",
-    "phone_number" : 556325365,
+    "phone_number" : 0656565656,
     "phone_number2" : 558547854,
     "schoolName" : "wcs",
     "companyName" : "wcs",
@@ -59,8 +59,8 @@ Content-Type: application/json
     "name_organisation" : "wcs",
     "isActive" : false,
     "logo" : "bjisdckjs",
-    "ActivityFieldId" : "f028612f-879e-4b8b-9df7-01bcee4e8b81",
-    "UserTypeId" : "00702be5-3a1d-4e98-a39b-7eda56bea7ce",
+    "ActivityFieldId" : "07dac2cd-63d1-4b3f-9795-db9ee36f37a3",
+    "UserTypeId" : "6f73feb0-2e71-48c9-8077-686717f005e0",
     "RoleId": "cb222a0a-35e3-4c52-bf18-46c4feaddd4d"
 }
 
