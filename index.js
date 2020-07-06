@@ -8,7 +8,7 @@ const Role = require("./models/Role");
 const User = require("./models/User");
 
 const api = require("./api/v1");
-const port = 8080;
+const port = process.env.PORT || 8080;
 const app = express();
 
 app.use(express.json());
