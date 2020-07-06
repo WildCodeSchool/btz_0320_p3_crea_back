@@ -3,6 +3,7 @@ const adminToken =
 
   const userToken =
 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE1ZGQ0M2VmLWQxM2ItNGZiYS1iM2IyLTBlYjJlZWQ3N2E0YyIsImVtYWlsIjoidXNlckBkZXYuY29tIiwicm9sZSI6IlVTRVIiLCJ0eXBlIjpudWxsLCJpYXQiOjE1OTQwMTk2MzMsImV4cCI6MTU5NDEwNjAzM30.V8nzWUvM8uF2PP5TTs8lhA1xqg7UGEuGXWoS3reiRNk"
+
 const adminSample = {
   lastName: "admin",
   firstName: "admin",
