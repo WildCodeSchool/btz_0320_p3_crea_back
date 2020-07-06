@@ -8,6 +8,8 @@ const posts = require("./routes/posts.route");
 const postTypes = require("./routes/postTypes.route");
 const jobCategories = require("./routes/jobCategories.route");
 const activityFields = require("./routes/activityFields.route");
+const auth = require("./routes/auth.route");
+
 
 const router = express.Router()
 
@@ -19,5 +21,7 @@ router.use("/postTypes", postTypes);
 router.use("/jobCategories", jobCategories);
 router.use("/activityFields", activityFields)
 router.use("/faq", faq);
+router.use("/auth", auth);
+
 
 module.exports = router

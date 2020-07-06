@@ -1,17 +1,18 @@
 const express = require("express");
-const activitiesFields = express.Router();
+const router = express.Router();
 const ActivityField = require("../../../models/ActivityField");
+const authRole = require("../../../middleware/authRole");
 
-activitiesFields.get("/", async (req, res) => {
+router.get("/", authRole(["ADMIN", "USER"]), async (req, res) => {
   try {
-    const activitiesFields = await ActivityField.findAll();
-    res.status(200).json(activitiesFields);
+    const router = await ActivityField.findAll();
+    res.status(200).json(router);
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
-activitiesFields.get("/:id", async (req, res) => {
+router.get("/:id",authRole(["ADMIN", "USER"]), async (req, res) => {
   try {
     const { id } = req.params;
     const activityField = await ActivityField.findByPk(id);
@@ -21,7 +22,7 @@ activitiesFields.get("/:id", async (req, res) => {
   }
 });
 
-activitiesFields.post("/", async (req, res) => {
+router.post("/", authRole("ADMIN"), async (req, res) => {
   const { labelFr, labelEs, labelEus } = req.body;
   try {
     const activityField = await ActivityField.create({
@@ -35,7 +36,7 @@ activitiesFields.post("/", async (req, res) => {
   }
 });
 
-activitiesFields.put("/:id", async (req, res) => {
+router.put("/:id", authRole("ADMIN"), async (req, res) => {
   const { labelFr, labelEs, labelEus } = req.body;
   const { id } = req.params;
   try {
@@ -54,7 +55,7 @@ activitiesFields.put("/:id", async (req, res) => {
   }
 });
 
-activitiesFields.delete("/:id", async (req, res) => {
+router.delete("/:id", authRole("ADMIN"), async (req, res) => {
   try {
     const { id } = req.params;
     const activityField = await ActivityField.destroy({
@@ -66,4 +67,4 @@ activitiesFields.delete("/:id", async (req, res) => {
   }
 });
 
-module.exports = activitiesFields;
+module.exports = router;

@@ -13,6 +13,10 @@ const Partner = sequelizeInstance.define("Partner", {
     type: Sequelize.STRING(200),
     allowNull: false,
   },
+  description: {
+    type: Sequelize.TEXT,
+    allowNull: false,
+  },
   url: {
     type: Sequelize.STRING(50),
     allowNull: false,

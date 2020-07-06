@@ -4,10 +4,12 @@ const cors = require("cors");
 
 const sequelize = require("./sequelize");
 require("./association");
-const api = require("./api/v1") 
+const Role = require("./models/Role");
+const User = require("./models/User");
 
-const app = express();
+const api = require("./api/v1");
 const port = 8080;
+const app = express();
 
 app.use(express.json());
 app.use(cors());
@@ -20,9 +22,45 @@ app.get("/", (req, res) => {
 
 if (process.env.NODE_ENV !== "test") {
   sequelize
-    .sync({force : true})
+    .sync()
     .then(() => {
       return sequelize.authenticate();
+    })
+    .then(() => {
+      // we create two roles only if they don't exists
+      return Promise.all([
+        Role.findCreateFind({ where: { label: "ADMIN" } }),
+        Role.findCreateFind({ where: { label: "USER" } }),
+      ]);
+    })
+    .then(([admin, user]) => {
+      // then we create two users for testing
+      return [
+        User.findCreateFind({
+          where: { email: "admin@dev.com" },
+          defaults: {
+            password: "admin",
+            firstName: "admin",
+            lastName: "admin",
+            localisation: "admin",
+            country: "France",
+            phone_number: 0656565656,
+            RoleId: admin[0].id,
+          },
+        }),
+        User.findCreateFind({
+          where: { email: "user@dev.com" },
+          defaults: {
+            password: "user",
+            firstName: "user",
+            lastName: "user",
+            localisation: "user",
+            country: "France",
+            phone_number: 0656565656,
+            RoleId: user[0].id,
+          },
+        }),
+      ];
     })
     .then(() => {
       app.listen(port, (err) => {
@@ -33,7 +71,7 @@ if (process.env.NODE_ENV !== "test") {
       });
     })
     .catch((err) => {
-      console.log("enable to join database", err.message);
+      console.log("unable to join database", err.message);
     });
 }
 

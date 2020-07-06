@@ -1,23 +1,24 @@
 GET http://localhost:8080/api/v1/users HTTP/1.1
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFiNTkwMGVhLTE4NDYtNDhlYS1iZTA4LWE0NTEyZTllZTgxZCIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NDAxOTYwMywiZXhwIjoxNTk0MTA2MDAzfQ.uKfANDJLATUg6Z-xKu9ScUA6akrobpqylUaPvxQYMJw
 
 ####
 
-GET http://localhost:8080/api/v1/users/b936fa4e-c26a-4bb0-8013-094da84b35f2 HTTP/1.1
-
+GET http://localhost:8080/api/v1/users/165162305 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI4YzQyNjU4LTNlMjctNGMxYy04YjgzLWNlZTRjYWQ3MWUyNyIsImVtYWlsIjoidXNlckBkZXYuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE1OTM2Nzg2MzIsImV4cCI6MTU5Mzc2NTAzMn0.rccNCXbw84slUi1RLu0756KpyHogf6Cf-qoxEIsc6i4
 
 ###
 POST http://localhost:8080/api/v1/users HTTP/1.1
 Content-Type: application/json
 
 {
-    "lastName" : "Nicolas",
-    "firstName" : "Pierre",
-    "email" : "hello",
-    "password" : "hellohe",
+    "lastName" : "maxime",
+    "firstName" : "reloue",
+    "email" : "reloue@je.fr",
+    "password" : "reloue2",
     "localisation" : "vielle",
+    "country": "France",
     "phone_number" : 556325365,
     "phone_number2" : 558547854,
-    "isAdmin" : true,
     "schoolName" : "wcs",
     "companyName" : "wcs",
     "siret" : "211680374",
@@ -26,8 +27,43 @@ Content-Type: application/json
     "name_organisation" : "wcs",
     "isActive" : false,
     "logo" : "bjisdckjs",
-    "ActivityFieldId" : "c58c9548-2361-4954-8e85-a32171dd757d",
-    "UserTypeId" : "332ed989-8117-4e7f-930a-9bda7b7e9c10"
+    "ActivityFieldId" : "07dac2cd-63d1-4b3f-9795-db9ee36f37a3",
+    "UserTypeId" : "6f73feb0-2e71-48c9-8077-686717f005e0"
+}
+
+###Auth
+POST http://localhost:8080/api/v1/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email" : "user@dev.com",
+    "password" : "user"
+}
+
+###register
+POST http://localhost:8080/api/v1/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "lastName" : "user",
+    "firstName" : "user",
+    "email" : "user@dev.com",
+    "password" : "user",
+    "localisation" : "vielle",
+    "country": "France",
+    "phone_number" : 0656565656,
+    "phone_number2" : 558547854,
+    "schoolName" : "wcs",
+    "companyName" : "wcs",
+    "siret" : "211680374",
+    "qualification" : "job",
+    "mobility" : "france",
+    "name_organisation" : "wcs",
+    "isActive" : false,
+    "logo" : "bjisdckjs",
+    "ActivityFieldId" : "07dac2cd-63d1-4b3f-9795-db9ee36f37a3",
+    "UserTypeId" : "6f73feb0-2e71-48c9-8077-686717f005e0",
+    "RoleId": "cb222a0a-35e3-4c52-bf18-46c4feaddd4d"
 }
 
 ###
@@ -41,6 +77,7 @@ Content-Type: application/json
     "email" : "helloworld",
     "password" : "blablabla",
     "localisation" : "anglet",
+    "country": "France",
     "phone_number" : 10940239,
     "phone_number2" : 58493029,
     "isAdmin" : false,
@@ -57,6 +94,7 @@ Content-Type: application/json
 ###
 
 DELETE http://localhost:8080/api/v1/users/c5e5dca9-00c5-405f-8146-ca97da2c0c97 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI4YzQyNjU4LTNlMjctNGMxYy04YjgzLWNlZTRjYWQ3MWUyNyIsImVtYWlsIjoidXNlckBkZXYuY29tIiwicm9sZSI6IlVTRVIiLCJ0eXBlIjpudWxsLCJpYXQiOjE1OTM2Nzk1NDV9.dUFgcCnGmTQZW3dcfRxq2ErNqXvNOI4jC19HVk2J710
 
 ###
 GET http://localhost:8080/api/v1/users/05f78664-b0e1-43bf-b6bc-ad7312cdbdd5/posts HTTP/1.1

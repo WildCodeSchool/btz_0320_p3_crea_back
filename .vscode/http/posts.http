@@ -1,21 +1,22 @@
 GET http://localhost:8080/api/v1/posts HTTP/1.1
-
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFjY2QwOWNiLTM4NDQtNDNiZS04OTQzLTc1NzhlYjI3ZDY3YSIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5Mzg5NTc1NiwiZXhwIjoxNTkzOTgyMTU2fQ.72NxYJV0stBwBp8af-GfzLl57Qf9F4K3Q9bkCUkCk8U
 ###
 GET http://localhost:8080/api/v1/posts/20a6d5a2-e2e4-42d3-b681-0b810d3ecaf0 HTTP/1.1
 
 
 ###
 POST http://localhost:8080/api/v1/posts HTTP/1.1
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFjY2QwOWNiLTM4NDQtNDNiZS04OTQzLTc1NzhlYjI3ZDY3YSIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5Mzg5NTc1NiwiZXhwIjoxNTkzOTgyMTU2fQ.72NxYJV0stBwBp8af-GfzLl57Qf9F4K3Q9bkCUkCk8U
 Content-Type: application/json
 
 {
-    "title" : "Deuxième annonce",
-    "content" :"Lorem Ipsum super",
-    "localisation" : "Bayonne",
-    "UserId": "23ac1ec2-f4b2-49d2-9b37-0de32e2fc47e",
-    "language" : "espagnol",
-    "JobCategoryId" : "771faaaa-b3bb-4a08-8875-98891628309c",
-    "TypePostId" : "511f20e1-2b0d-48ca-9959-3ad75cbc8b6f"
+    "title" : "annonce2",
+    "content" :"blablabla54",
+    "localisation" : "biarritz",
+    "language" : "french",
+    "UserId": "73698675-71b7-4071-bcc1-829dcaf68b4d",
+    "TypePostId": "24c13f60-2407-454c-9544-d8cb5650cbf0",
+    "JobCategoryId": "283e56f6-8c72-41b1-81ad-21dd5eed9b44"
 }
 
 ###
@@ -32,4 +33,5 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:8080/api/v1/posts/c5e5dca9-00c5-405f-8146-ca97da2c0c97 HTTP/1.1
+DELETE http://localhost:8080/api/v1/posts/56c534b4-a47f-4621-86c2-33d41a812c90 HTTP/1.1
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFjY2QwOWNiLTM4NDQtNDNiZS04OTQzLTc1NzhlYjI3ZDY3YSIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5Mzg5NTc1NiwiZXhwIjoxNTkzOTgyMTU2fQ.72NxYJV0stBwBp8af-GfzLl57Qf9F4K3Q9bkCUkCk8U

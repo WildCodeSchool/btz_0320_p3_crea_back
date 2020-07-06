@@ -1,8 +1,8 @@
 const Sequelize = require("sequelize");
 
-const sequlizeInstance = require("../sequelize");
+const sequelizeInstance = require("../sequelize");
 
-const ActivityField = sequlizeInstance.define("ActivityField", {
+const ActivityField = sequelizeInstance.define("ActivityField", {
   id: {
     type: Sequelize.UUID,
     allowNull: false,
@@ -10,7 +10,7 @@ const ActivityField = sequlizeInstance.define("ActivityField", {
     defaultValue: Sequelize.UUIDV4,
   },
   labelFr: {
-    type: Sequelize.STRING(100),
+    type: Sequelize.STRING(255),
     allowNull: false,
   },
   labelEs: {

@@ -1,85 +1,101 @@
 const express = require("express");
-const users = express.Router();
+
+const authRole = require("../../../middleware/authRole");
+const user = require("../routes/auth.route");
 const User = require("../../../models/User");
 const Post = require("../../../models/Post");
 
-users.get("/", async (req, res) => {
+const router = express.Router();
+
+router.get("/", authRole("ADMIN"), async (req, res) => {
   try {
-    const users = await User.findAll();
-    res.status(200).json(users);
+    if (req.user) {
+      const users = await User.findAll();
+      res.status(200).json(users);
+    } else {
+      throw new Error("You are not admin!");
+    }
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
-users.get("/:id", async (req, res) => {
+router.get("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
+  const { id } = req.params;
   try {
-    const { id } = req.params;
-    const user = await User.findAll({ where: { id } });
+    // if (req.user.role === "USER" && req.user.id !== id) {
+    //   res.status(401).json({
+    //     message: "You are not allowed to access this",
+    //   });
+    // } else {
+    //   const user = await User.findOne({ where: { id } });
+    //   res.status(200).json(user);
+    // }
+    const user = await User.findOne({ where: { id } });
     res.status(200).json(user);
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
-users.post("/", async (req, res) => {
-  const {
-    lastName,
-    firstName,
-    email,
-    password,
-    localisation,
-    phone_number,
-    phone_number2,
-    isAdmin,
-    schoolName,
-    companyName,
-    siret,
-    qualification,
-    mobility,
-    name_organisation,
-    isActive,
-    logo,
-    UserTypeId,
-    ActivityFieldId,
-  } = req.body;
-  try {
-    const user = await User.create({
-      lastName,
-      firstName,
-      email,
-      password,
-      localisation,
-      phone_number,
-      phone_number2,
-      isAdmin,
-      schoolName,
-      companyName,
-      siret,
-      qualification,
-      mobility,
-      name_organisation,
-      isActive,
-      logo,
-      UserTypeId,
-      ActivityFieldId,
-    });
-    res.status(201).json(user);
-  } catch (err) {
-    res.status(422).json(err);
-  }
-});
+// router.post("/", authRole("ADMIN"), async (req, res) => {
+//   const {
+//     lastName,
+//     firstName,
+//     email,
+//     password,
+//     localisation,
+//     phone_number,
+//     phone_number2,
+//     schoolName,
+//     companyName,
+//     siret,
+//     qualification,
+//     mobility,
+//     name_organisation,
+//     isActive,
+//     logo,
+//     UserTypeId,
+//     ActivityFieldId,
+//     RoleId,
+//   } = req.body;
+//   try {
+//     const user = await User.create({
+//       lastName,
+//       firstName,
+//       email,
+//       password,
+//       localisation,
+//       phone_number,
+//       phone_number2,
+//       schoolName,
+//       companyName,
+//       siret,
+//       qualification,
+//       mobility,
+//       name_organisation,
+//       isActive,
+//       logo,
+//       UserTypeId,
+//       ActivityFieldId,
+//       RoleId,
+//     });
+//     res.status(201).json(user);
+//   } catch (err) {
+//     res.status(422).json(err);
+//   }
+// });
 
-users.put("/:id", async (req, res) => {
+router.put("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
   const {
     lastName,
     firstName,
     email,
     password,
     localisation,
+    country,
     phone_number,
     phone_number2,
-    isAdmin,
     schoolName,
     companyName,
     siret,
@@ -90,9 +106,15 @@ users.put("/:id", async (req, res) => {
     logo,
     UserTypeId,
     ActivityFieldId,
+    RoleId,
   } = req.body;
   const { id } = req.params;
   try {
+    // if (req.user.role === "USER" && req.user.id !== id) {
+    //   res.status(401).json({
+    //     message: "You are not allowed to modify this",
+    //   });
+    // }
     await User.update(
       {
         lastName,
@@ -100,9 +122,9 @@ users.put("/:id", async (req, res) => {
         email,
         password,
         localisation,
+        country,
         phone_number,
         phone_number2,
-        isAdmin,
         schoolName,
         companyName,
         siret,
@@ -113,32 +135,60 @@ users.put("/:id", async (req, res) => {
         logo,
         UserTypeId,
         ActivityFieldId,
+        RoleId,
       },
       { where: { id } }
     );
-    const user = await User.findByPk(id)
+    const user = await User.findByPk(id);
     res.status(202).json(user);
   } catch (err) {
     res.status(422).json(err);
   }
 });
 
-users.delete("/:id", async (req, res) => {
+router.delete("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
   try {
     const { id } = req.params;
-    const user = await User.destroy({
-      where: { id },
+    // if (req.user.role === "USER" && req.user.id !== id) {
+    //   res.status(401).json({
+    //     message: "You are not allowed to delete this",
+    //   });
+    // }
+    // const user = await User.destroy({
+    //   where: { id },
+    // });
+    // res.status(204).send("L'utilisateur a bien été effacé");
+    // if (req.user.role === "USER") {
+    //   console.log(id);
+    //   await User.destroy({
+    //     where: { id: req.user.id },
+    //   });
+    //   res.status(204).end();
+    // }
+    // if (req.user.role === "ADMIN") {
+    //   await User.destroy({
+    //     where: { id },
+    //   });
+    //   res.status(204).end();
+    // }
+    await User.destroy({
+      where: { id: req.user.id },
     });
-    res.status(204).send("L'utilisateur a bien été effacé");
+    res.status(204).end();
   } catch (err) {
     res.status(422).json(err);
   }
 });
 
 // récupérer les posts d'un utilisateur
-users.get("/:id/posts", async (req, res) => {
+router.get("/:id/posts", authRole(["ADMIN", "USER"]), async (req, res) => {
   try {
     const { id } = req.params;
+    if (req.user.role === "USER" && req.user.id !== id) {
+      res.status(401).json({
+        message: "You are not allowed to delete this",
+      });
+    }
     const posts = await Post.findAll({ where: { UserId: id } });
     res.status(200).json(posts);
   } catch (err) {
@@ -146,4 +196,4 @@ users.get("/:id/posts", async (req, res) => {
   }
 });
 
-module.exports = users;
+module.exports = router;
