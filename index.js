@@ -35,7 +35,7 @@ if (process.env.NODE_ENV !== "test") {
     })
     .then(([admin, user]) => {
       // then we create two users for testing
-      return [
+      return Promise.all([
         User.findCreateFind({
           where: { email: "admin@dev.com" },
           defaults: {
@@ -60,7 +60,7 @@ if (process.env.NODE_ENV !== "test") {
             RoleId: user[0].id,
           },
         }),
-      ];
+      ]);
     })
     .then(() => {
       app.listen(port, (err) => {
