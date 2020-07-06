@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
 
 if (process.env.NODE_ENV !== "test") {
   sequelize
-    .sync({ alter: true })
+    .sync()
     .then(() => {
       return sequelize.authenticate();
     })
