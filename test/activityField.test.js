@@ -72,9 +72,9 @@ describe("Activity field", () => {
       name_organisation: "ADIE",
       isActive: false,
       logo: "mlkdmlqksml.png",
-      userTypeId: userTypeId,
-      activityFieldId: activityFieldId,
-      roleId: roleUserId,
+      "UserTypeId": userTypeId,
+      "ActivityFieldId": activityFieldId,
+      "RoleId": roleUserId,
     });
     userId = user.dataValues.id;
 
@@ -95,9 +95,9 @@ describe("Activity field", () => {
       name_organisation: "ADIE",
       isActive: false,
       logo: "mlkdmlqksml.png",
-      userTypeId: userTypeId,
-      activityFieldId: activityFieldId,
-      roleId: roleAdminId,
+      "UserTypeId": userTypeId,
+      "ActivityFieldId": activityFieldId,
+      "RoleId": roleAdminId,
     });
     adminId = admin.dataValues.id;
 
