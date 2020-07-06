@@ -1,11 +1,16 @@
 const chai = require("chai");
 const chaiHttp = require("chai-http");
+const jwt = require("jsonwebtoken");
+
 let should = chai.should();
 let server = require("../index");
 const sequelize = require("../sequelize");
 const ActivityField = require("../models/ActivityField");
 const User = require("../models/User");
-const { adminToken, userToken } = require("../testSamples");
+const UserType = require("../models/UserType")
+const Role = require("../models/Role");
+const JobCategory = require("../models/JobCategory");
+const TypePost = require("../models/TypePost");
 
 chai.use(chaiHttp);
 
@@ -20,16 +25,112 @@ const activityFieldKeys = [
 
 let activityFieldId;
 let activity;
+let userId;
+let userTypeId;
+let jobCategoryId;
+let userToken;
+let adminToken;
+let roleAdminId;
+let roleUserId;
 
 describe("Activity field", () => {
   before(async () => {
-    await sequelize.sync({ force: true });
-    activity = await ActivityField.create({
+    const type = await UserType.create({
+      label: "chomeur",
+    });
+    userTypeId = type.dataValues.id;
+
+    const roleAdmin = await Role.create({
+      label: "ADMIN",
+    });
+    roleAdminId = roleAdmin.dataValues.id;
+
+    const roleUser = await Role.create({
+      label: "USER",
+    });
+    roleUserId = roleUser.dataValues.id;
+
+    const activityField = await ActivityField.create({
       labelFr: "Bâtiment",
       labelEs: "Building",
       labelEus: "Eraikin",
     });
-    activityFieldId = activity.dataValues.id;
+    activityFieldId = activityField.dataValues.id;
+
+    const user = await User.create({
+      lastName: "jean",
+      firstName: "toto",
+      email: "helloworld",
+      password: "blablabla",
+      localisation: "anglet",
+      country: "France",
+      phone_number: 10940239,
+      phone_number2: 58493029,
+      isAdmin: false,
+      schoolName: "HEC",
+      companyName: "HEC",
+      siret: "234536251",
+      qualification: "metier",
+      mobility: "USA",
+      name_organisation: "ADIE",
+      isActive: false,
+      logo: "mlkdmlqksml.png",
+      UserTypeId: userTypeId,
+      ActivityFieldId: activityFieldId,
+      RoleId: roleUserId,
+    });
+    userId = user.dataValues.id;
+
+    const admin = await User.create({
+      lastName: "jean",
+      firstName: "toto",
+      email: "helloworld",
+      password: "blablabla",
+      localisation: "anglet",
+      country: "France",
+      phone_number: 10940239,
+      phone_number2: 58493029,
+      schoolName: "HEC",
+      companyName: "HEC",
+      siret: "234536251",
+      qualification: "metier",
+      mobility: "USA",
+      name_organisation: "ADIE",
+      isActive: false,
+      logo: "mlkdmlqksml.png",
+      UserTypeId: userTypeId,
+      ActivityFieldId: activityFieldId,
+      RoleId: roleAdminId,
+    });
+    adminId = admin.dataValues.id;
+
+    const jobCategory = await JobCategory.create({
+      labelFr: "toto",
+      labelEs: "jean",
+      labelEus: "hello",
+    });
+    jobCategoryId = jobCategory.dataValues.id;
+
+    userToken = jwt.sign(
+      {
+        id: user.dataValues.id,
+        email: user.dataValues.email,
+        role: "USER",
+        type: type.dataValues.label,
+      },
+      process.env.SECRET,
+      { expiresIn: "3h" }
+    );
+    adminToken = jwt.sign(
+      {
+        id: admin.dataValues.id,
+        email: admin.dataValues.email,
+        role: "ADMIN",
+        type: type.dataValues.label,
+      },
+      process.env.SECRET,
+      { expiresIn: "3h" }
+    );
   });
   describe("GET ALL", () => {
     it("ADMIN should success", async () => {
@@ -40,7 +141,7 @@ describe("Activity field", () => {
           .set("Authorization", `Bearer ${adminToken}`);
         res.should.have.status(200);
         res.body.should.be.a("array");
-        res.body.length.should.be.eql(1);
+        res.body.length.should.be.eql(2);
       } catch (err) {
         throw err;
       }
@@ -53,7 +154,7 @@ describe("Activity field", () => {
           .set("Authorization", `Bearer ${userToken}`);
         res.should.have.status(200);
         res.body.should.be.a("array");
-        res.body.length.should.be.eql(1);
+        res.body.length.should.be.eql(2);
       } catch (err) {
         throw err;
       }

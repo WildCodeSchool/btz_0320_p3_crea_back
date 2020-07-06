@@ -15,7 +15,7 @@ jobCategory.get("/",authRole(["ADMIN", "USER"]), async (req, res) => {
 jobCategory.get("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
   try {
     const { id } = req.params;
-    const category = await JobCategory.findAll({ where: { id } });
+    const category = await JobCategory.findByPk(id);
     res.status(200).json(category);
   } catch (err) {
     res.status(400).json(err);

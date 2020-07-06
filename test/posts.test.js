@@ -5,15 +5,14 @@ const jwt = require("jsonwebtoken");
 let should = chai.should();
 let server = require("../index");
 const sequelize = require("../sequelize");
-const { adminToken } = require("../testSamples");
 
 const Post = require("../models/Post");
 const UserType = require("../models/UserType");
 const User = require("../models/User");
 const JobCategory = require("../models/JobCategory");
 const ActivityField = require("../models/ActivityField");
-const activitiesFields = require("../api/v1/routes/activityFields.route");
 const TypePost = require("../models/TypePost");
+const Role = require("../models/Role");
 
 chai.use(chaiHtpp);
 
@@ -38,6 +37,9 @@ let postId2;
 let activityFieldId;
 let postTypeId;
 let userToken;
+let adminToken;
+let roleAdminId;
+let roleUserId;
 
 describe("POSTS", () => {
   before(async () => {
@@ -47,6 +49,16 @@ describe("POSTS", () => {
     });
     userTypeId = type.dataValues.id;
 
+    const roleAdmin = await Role.create({
+      label: "ADMIN",
+    });
+    roleAdminId = roleAdmin.dataValues.id;
+
+    const roleUser = await Role.create({
+      label: "USER",
+    });
+    roleUserId = roleUser.dataValues.id;
+    
     const activityField = await ActivityField.create({
       labelFr: "Bâtiment",
       labelEs: "Building",
@@ -74,10 +86,11 @@ describe("POSTS", () => {
       logo: "mlkdmlqksml.png",
       UserTypeId: userTypeId,
       ActivityFieldId: activityFieldId,
+      RoleId: roleUserId,
     });
     userId = user.dataValues.id;
 
-    const user2 = await User.create({
+    const admin = await User.create({
       lastName: "jean",
       firstName: "toto",
       email: "helloworld",
@@ -86,7 +99,6 @@ describe("POSTS", () => {
       country: "France",
       phone_number: 10940239,
       phone_number2: 58493029,
-      isAdmin: false,
       schoolName: "HEC",
       companyName: "HEC",
       siret: "234536251",
@@ -97,7 +109,9 @@ describe("POSTS", () => {
       logo: "mlkdmlqksml.png",
       UserTypeId: userTypeId,
       ActivityFieldId: activityFieldId,
+      RoleId: roleAdminId,
     });
+    adminId = admin.dataValues.id;
 
     const jobCategory = await JobCategory.create({
       labelFr: "toto",
@@ -114,17 +128,6 @@ describe("POSTS", () => {
 
     postTypeId = typePost.dataValues.id;
 
-    const post2 = await Post.create({
-      title: "annonce",
-      content: "blablabla",
-      localisation: "dax",
-      language: "anglais",
-      UserId: user2.dataValues.id,
-      TypePostId: postTypeId,
-      JobCategoryId: jobCategoryId,
-    });
-    postId2 = post2.dataValues.id;
-
     const post = await Post.create({
       title: "annonce",
       content: "blablabla",
@@ -137,6 +140,19 @@ describe("POSTS", () => {
 
     postId = post.dataValues.id;
 
+    const post2 = await Post.create({
+      title: "annonce",
+      content: "blabla",
+      localisation: "dax",
+      language: "anglais",
+      UserId: adminId,
+      TypePostId: postTypeId,
+      JobCategoryId: jobCategoryId,
+    });
+
+    postId2 = post2.dataValues.id;
+
+
     userToken = jwt.sign(
       {
         id: user.dataValues.id,
@@ -145,7 +161,17 @@ describe("POSTS", () => {
         type: type.dataValues.label,
       },
       process.env.SECRET,
-      { expiresIn: "1h" }
+      { expiresIn: "3h" }
+    );
+    adminToken = jwt.sign(
+      {
+        id: admin.dataValues.id,
+        email: admin.dataValues.email,
+        role: "ADMIN",
+        type: type.dataValues.label,
+      },
+      process.env.SECRET,
+      { expiresIn: "3h" }
     );
   });
 
