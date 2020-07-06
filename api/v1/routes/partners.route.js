@@ -22,13 +22,14 @@ partners.get("/:id", async (req, res) => {
 });
 
 partners.post("/", async (req, res) => {
-  const { label, url, logo, favorite } = req.body;
+  const { label, url, logo, favorite, description } = req.body;
   try {
     const partner = await Partner.create({
       label,
       url,
       logo,
       favorite,
+      description,
     });
     res.status(201).json(partner);
   } catch (err) {
@@ -37,7 +38,7 @@ partners.post("/", async (req, res) => {
 });
 
 partners.put("/:id", async (req, res) => {
-  const { label, url, logo, favorite } = req.body;
+  const { label, url, logo, favorite, description } = req.body;
   const { id } = req.params;
   try {
     await Partner.update(
@@ -46,6 +47,7 @@ partners.put("/:id", async (req, res) => {
         url,
         logo,
         favorite,
+        description,
       },
       { where: { id } }
     );

@@ -14,6 +14,7 @@ const partnerKeys = [
   "logo",
   "favorite",
   "createdAt",
+  "description",
   "updatedAt",
 ];
 
@@ -25,6 +26,7 @@ describe("PARTNERS", () => {
       url: "Fine",
       logo: "Ends",
       favorite: "ok",
+      description: "ok",
     });
     partnerId = partner.dataValues.id;
   });
@@ -62,6 +64,7 @@ describe("PARTNERS", () => {
           url: "Ficdscsne",
           logo: "Endcds",
           favorite: "favorite",
+          description: "ok",
         });
         res.should.have.status(201);
         res.body.should.be.a("object");
