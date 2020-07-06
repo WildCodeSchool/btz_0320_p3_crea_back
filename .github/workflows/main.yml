@@ -42,3 +42,4 @@ jobs:
           DBPASS: postgres
           DBDIALECT: postgres
           DBNAME: postgres
+          SECRET:  postgres
