@@ -14,10 +14,10 @@ User.belongsToMany(Post, { through: Reply });
 Post.belongsToMany(User, { through: Reply });
 
 User.belongsTo(Activity, { foreignKey: { allowNull: true }});
-Activity.hasMany(User);
+Activity.hasMany(User, { foreignKey: { allowNull: true }});
 
 User.belongsTo(UserType, { foreignKey: { allowNull: true }});
-UserType.hasMany(User);
+UserType.hasMany(User, { foreignKey: { allowNull: true }} );
 
 TypePost.hasMany(Post, { foreignKey: { allowNull: false }});
 Post.belongsTo(TypePost, { foreignKey: { allowNull: false }});
@@ -26,4 +26,4 @@ JobCategory.hasMany(Post, { foreignKey: { allowNull: false }});
 Post.belongsTo(JobCategory, { foreignKey: { allowNull: false }});
 
 User.belongsTo(Role, {foreignKey: { allowNull: true }})
-Role.hasMany(User)
+Role.hasMany(User, { foreignKey: { allowNull: true }})

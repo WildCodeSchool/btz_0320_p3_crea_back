@@ -88,12 +88,6 @@ const User = sequelizeInstance.define(
     },
   },
   {
-    // disable the modification of table names; By default, sequelize will automatically
-    // transform all passed model names (first parameter of define) into plural.
-    // if you don't want that, set the following
-    freezeTableName: true,
-  },
-  {
     hooks: {
       beforeCreate: (user) => {
         const salt = bcrypt.genSaltSync();
@@ -105,11 +99,11 @@ const User = sequelizeInstance.define(
 
 User.prototype.validPassword = function (password) {
   return bcrypt.compareSync(password, this.password);
-//   if (password === this.password) {
-//     return true;
-//   } else {
-//     return false;
-//   }
+  //   if (password === this.password) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
 };
 
 module.exports = User;
