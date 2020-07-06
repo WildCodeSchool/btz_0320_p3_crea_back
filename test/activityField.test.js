@@ -1,13 +1,13 @@
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 const jwt = require("jsonwebtoken");
-
+const sequelize = require("../sequelize");
 let should = chai.should();
 let server = require("../index");
-const sequelize = require("../sequelize");
+
 const ActivityField = require("../models/ActivityField");
 const User = require("../models/User");
-const UserType = require("../models/UserType")
+const UserType = require("../models/UserType");
 const Role = require("../models/Role");
 const JobCategory = require("../models/JobCategory");
 const TypePost = require("../models/TypePost");
@@ -24,8 +24,8 @@ const activityFieldKeys = [
 ];
 
 let activityFieldId;
-let activity;
 let userId;
+let adminId;
 let userTypeId;
 let jobCategoryId;
 let userToken;
@@ -104,13 +104,6 @@ describe("Activity field", () => {
     });
     adminId = admin.dataValues.id;
 
-    const jobCategory = await JobCategory.create({
-      labelFr: "toto",
-      labelEs: "jean",
-      labelEus: "hello",
-    });
-    jobCategoryId = jobCategory.dataValues.id;
-
     userToken = jwt.sign(
       {
         id: user.dataValues.id,
@@ -132,6 +125,7 @@ describe("Activity field", () => {
       { expiresIn: "3h" }
     );
   });
+
   describe("GET ALL", () => {
     it("ADMIN should success", async () => {
       try {

@@ -8,7 +8,6 @@ let server = require("../index");
 
 const UserType = require("../models/UserType");
 const User = require("../models/User");
-const JobCategory = require("../models/JobCategory");
 const ActivityField = require("../models/ActivityField");
 const TypePost = require("../models/TypePost");
 const Role = require("../models/Role");
@@ -18,7 +17,6 @@ chai.use(chaiHtpp);
 let userTypeKeys = ["id", "label", "createdAt", "updatedAt"];
 let userId;
 let userTypeId;
-let jobCategoryId;
 let activityFieldId;
 let userToken;
 let adminToken;
@@ -96,13 +94,6 @@ describe("USERS_TYPES", () => {
       RoleId: roleAdminId,
     });
     adminId = admin.dataValues.id;
-
-    const jobCategory = await JobCategory.create({
-      labelFr: "toto",
-      labelEs: "jean",
-      labelEus: "hello",
-    });
-    jobCategoryId = jobCategory.dataValues.id;
 
     userToken = jwt.sign(
       {
