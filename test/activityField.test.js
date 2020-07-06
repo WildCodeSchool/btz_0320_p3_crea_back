@@ -9,7 +9,6 @@ const ActivityField = require("../models/ActivityField");
 const User = require("../models/User");
 const UserType = require("../models/UserType");
 const Role = require("../models/Role");
-const JobCategory = require("../models/JobCategory");
 const TypePost = require("../models/TypePost");
 
 chai.use(chaiHttp);
@@ -27,7 +26,6 @@ let activityFieldId;
 let userId;
 let adminId;
 let userTypeId;
-let jobCategoryId;
 let userToken;
 let adminToken;
 let roleAdminId;
