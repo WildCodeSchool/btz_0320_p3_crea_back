@@ -23,7 +23,7 @@ let adminToken;
 let roleAdminId;
 let roleUserId;
 
-describe("USERS_TYPES", () => {
+describe("USERS TYPES", () => {
   before(async () => {
     await sequelize.sync({ force: true });
     const type = await UserType.create({
