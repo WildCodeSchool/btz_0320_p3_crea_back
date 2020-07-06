@@ -34,9 +34,9 @@ let userKeys = [
   "name_organisation",
   "isActive",
   "logo",
-  "ActivityFieldId",
-  "UserTypeId",
-  "RoleId",
+  "activityFieldId",
+  "userTypeId",
+  "roleId",
 ];
 
 let user;

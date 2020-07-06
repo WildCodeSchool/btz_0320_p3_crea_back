@@ -32,7 +32,6 @@ let roleUserId;
 
 describe("Activity field", () => {
   before(async () => {
-
     const type = await UserType.create({
       label: "chomeur",
     });
@@ -73,9 +72,9 @@ describe("Activity field", () => {
       name_organisation: "ADIE",
       isActive: false,
       logo: "mlkdmlqksml.png",
-      UserTypeId: userTypeId,
-      ActivityFieldId: activityFieldId,
-      RoleId: roleUserId,
+      userTypeId: userTypeId,
+      activityFieldId: activityFieldId,
+      roleId: roleUserId,
     });
     userId = user.dataValues.id;
 
@@ -96,9 +95,9 @@ describe("Activity field", () => {
       name_organisation: "ADIE",
       isActive: false,
       logo: "mlkdmlqksml.png",
-      UserTypeId: userTypeId,
-      ActivityFieldId: activityFieldId,
-      RoleId: roleAdminId,
+      userTypeId: userTypeId,
+      activityFieldId: activityFieldId,
+      roleId: roleAdminId,
     });
     adminId = admin.dataValues.id;
 
