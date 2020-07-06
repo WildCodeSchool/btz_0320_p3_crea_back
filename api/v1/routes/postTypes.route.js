@@ -1,10 +1,10 @@
 const express = require("express");
-const types_post = express.Router();
+const router = express.Router();
 const Type_post = require("../../../models/TypePost");
 const authRole = require("../../../middleware/authRole");
 
 //récupère tous les types de posts
-types_post.get("/", authRole(["ADMIN", "USER"]), async (req, res) => {
+router.get("/", authRole(["ADMIN", "USER"]), async (req, res) => {
   try {
     const types_post = await Type_post.findAll();
     res.status(200).json(types_post);
@@ -14,7 +14,7 @@ types_post.get("/", authRole(["ADMIN", "USER"]), async (req, res) => {
 });
 
 // récupère un type de posts avec son id
-types_post.get("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
+router.get("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
   const { id } = req.params;
   try {
     const type_post = await Type_post.findByPk(id);
@@ -23,7 +23,7 @@ types_post.get("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
     res.status(400).json(err);
   }
 });
-types_post.post("/", authRole("ADMIN"), async (req, res) => {
+router.post("/", authRole("ADMIN"), async (req, res) => {
   const { labelFr, labelEs, labelEus } = req.body;
   try {
     const type_post = await Type_post.create({
@@ -37,7 +37,7 @@ types_post.post("/", authRole("ADMIN"), async (req, res) => {
   }
 });
 
-types_post.put("/:id", authRole("ADMIN"), async (req, res) => {
+router.put("/:id", authRole("ADMIN"), async (req, res) => {
   const { labelFr, labelEs, labelEus } = req.body;
   const { id } = req.params;
   try {
@@ -56,7 +56,7 @@ types_post.put("/:id", authRole("ADMIN"), async (req, res) => {
   }
 });
 
-types_post.delete("/:id", authRole("ADMIN"), async (req, res) => {
+router.delete("/:id", authRole("ADMIN"), async (req, res) => {
   try {
     const { id } = req.params;
     const type_post = await Type_post.destroy({
@@ -68,4 +68,4 @@ types_post.delete("/:id", authRole("ADMIN"), async (req, res) => {
   }
 });
 
-module.exports = types_post;
+module.exports = router;

@@ -1,9 +1,9 @@
 const express = require("express");
-const partners = express.Router();
+const router = express.Router();
 const Partner = require("../../../models/Partner");
 const authRole = require("../../../middleware/authRole");
 
-partners.get("/", authRole(["ADMIN", "USER"]), async (req, res) => {
+router.get("/", authRole(["ADMIN", "USER"]), async (req, res) => {
   try {
     const partner = await Partner.findAll();
     res.status(200).json(partner);
@@ -12,7 +12,7 @@ partners.get("/", authRole(["ADMIN", "USER"]), async (req, res) => {
   }
 });
 
-partners.get("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
+router.get("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
   try {
     const { id } = req.params;
     const partner = await Partner.findOne({ where: { id } });
@@ -22,7 +22,7 @@ partners.get("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
   }
 });
 
-partners.post("/", authRole("ADMIN"), async (req, res) => {
+router.post("/", authRole("ADMIN"), async (req, res) => {
   const { label, url, logo, favorite, description } = req.body;
   try {
     const partner = await Partner.create({
@@ -38,7 +38,7 @@ partners.post("/", authRole("ADMIN"), async (req, res) => {
   }
 });
 
-partners.put("/:id", authRole("ADMIN"), async (req, res) => {
+router.put("/:id", authRole("ADMIN"), async (req, res) => {
   const { label, url, logo, favorite, description } = req.body;
   const { id } = req.params;
   try {
@@ -59,7 +59,7 @@ partners.put("/:id", authRole("ADMIN"), async (req, res) => {
   }
 });
 
-partners.delete("/:id", authRole("ADMIN"), async (req, res) => {
+router.delete("/:id", authRole("ADMIN"), async (req, res) => {
   const { id } = req.params;
   try {
     const partner = await Partner.destroy({ where: { id } });
@@ -69,4 +69,4 @@ partners.delete("/:id", authRole("ADMIN"), async (req, res) => {
   }
 });
 
-module.exports = partners;
+module.exports = router;

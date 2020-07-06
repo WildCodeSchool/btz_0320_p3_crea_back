@@ -3,6 +3,7 @@ const chaiHttp = require("chai-http");
 const jwt = require("jsonwebtoken");
 const sequelize = require("../sequelize");
 let should = chai.should();
+
 let server = require("../index");
 
 const ActivityField = require("../models/ActivityField");

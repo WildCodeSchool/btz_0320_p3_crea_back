@@ -1,8 +1,8 @@
 const Sequelize = require("sequelize");
 
-const sequlizeInstance = require("../sequelize");
+const sequelizeInstance = require("../sequelize");
 
-const ActivityField = sequlizeInstance.define("ActivityField", {
+const ActivityField = sequelizeInstance.define("ActivityField", {
   id: {
     type: Sequelize.UUID,
     allowNull: false,
@@ -21,6 +21,11 @@ const ActivityField = sequlizeInstance.define("ActivityField", {
     type: Sequelize.STRING(255),
     allowNull: false,
   },
+},{
+  // disable the modification of table names; By default, sequelize will automatically
+  // transform all passed model names (first parameter of define) into plural.
+  // if you don't want that, set the following
+  freezeTableName: true,
 });
 
 module.exports = ActivityField;

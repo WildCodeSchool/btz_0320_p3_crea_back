@@ -1,9 +1,10 @@
 const express = require("express");
-const jobCategory = express.Router();
+const router = express.Router();
+
 const JobCategory = require("../../../models/JobCategory");
 const authRole = require("../../../middleware/authRole");
 
-jobCategory.get("/",authRole(["ADMIN", "USER"]), async (req, res) => {
+router.get("/",authRole(["ADMIN", "USER"]), async (req, res) => {
   try {
     const category = await JobCategory.findAll();
     res.status(200).json(category);
@@ -12,7 +13,7 @@ jobCategory.get("/",authRole(["ADMIN", "USER"]), async (req, res) => {
   }
 });
 
-jobCategory.get("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
+router.get("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
   try {
     const { id } = req.params;
     const category = await JobCategory.findByPk(id);
@@ -22,7 +23,7 @@ jobCategory.get("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
   }
 });
 
-jobCategory.post("/", authRole("ADMIN"), async (req, res) => {
+router.post("/", authRole("ADMIN"), async (req, res) => {
   const { labelFr, labelEs, labelEus } = req.body;
   try {
     const category = await JobCategory.create({
@@ -36,7 +37,7 @@ jobCategory.post("/", authRole("ADMIN"), async (req, res) => {
   }
 });
 
-jobCategory.put("/:id", authRole("ADMIN"), async (req, res) => {
+router.put("/:id", authRole("ADMIN"), async (req, res) => {
   const { labelFr, labelEs, labelEus } = req.body;
   const { id } = req.params;
   try {
@@ -55,7 +56,7 @@ jobCategory.put("/:id", authRole("ADMIN"), async (req, res) => {
   }
 });
 
-jobCategory.delete("/:id", authRole("ADMIN"), async (req, res) => {
+router.delete("/:id", authRole("ADMIN"), async (req, res) => {
   try {
     const { id } = req.params;
     const category = await JobCategory.destroy({
@@ -67,4 +68,4 @@ jobCategory.delete("/:id", authRole("ADMIN"), async (req, res) => {
   }
 });
 
-module.exports = jobCategory;
+module.exports = router;
