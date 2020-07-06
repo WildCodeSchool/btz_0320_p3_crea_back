@@ -1,22 +1,22 @@
 GET http://localhost:8080/api/v1/posts HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkyNjdjNjZiLWQyOTEtNGU4Ny1hNTM3LTdhYWQ1NzQxYzA4OSIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5MzcwNzg0NCwiZXhwIjoxNTkzNzk0MjQ0fQ.Z3jP7GY7YifvT8g6-FO0vf0S5QkcjX6JQ8Jys42ZO2w
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFjY2QwOWNiLTM4NDQtNDNiZS04OTQzLTc1NzhlYjI3ZDY3YSIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5Mzg5NTc1NiwiZXhwIjoxNTkzOTgyMTU2fQ.72NxYJV0stBwBp8af-GfzLl57Qf9F4K3Q9bkCUkCk8U
 ###
 GET http://localhost:8080/api/v1/posts/20a6d5a2-e2e4-42d3-b681-0b810d3ecaf0 HTTP/1.1
 
 
 ###
 POST http://localhost:8080/api/v1/posts HTTP/1.1
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFjY2QwOWNiLTM4NDQtNDNiZS04OTQzLTc1NzhlYjI3ZDY3YSIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5Mzg5NTc1NiwiZXhwIjoxNTkzOTgyMTU2fQ.72NxYJV0stBwBp8af-GfzLl57Qf9F4K3Q9bkCUkCk8U
 Content-Type: application/json
-Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRhZTBlNzkzLTdjZmItNGNkMS1hYjZkLTNmZTA4ODY5NzRkYSIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5MzY3OTQ2OH0.HiozkET8znDlmYfYImWj5fGu2CDcBvE1n_26FqVHa34
 
 {
     "title" : "annonce2",
     "content" :"blablabla54",
     "localisation" : "biarritz",
     "language" : "french",
-    "UserId": "099623a1-b8dd-4bde-985b-8a4ec2920a43",
-    "TypePostId": "9cf7a430-14cf-4a99-85ba-dc1401c28bef",
-    "JobCategoryId": "438b65dc-9b5f-413a-acff-5b8f216cd502"
+    "UserId": "73698675-71b7-4071-bcc1-829dcaf68b4d",
+    "TypePostId": "24c13f60-2407-454c-9544-d8cb5650cbf0",
+    "JobCategoryId": "283e56f6-8c72-41b1-81ad-21dd5eed9b44"
 }
 
 ###
@@ -33,5 +33,5 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:8080/api/v1/posts/9fcc4250-caad-4d53-ba4d-c07b7404a01c HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkyNjdjNjZiLWQyOTEtNGU4Ny1hNTM3LTdhYWQ1NzQxYzA4OSIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5MzcwNzg0NCwiZXhwIjoxNTkzNzk0MjQ0fQ.Z3jP7GY7YifvT8g6-FO0vf0S5QkcjX6JQ8Jys42ZO2w
+DELETE http://localhost:8080/api/v1/posts/56c534b4-a47f-4621-86c2-33d41a812c90 HTTP/1.1
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFjY2QwOWNiLTM4NDQtNDNiZS04OTQzLTc1NzhlYjI3ZDY3YSIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5Mzg5NTc1NiwiZXhwIjoxNTkzOTgyMTU2fQ.72NxYJV0stBwBp8af-GfzLl57Qf9F4K3Q9bkCUkCk8U

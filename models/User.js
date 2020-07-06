@@ -33,6 +33,10 @@ const User = sequelizeInstance.define("User", {
         type: Sequelize.STRING(50),
         allowNull: false,
     },
+    country: {
+        type: Sequelize.STRING(50),
+        allowNull: false,
+    },
     phone_number: {
         type: Sequelize.INTEGER(15),
         allowNull: false,

@@ -7,7 +7,6 @@ let server = require("../index");
 const sequelize = require("../sequelize");
 const { adminToken } = require("../testSamples");
 
-
 const Post = require("../models/Post");
 const UserType = require("../models/UserType");
 const User = require("../models/User");
@@ -61,6 +60,7 @@ describe("POSTS", () => {
       email: "helloworld",
       password: "blablabla",
       localisation: "anglet",
+      country: "France",
       phone_number: 10940239,
       phone_number2: 58493029,
       isAdmin: false,
@@ -83,6 +83,7 @@ describe("POSTS", () => {
       email: "helloworld",
       password: "blablabla",
       localisation: "anglet",
+      country: "France",
       phone_number: 10940239,
       phone_number2: 58493029,
       isAdmin: false,
@@ -133,17 +134,19 @@ describe("POSTS", () => {
       TypePostId: postTypeId,
       JobCategoryId: jobCategoryId,
     });
-    
+
     postId = post.dataValues.id;
-    
-    userToken = jwt.sign({
-      id: user.dataValues.id,
-      email: user.dataValues.email,
-      role: "USER",
-      type: type.dataValues.label
-    },
-    process.env.SECRET, 
-    {expiresIn: "1h"})
+
+    userToken = jwt.sign(
+      {
+        id: user.dataValues.id,
+        email: user.dataValues.email,
+        role: "USER",
+        type: type.dataValues.label,
+      },
+      process.env.SECRET,
+      { expiresIn: "1h" }
+    );
   });
 
   describe("GET ALL", () => {
@@ -360,6 +363,18 @@ describe("POSTS", () => {
         throw err;
       }
     });
+    // it("USER should failed", async () => {
+    //   try {
+    //     const res = await chai
+    //       .request(server)
+    //       .delete("/api/v1/posts/vdvdfvdf")
+    //       .set("Authorization", `Bearer ${userToken}`);
+    //     res.should.have.status(422);
+    //     res.body.should.be.a("object");
+    //   } catch (err) {
+    //     throw err;
+    //   }
+    // });
     it("USER should success", async () => {
       try {
         const res = await chai

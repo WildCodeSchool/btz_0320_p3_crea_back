@@ -96,8 +96,22 @@ router.delete("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
     // if (req.user.role === "USER" && req.user.id == UserId) {
     //   res.status(401).json({ message: "You are not allowed to delete this" });
     // }
+    // if (req.user.role === "USER") {
+    //   await Post.destroy({
+    //     where: { id, UserId: req.user.id },
+    //   });
+    //   res.status(204).end();
+    // } else if (req.user.role === "ADMIN") {
+    //   await Post.destroy({
+    //     where: { id },
+    //   });
+    //   res.status(204).end();
+    // } else {
+    //   res.status(401).json({ message: "You are not allowed to delete this" });
+    // }
+
     await Post.destroy({
-      where: { id, UserId: req.user.id },
+      where: { id, UserId: req.user.id},
     });
     res.status(204).end();
   } catch (err) {
