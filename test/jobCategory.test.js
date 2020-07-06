@@ -26,6 +26,7 @@ let categoryKeys = [
 ];
 
 let userId;
+let adminId;
 let userTypeId;
 let jobCategoryId;
 let activityFieldId;

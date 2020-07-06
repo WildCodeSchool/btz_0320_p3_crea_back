@@ -9,13 +9,13 @@ let server = require("../index");
 const UserType = require("../models/UserType");
 const User = require("../models/User");
 const ActivityField = require("../models/ActivityField");
-const TypePost = require("../models/TypePost");
 const Role = require("../models/Role");
 
 chai.use(chaiHtpp);
 
 let userTypeKeys = ["id", "label", "createdAt", "updatedAt"];
 let userId;
+let adminId;
 let userTypeId;
 let activityFieldId;
 let userToken;

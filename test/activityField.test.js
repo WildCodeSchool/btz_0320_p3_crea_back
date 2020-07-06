@@ -9,7 +9,6 @@ const ActivityField = require("../models/ActivityField");
 const User = require("../models/User");
 const UserType = require("../models/UserType");
 const Role = require("../models/Role");
-const TypePost = require("../models/TypePost");
 
 chai.use(chaiHttp);
 
@@ -33,6 +32,7 @@ let roleUserId;
 
 describe("Activity field", () => {
   before(async () => {
+
     const type = await UserType.create({
       label: "chomeur",
     });

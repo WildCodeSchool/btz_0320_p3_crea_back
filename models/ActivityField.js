@@ -10,7 +10,7 @@ const ActivityField = sequlizeInstance.define("ActivityField", {
     defaultValue: Sequelize.UUIDV4,
   },
   labelFr: {
-    type: Sequelize.STRING(100),
+    type: Sequelize.STRING(255),
     allowNull: false,
   },
   labelEs: {

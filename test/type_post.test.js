@@ -26,6 +26,7 @@ const typePostKeys = [
 let typePost;
 let typePostId;
 let userId;
+let adminId;
 let userTypeId;
 let jobCategoryId;
 let activityFieldId;

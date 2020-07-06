@@ -46,6 +46,7 @@ let userTypeId;
 let activityField;
 let activityFieldId;
 let userId;
+let adminId;
 let adminRole;
 let adminRoleId;
 let userToken;

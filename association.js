@@ -14,10 +14,10 @@ User.belongsToMany(Post, { through: Reply });
 Post.belongsToMany(User, { through: Reply });
 
 User.belongsTo(Activity, { foreignKey: { allowNull: true }});
-Activity.hasMany(User, { foreignKey: { allowNull: true }});
+Activity.hasMany(User);
 
 User.belongsTo(UserType, { foreignKey: { allowNull: true }});
-UserType.hasMany(User, { foreignKey: { allowNull: true }});
+UserType.hasMany(User);
 
 TypePost.hasMany(Post, { foreignKey: { allowNull: false }});
 Post.belongsTo(TypePost, { foreignKey: { allowNull: false }});

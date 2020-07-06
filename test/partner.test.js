@@ -29,6 +29,7 @@ const partnerKeys = [
 
 let partnerId;
 let userId;
+let adminId;
 let userTypeId;
 let jobCategoryId;
 let activityFieldId;

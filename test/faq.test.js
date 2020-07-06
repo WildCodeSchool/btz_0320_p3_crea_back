@@ -27,6 +27,7 @@ let faqKeys = [
 
 let fasId;
 let userId;
+let adminId;
 let userTypeId;
 let jobCategoryId;
 let activityFieldId;
