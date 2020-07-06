@@ -43,7 +43,7 @@ router.post("/login", async (req, res) => {
       const token = jwt.sign(payload, SECRET, {
         expiresIn: "24h",
       });
-      // delete user.dataValues.password;
+      delete user.dataValues.password;
       res.status(200).json({ token, user });
     } else {
       res.status(422).json({ message: "Wrong credentials", error: err.errors });
