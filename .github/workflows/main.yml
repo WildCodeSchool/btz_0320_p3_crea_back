@@ -29,7 +29,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1 && secrethub/actions/env-export@v0.1.0
+        uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
@@ -42,5 +42,4 @@ jobs:
           DBPASS: postgres
           DBDIALECT: postgres
           DBNAME: postgres
-          SECRET: ${{ secrets.SECRETHUB_CREDENTIAL }}
-
+          SECRET: supertopsecret 
