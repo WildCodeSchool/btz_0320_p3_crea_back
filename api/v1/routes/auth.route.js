@@ -61,6 +61,7 @@ router.post("/register", async (req, res) => {
     email,
     password,
     localisation,
+    country,
     phone_number,
     phone_number2,
     schoolName,
@@ -82,6 +83,7 @@ router.post("/register", async (req, res) => {
       email,
       password,
       localisation,
+      country,
       phone_number,
       phone_number2,
       schoolName,
@@ -96,12 +98,13 @@ router.post("/register", async (req, res) => {
       UserTypeId,
       RoleId,
     });
+    res.status(201).json(register);
   } catch (err) {
     console.log(err);
     res.status(422).json({ message: "Wrong credentials", error: err.errors });
   }
   try {
-    const { email, password } = req.body;
+    const { email, password } = register;
     const user = await User.findOne({
       where: {
         email,
