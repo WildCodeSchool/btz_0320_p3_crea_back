@@ -3,10 +3,22 @@ const Post = require("../../../models/Post");
 const router = express.Router();
 const authRole = require("../../../middleware/authRole");
 const { validator, postForPut } = require("../../../middleware/validator");
+const User = require("../../../models/User");
+const JobCategory = require("../../../models/JobCategory");
+const TypePost = require("../../../models/TypePost");
 
 router.get("/", authRole(["ADMIN", "USER"]), async (req, res) => {
   try {
-    const post = await Post.findAll();
+    const post = await Post.findAll({
+      include: [
+        {
+          model: TypePost,
+        },
+        {
+          model: JobCategory,
+        },
+      ],
+    });
     res.status(200).json(post);
   } catch (err) {
     res.status(400).json(err);
@@ -111,7 +123,7 @@ router.delete("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
     // }
 
     await Post.destroy({
-      where: { id, UserId: req.user.id},
+      where: { id, UserId: req.user.id },
     });
     res.status(204).end();
   } catch (err) {
