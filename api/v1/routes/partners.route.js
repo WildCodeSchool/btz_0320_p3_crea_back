@@ -3,7 +3,7 @@ const router = express.Router();
 const Partner = require("../../../models/Partner");
 const authRole = require("../../../middleware/authRole");
 
-router.get("/", authRole(["ADMIN", "USER"]), async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const partner = await Partner.findAll();
     res.status(200).json(partner);
@@ -12,7 +12,7 @@ router.get("/", authRole(["ADMIN", "USER"]), async (req, res) => {
   }
 });
 
-router.get("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const partner = await Partner.findOne({ where: { id } });
