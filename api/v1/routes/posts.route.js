@@ -3,10 +3,9 @@ const Post = require("../../../models/Post");
 const router = express.Router();
 const authRole = require("../../../middleware/authRole");
 const { validator, postForPut } = require("../../../middleware/validator");
+const User = require("../../../models/User");
 const JobCategory = require("../../../models/JobCategory");
 const TypePost = require("../../../models/TypePost");
-const Reply = require("../../../models/Reply");
-const User = require("../../../models/User");
 
 router.get("/", authRole(["ADMIN", "USER"]), async (req, res) => {
   try {

@@ -4,13 +4,24 @@ const authRole = require("../../../middleware/authRole");
 const user = require("../routes/auth.route");
 const User = require("../../../models/User");
 const Post = require("../../../models/Post");
+const UserType = require("../../../models/UserType");
+const ActivityField = require("../../../models/ActivityField");
 
 const router = express.Router();
 
 router.get("/", authRole("ADMIN"), async (req, res) => {
   try {
     if (req.user) {
-      const users = await User.findAll();
+      const users = await User.findAll({
+        include: [
+          {
+            model: UserType,
+          },
+          {
+            model: ActivityField,
+          },
+        ],
+      });
       res.status(200).json(users);
     } else {
       throw new Error("You are not admin!");

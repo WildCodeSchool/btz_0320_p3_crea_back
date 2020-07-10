@@ -1,4 +1,5 @@
 GET http://localhost:8080/api/v1/partners HTTP/1.1
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImExYjM5OTM1LTQwNmItNGE1NC1hNDk5LWJhNzAxODhiMGFiNCIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NDIxNTI3NSwiZXhwIjoxNTk0MzAxNjc1fQ.7-UtY6-5hr7_if0x0Ia7fQIIScxoRqM5wUE5THSYh8Q
 
 ###
 GET http://localhost:8080/api/v1/partners/e995f399-172e-40a8-8d53-92da0b2e480b HTTP/1.1
@@ -6,11 +7,15 @@ GET http://localhost:8080/api/v1/partners/e995f399-172e-40a8-8d53-92da0b2e480b H
 
 ###
 POST http://localhost:8080/api/v1/partners HTTP/1.1
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImExYjM5OTM1LTQwNmItNGE1NC1hNDk5LWJhNzAxODhiMGFiNCIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NDIxNTI3NSwiZXhwIjoxNTk0MzAxNjc1fQ.7-UtY6-5hr7_if0x0Ia7fQIIScxoRqM5wUE5THSYh8Q
 Content-Type: application/json
 
 {
-    "label" : "annonce",
-    "url" : "blablabla"
+    "label" : "entreprise 4",
+    "url" : "entreprise4@dev.fr",
+    "description" : "hello world4",
+    "logo" : "https://via.placeholder.com/150",
+    "favorite" : true
 }
 
 ###
