@@ -3,10 +3,23 @@ const Post = require("../../../models/Post");
 const router = express.Router();
 const authRole = require("../../../middleware/authRole");
 const { validator, postForPut } = require("../../../middleware/validator");
+const JobCategory = require("../../../models/JobCategory");
+const TypePost = require("../../../models/TypePost");
+const Reply = require("../../../models/Reply");
+const User = require("../../../models/User");
 
 router.get("/", authRole(["ADMIN", "USER"]), async (req, res) => {
   try {
-    const post = await Post.findAll();
+    const post = await Post.findAll({
+      include: [
+        {
+          model: TypePost,
+        },
+        {
+          model: JobCategory,
+        },
+      ],
+    });
     res.status(200).json(post);
   } catch (err) {
     res.status(400).json(err);
@@ -16,7 +29,17 @@ router.get("/", authRole(["ADMIN", "USER"]), async (req, res) => {
 router.get("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
   try {
     const { id } = req.params;
-    const post = await Post.findByPk(id);
+    const post = await Post.findAll({
+      where: { id },
+      include: [
+        {
+          model: JobCategory,
+        },
+        {
+          model: TypePost,
+        },
+      ],
+    });
     res.status(200).json(post);
   } catch (err) {
     res.status(400).json(err);
@@ -111,7 +134,7 @@ router.delete("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
     // }
 
     await Post.destroy({
-      where: { id, UserId: req.user.id},
+      where: { id, UserId: req.user.id },
     });
     res.status(204).end();
   } catch (err) {
