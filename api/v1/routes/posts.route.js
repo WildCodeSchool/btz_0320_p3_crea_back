@@ -28,7 +28,17 @@ router.get("/", authRole(["ADMIN", "USER"]), async (req, res) => {
 router.get("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
   try {
     const { id } = req.params;
-    const post = await Post.findByPk(id);
+    const post = await Post.findAll({
+      where: { id },
+      include: [
+        {
+          model: JobCategory,
+        },
+        {
+          model: TypePost,
+        },
+      ],
+    });
     res.status(200).json(post);
   } catch (err) {
     res.status(400).json(err);
