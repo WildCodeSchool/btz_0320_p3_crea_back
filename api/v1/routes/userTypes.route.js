@@ -4,7 +4,7 @@ const authRole = require("../../../middleware/authRole");
 
 const router = express.Router();
 
-router.get("/", authRole(["ADMIN", "USER"]), async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const userType = await UserType.findAll();
     res.status(200).json(userType);

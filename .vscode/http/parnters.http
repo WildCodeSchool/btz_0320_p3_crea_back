@@ -11,9 +11,9 @@ Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImExYjM5OTM1
 Content-Type: application/json
 
 {
-    "label" : "entreprise 4",
-    "url" : "entreprise4@dev.fr",
-    "description" : "hello world4",
+    "label" : "entreprise 1",
+    "url" : "entreprise1@dev.fr",
+    "description" : "hello world1",
     "logo" : "https://via.placeholder.com/150",
     "favorite" : true
 }

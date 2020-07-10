@@ -3,7 +3,7 @@ const router = express.Router();
 const ActivityField = require("../../../models/ActivityField");
 const authRole = require("../../../middleware/authRole");
 
-router.get("/", authRole(["ADMIN", "USER"]), async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const router = await ActivityField.findAll();
     res.status(200).json(router);
