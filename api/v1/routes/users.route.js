@@ -6,6 +6,7 @@ const User = require("../../../models/User");
 const Post = require("../../../models/Post");
 const UserType = require("../../../models/UserType");
 const ActivityField = require("../../../models/ActivityField");
+const bcrypt = require("bcrypt");
 
 const router = express.Router();
 
@@ -98,7 +99,7 @@ router.get("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
 // });
 
 router.put("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
-  const {
+  let {
     lastName,
     firstName,
     email,
@@ -120,12 +121,12 @@ router.put("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
     RoleId,
   } = req.body;
   const { id } = req.params;
+  // if (req.user.role === "USER" && req.user.id !== id) {
+  //   res.status(401).json({
+  //     message: "You are not allowed to modify this",
+  //   });
+  // }
   try {
-    // if (req.user.role === "USER" && req.user.id !== id) {
-    //   res.status(401).json({
-    //     message: "You are not allowed to modify this",
-    //   });
-    // }
     await User.update(
       {
         lastName,
@@ -183,7 +184,7 @@ router.delete("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
     //   res.status(204).end();
     // }
     await User.destroy({
-      where: { id: req.user.id },
+      where: { id },
     });
     res.status(204).end();
   } catch (err) {

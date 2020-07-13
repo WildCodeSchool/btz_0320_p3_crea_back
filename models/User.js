@@ -93,17 +93,18 @@ const User = sequelizeInstance.define(
         const salt = bcrypt.genSaltSync();
         user.password = bcrypt.hashSync(user.password, salt);
       },
+      beforeBulkUpdate : (user) => {
+        const salt = bcrypt.genSaltSync();
+        user.password = bcrypt.hashSync(user.password, salt);
+        console.log(user)
+      }
     },
   }
 );
 
 User.prototype.validPassword = function (password) {
   return bcrypt.compareSync(password, this.password);
-  //   if (password === this.password) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
+
 };
 
 module.exports = User;
