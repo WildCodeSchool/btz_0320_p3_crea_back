@@ -1,22 +1,22 @@
 GET http://localhost:8080/api/v1/posts HTTP/1.1
-Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFjY2QwOWNiLTM4NDQtNDNiZS04OTQzLTc1NzhlYjI3ZDY3YSIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5Mzg5NTc1NiwiZXhwIjoxNTkzOTgyMTU2fQ.72NxYJV0stBwBp8af-GfzLl57Qf9F4K3Q9bkCUkCk8U
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRlNTQwYTE0LTliYmItNGFhNi1hZDUyLTY3NWJiOWVkNzM4ZCIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NDI5OTQ3MSwiZXhwIjoxNTk0Mzg1ODcxfQ._LskOOKVEGDwqBwa813cQIhRo2OzX0GBNBQLn2OMJPY
 ###
 GET http://localhost:8080/api/v1/posts/20a6d5a2-e2e4-42d3-b681-0b810d3ecaf0 HTTP/1.1
 
 
 ###
 POST http://localhost:8080/api/v1/posts HTTP/1.1
-Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFjY2QwOWNiLTM4NDQtNDNiZS04OTQzLTc1NzhlYjI3ZDY3YSIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5Mzg5NTc1NiwiZXhwIjoxNTkzOTgyMTU2fQ.72NxYJV0stBwBp8af-GfzLl57Qf9F4K3Q9bkCUkCk8U
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRlNTQwYTE0LTliYmItNGFhNi1hZDUyLTY3NWJiOWVkNzM4ZCIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NDI5OTQ3MSwiZXhwIjoxNTk0Mzg1ODcxfQ._LskOOKVEGDwqBwa813cQIhRo2OzX0GBNBQLn2OMJPY
 Content-Type: application/json
 
 {
-    "title" : "annonce2",
+    "title" : "annonce5",
     "content" :"blablabla54",
     "localisation" : "biarritz",
     "language" : "french",
-    "UserId": "73698675-71b7-4071-bcc1-829dcaf68b4d",
-    "TypePostId": "24c13f60-2407-454c-9544-d8cb5650cbf0",
-    "JobCategoryId": "283e56f6-8c72-41b1-81ad-21dd5eed9b44"
+    "UserId": "da41cd98-54f2-4aa8-a6af-8d94dbed89c0",
+    "TypePostId": "a7e93a07-804a-4745-846e-a3ef4af6a002",
+    "JobCategoryId": "3097ce0e-20e0-4f40-8b45-c6974cd4d671"
 }
 
 ###
