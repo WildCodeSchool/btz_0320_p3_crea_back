@@ -1,0 +1,33 @@
+POST http://localhost:8080/api/v1/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email" : "admin@dev.com",
+    "password" : "admin"
+}
+
+###register
+POST http://localhost:8080/api/v1/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "lastName" : "toto",
+    "firstName" : "toto",
+    "email" : "toto@dev.com",
+    "password" : "toto",
+    "localisation" : "vielle",
+    "country": "France",
+    "phone_number" : "0656565656",
+    "phone_number2" : "558547854",
+    "schoolName" : "wcs",
+    "companyName" : "wcs",
+    "siret" : "211680374",
+    "qualification" : "job",
+    "mobility" : "france",
+    "name_organisation" : "wcs",
+    "isActive" : false,
+    "logo" : "bjisdckjs",
+    "RoleId" : "c03c4d4c-24ba-4496-9e93-56810f4c4227",
+    "UserTypeId" : "1698b306-4568-4193-8fc0-7f75912432fb",
+    "ActivityField" : "21f22ca4-72de-4a77-bbdb-22c7ff761fbf"
+}
