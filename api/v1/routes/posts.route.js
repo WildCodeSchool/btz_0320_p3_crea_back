@@ -133,7 +133,7 @@ router.delete("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
     // }
 
     await Post.destroy({
-      where: { id, UserId: req.user.id },
+      where: { id },
     });
     res.status(204).end();
   } catch (err) {

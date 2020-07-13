@@ -1,4 +1,6 @@
 GET http://localhost:8080/api/v1/postTypes HTTP/1.1
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRlNTQwYTE0LTliYmItNGFhNi1hZDUyLTY3NWJiOWVkNzM4ZCIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NDI5OTQ3MSwiZXhwIjoxNTk0Mzg1ODcxfQ._LskOOKVEGDwqBwa813cQIhRo2OzX0GBNBQLn2OMJPY
+
 
 ### //route test pour récupérer un id
 GET http://localhost:8080/api/v1/postTypes/2464b82e-838f-4199-9fef-c5446756f6d5 HTTP/1.1
