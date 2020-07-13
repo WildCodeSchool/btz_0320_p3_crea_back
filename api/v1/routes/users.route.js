@@ -149,7 +149,7 @@ router.put("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
         ActivityFieldId,
         RoleId,
       },
-      { where: { id } }
+      { where: { id }, individualHooks: true }
     );
     const user = await User.findByPk(id);
     res.status(202).json(user);
