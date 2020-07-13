@@ -1,44 +1,18 @@
 GET http://localhost:8080/api/v1/users HTTP/1.1
-Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MGMxNGMyLTIyNmEtNDU0YS1hODkwLTI5MDRiZThlODEwOSIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NDA1NzU5MCwiZXhwIjoxNTk0MTQzOTkwfQ.hGBnMgCTWAo48Vdyft_1EievAAdhlOQMX-748v68Wu8
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRlNTQwYTE0LTliYmItNGFhNi1hZDUyLTY3NWJiOWVkNzM4ZCIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NDI5OTQ3MSwiZXhwIjoxNTk0Mzg1ODcxfQ._LskOOKVEGDwqBwa813cQIhRo2OzX0GBNBQLn2OMJPY
 
 ####
 
 GET http://localhost:8080/api/v1/users/165162305 HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI4YzQyNjU4LTNlMjctNGMxYy04YjgzLWNlZTRjYWQ3MWUyNyIsImVtYWlsIjoidXNlckBkZXYuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE1OTM2Nzg2MzIsImV4cCI6MTU5Mzc2NTAzMn0.rccNCXbw84slUi1RLu0756KpyHogf6Cf-qoxEIsc6i4
 
-###
-POST http://localhost:8080/api/v1/users HTTP/1.1
-Content-Type: application/json
-
-{
-    "lastName" : "maxime",
-    "firstName" : "reloue",
-    "email" : "reloue@je.fr",
-    "password" : "reloue2",
-    "localisation" : "vielle",
-    "country": "France",
-    "phone_number" : 556325365,
-    "phone_number2" : 558547854,
-    "schoolName" : "wcs",
-    "companyName" : "wcs",
-    "siret" : "211680374",
-    "qualification" : "job",
-    "mobility" : "france",
-    "name_organisation" : "wcs",
-    "isActive" : false,
-    "logo" : "bjisdckjs",
-    "ActivityFieldId" : "07dac2cd-63d1-4b3f-9795-db9ee36f37a3",
-    "UserTypeId" : "6f73feb0-2e71-48c9-8077-686717f005e0",
-    
-}
-
 ###Auth
 POST http://localhost:8080/api/v1/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email" : "admin@dev.com",
-    "password" : "admin"
+    "email" : "user@dev.com",
+    "password" : "user"
 }
 
 ###register
@@ -46,24 +20,24 @@ POST http://localhost:8080/api/v1/auth/register HTTP/1.1
 Content-Type: application/json
 
 {
-    "lastName" : "toto",
-    "firstName" : "toto",
-    "email" : "toto@dev.com",
-    "password" : "toto",
+    "lastName" : "Shakira",
+    "firstName" : "Shakira",
+    "email" : "Shakira@dev.com",
+    "password" : "password",
     "localisation" : "vielle",
-    "country": "France",
+    "country": "Espagne",
     "phone_number" : "0656565656",
     "phone_number2" : "558547854",
     "schoolName" : "wcs",
     "companyName" : "wcs",
     "siret" : "211680374",
     "qualification" : "job",
-    "mobility" : "france",
+    "mobility" : "Espagne",
     "name_organisation" : "wcs",
     "isActive" : false,
     "logo" : "bjisdckjs",
-    "RoleId" : "7464ba81-2d2f-4760-b8b1-119dda8cf021",
-    "UserTypeId" : "8c6099e6-45a4-40b7-904f-1e486e95e033"
+    "RoleId" : "a5be2e09-9eb6-4212-88c4-caa5af81abe6",
+    "UserTypeId" : "b59a0dfc-8f2c-4b12-82cc-d904007c8d55"
 }
 
 ###
