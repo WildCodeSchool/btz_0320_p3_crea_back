@@ -103,48 +103,6 @@ router.post("/register", async (req, res) => {
     console.log(err);
     res.status(422).json({ message: "Wrong credentials", error: err.errors });
   }
-  try {
-    const { email, password } = register;
-    const user = await User.findOne({
-      where: {
-        email,
-      },
-      include: [
-        {
-          model: Role,
-          attributes: ["label"],
-        },
-        {
-          model: UserType,
-          attributes: ["label"],
-        },
-      ],
-    });
-    const isPasswordValid = user.validPassword(password);
-
-    if (user && isPasswordValid) {
-      const payload = {
-        id: user.dataValues.id,
-        email: user.dataValues.email,
-        role: user.dataValues.Role.label,
-        type: null,
-      };
-
-      if (user.dataValues.UserTypeId !== null) {
-        payload.type = user.dataValues.UserType.label;
-      }
-      const token = jwt.sign(payload, SECRET, {
-        expiresIn: "24h",
-      });
-      delete user.dataValues.password;
-      res.status(200).json({ token, user });
-    } else {
-      res.status(422).json({ message: "Wrong credentials", error: err.errors });
-    }
-  } catch (err) {
-    console.log(err);
-    res.status(422).json({ message: "Wrong credentials", error: err.errors });
-  }
 });
 
 module.exports = router;

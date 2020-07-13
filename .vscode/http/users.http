@@ -6,6 +6,7 @@ Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRlNTQwYTE0
 GET http://localhost:8080/api/v1/users/165162305 HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI4YzQyNjU4LTNlMjctNGMxYy04YjgzLWNlZTRjYWQ3MWUyNyIsImVtYWlsIjoidXNlckBkZXYuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE1OTM2Nzg2MzIsImV4cCI6MTU5Mzc2NTAzMn0.rccNCXbw84slUi1RLu0756KpyHogf6Cf-qoxEIsc6i4
 
+<<<<<<< HEAD
 ###Auth
 POST http://localhost:8080/api/v1/auth/login HTTP/1.1
 Content-Type: application/json
@@ -28,10 +29,26 @@ Content-Type: application/json
     "country": "Espagne",
     "phone_number" : "0656565656",
     "phone_number2" : "558547854",
+=======
+###
+POST http://localhost:8080/api/v1/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "lastName" : "maxime",
+    "firstName" : "reloue",
+    "email" : "reloue@je.fr",
+    "password" : "reloue2",
+    "localisation" : "vielle",
+    "country": "France",
+    "phone_number" : 556325365,
+    "phone_number2" : 558547854,
+>>>>>>> 158bbbf733f65a26da62cfc4e26ba08482b4416f
     "schoolName" : "wcs",
     "companyName" : "wcs",
     "siret" : "211680374",
     "qualification" : "job",
+<<<<<<< HEAD
     "mobility" : "Espagne",
     "name_organisation" : "wcs",
     "isActive" : false,
@@ -39,6 +56,17 @@ Content-Type: application/json
     "RoleId" : "a5be2e09-9eb6-4212-88c4-caa5af81abe6",
     "UserTypeId" : "b59a0dfc-8f2c-4b12-82cc-d904007c8d55"
 }
+=======
+    "mobility" : "france",
+    "name_organisation" : "wcs",
+    "isActive" : false,
+    "logo" : "bjisdckjs",
+    "ActivityFieldId" : "07dac2cd-63d1-4b3f-9795-db9ee36f37a3",
+    "UserTypeId" : "6f73feb0-2e71-48c9-8077-686717f005e0",
+    
+}
+
+>>>>>>> 158bbbf733f65a26da62cfc4e26ba08482b4416f
 
 ###
 

@@ -59,7 +59,7 @@ describe("POSTS", () => {
       label: "USER",
     });
     roleUserId = roleUser.dataValues.id;
-    
+
     const activityField = await ActivityField.create({
       labelFr: "Bâtiment",
       labelEs: "Building",
@@ -153,7 +153,6 @@ describe("POSTS", () => {
 
     postId2 = post2.dataValues.id;
 
-
     userToken = jwt.sign(
       {
         id: user.dataValues.id,
@@ -212,8 +211,8 @@ describe("POSTS", () => {
           .get(`/api/v1/posts/${postId}`)
           .set("Authorization", `Bearer ${adminToken}`);
         res.should.have.status(200);
-        res.body.should.be.a("object");
-        res.body.should.have.keys(postKeys);
+        res.body.should.be.a("array");
+        res.body.length.should.be.eql(1);
       } catch (err) {
         throw err;
       }
@@ -225,8 +224,8 @@ describe("POSTS", () => {
           .get(`/api/v1/posts/${postId}`)
           .set("Authorization", `Bearer ${userToken}`);
         res.should.have.status(200);
-        res.body.should.be.a("object");
-        res.body.should.have.keys(postKeys);
+        res.body.should.be.a("array");
+        res.body.length.should.be.eql(1);
       } catch (err) {
         throw err;
       }

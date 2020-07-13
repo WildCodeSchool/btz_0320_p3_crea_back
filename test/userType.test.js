@@ -40,7 +40,7 @@ describe("USERS TYPES", () => {
       label: "USER",
     });
     roleUserId = roleUser.dataValues.id;
-    
+
     const activityField = await ActivityField.create({
       labelFr: "Bâtiment",
       labelEs: "Building",
@@ -125,7 +125,20 @@ describe("USERS TYPES", () => {
           .set("Authorization", `Bearer ${adminToken}`);
         res.should.have.status(200);
         res.body.should.be.a("object");
-        res.body.should.have.keys(userTypeKeys)
+        res.body.should.have.keys(userTypeKeys);
+      } catch (err) {
+        throw err;
+      }
+    });
+    it("with users list", async () => {
+      try {
+        const res = await chai
+          .request(server)
+          .get(`/api/v1/userTypes/${userTypeId}/users`)
+          .set("Authorization", `Bearer ${adminToken}`);
+        res.should.have.status(200);
+        res.body.should.be.a("object");
+        res.body.should.have.keys([...userTypeKeys, "Users"]);
       } catch (err) {
         throw err;
       }
@@ -138,7 +151,7 @@ describe("USERS TYPES", () => {
           .set("Authorization", `Bearer ${userToken}`);
         res.should.have.status(200);
         res.body.should.be.a("object");
-        res.body.should.have.keys(userTypeKeys)
+        res.body.should.have.keys(userTypeKeys);
       } catch (err) {
         throw err;
       }
@@ -147,8 +160,10 @@ describe("USERS TYPES", () => {
   describe("GET ALL", () => {
     it("ADMIN should success", async () => {
       try {
-        const res = await chai.request(server).get("/api/v1/userTypes")
-        .set("Authorization", `Bearer ${adminToken}`);
+        const res = await chai
+          .request(server)
+          .get("/api/v1/userTypes")
+          .set("Authorization", `Bearer ${adminToken}`);
         res.should.have.status(200);
         res.body.should.be.a("array");
         res.body.length.should.be.eql(1);
@@ -158,8 +173,10 @@ describe("USERS TYPES", () => {
     });
     it("USER should success", async () => {
       try {
-        const res = await chai.request(server).get("/api/v1/userTypes")
-        .set("Authorization", `Bearer ${userToken}`);
+        const res = await chai
+          .request(server)
+          .get("/api/v1/userTypes")
+          .set("Authorization", `Bearer ${userToken}`);
         res.should.have.status(200);
         res.body.should.be.a("array");
         res.body.length.should.be.eql(1);
@@ -171,10 +188,13 @@ describe("USERS TYPES", () => {
   describe("POST", () => {
     it("ADMIN should success", async () => {
       try {
-        const res = await chai.request(server).post("/api/v1/userTypes").send({
-          label: "new toto label",
-        })        
-        .set("Authorization", `Bearer ${adminToken}`);
+        const res = await chai
+          .request(server)
+          .post("/api/v1/userTypes")
+          .send({
+            label: "new toto label",
+          })
+          .set("Authorization", `Bearer ${adminToken}`);
         res.should.have.status(201);
         res.body.should.be.a("object");
         res.body.should.have.keys(userTypeKeys);
@@ -184,10 +204,13 @@ describe("USERS TYPES", () => {
     });
     it("USER should fail", async () => {
       try {
-        const res = await chai.request(server).post("/api/v1/userTypes").send({
-          label: "new toto label",
-        })        
-        .set("Authorization", `Bearer ${userToken}`);
+        const res = await chai
+          .request(server)
+          .post("/api/v1/userTypes")
+          .send({
+            label: "new toto label",
+          })
+          .set("Authorization", `Bearer ${userToken}`);
         res.should.have.status(403);
         res.body.should.be.a("object");
       } catch (err) {
@@ -224,23 +247,29 @@ describe("USERS TYPES", () => {
   describe("PUT", () => {
     it("ADMIN should success", async () => {
       try {
-        const res = await chai.request(server).put(`/api/v1/userTypes/${userTypeId}`).send({
-          label: "Capitalist"
-        })          
-        .set("Authorization", `Bearer ${adminToken}`);
+        const res = await chai
+          .request(server)
+          .put(`/api/v1/userTypes/${userTypeId}`)
+          .send({
+            label: "Capitalist",
+          })
+          .set("Authorization", `Bearer ${adminToken}`);
         res.should.have.status(202);
         res.body.should.be.a("object");
-        res.body.should.have.keys(userTypeKeys)
+        res.body.should.have.keys(userTypeKeys);
       } catch (err) {
         throw err;
       }
     });
     it("USER should fail", async () => {
       try {
-        const res = await chai.request(server).put(`/api/v1/userTypes/${userTypeId}`).send({
-          label: "Capitalist"
-        })          
-        .set("Authorization", `Bearer ${userToken}`);
+        const res = await chai
+          .request(server)
+          .put(`/api/v1/userTypes/${userTypeId}`)
+          .send({
+            label: "Capitalist",
+          })
+          .set("Authorization", `Bearer ${userToken}`);
         res.should.have.status(403);
         res.body.should.be.a("object");
       } catch (err) {
@@ -251,8 +280,10 @@ describe("USERS TYPES", () => {
   describe("DELETE", () => {
     it("ADMIN should success", async () => {
       try {
-        const res = await chai.request(server).delete(`/api/v1/userTypes/${userTypeId}`)
-        .set("Authorization", `Bearer ${adminToken}`);
+        const res = await chai
+          .request(server)
+          .delete(`/api/v1/userTypes/${userTypeId}`)
+          .set("Authorization", `Bearer ${adminToken}`);
         res.should.have.status(204);
         res.body.should.be.a("object");
       } catch (err) {
@@ -261,8 +292,10 @@ describe("USERS TYPES", () => {
     });
     it("USER should fail", async () => {
       try {
-        const res = await chai.request(server).delete(`/api/v1/userTypes/${userTypeId}`)
-        .set("Authorization", `Bearer ${userToken}`);
+        const res = await chai
+          .request(server)
+          .delete(`/api/v1/userTypes/${userTypeId}`)
+          .set("Authorization", `Bearer ${userToken}`);
         res.should.have.status(403);
         res.body.should.be.a("object");
       } catch (err) {
