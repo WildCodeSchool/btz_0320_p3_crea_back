@@ -5,6 +5,7 @@ const user = require("../routes/auth.route");
 const User = require("../../../models/User");
 const Post = require("../../../models/Post");
 const UserType = require("../../../models/UserType");
+const Role = require("../../../models/Role");
 const ActivityField = require("../../../models/ActivityField");
 const bcrypt = require("bcrypt");
 
@@ -20,6 +21,9 @@ router.get("/", authRole("ADMIN"), async (req, res) => {
           },
           {
             model: ActivityField,
+          },
+          {
+            model: Role,
           },
         ],
       });
