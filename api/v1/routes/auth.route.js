@@ -1,10 +1,12 @@
 require("dotenv").config();
 const express = require("express");
+const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 const User = require("../../../models/User");
 const UserType = require("../../../models/UserType");
 const Role = require("../../../models/Role");
 const { SECRET } = process.env;
+const generator = require('generate-password');
 
 const router = express.Router();
 
@@ -102,6 +104,49 @@ router.post("/register", async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(422).json({ message: "Wrong credentials", error: err.errors });
+  }
+});
+
+router.post("/forgetPassword", async (req, res) => {
+  const { email } = req.body;
+  try {
+    const findUser = User.findOne({ where: { email } });
+    const password = generator.generate({
+      length: 10,
+      numbers: true
+  });
+  console.log(password)
+
+    User.update({ password }, { where: { email }, individualHooks: true  });
+
+    console.log(req.body);
+    let transporter = nodemailer.createTransport({
+      host: "smtp.ethereal.email",
+      port: 587,
+      auth: {
+        user: "eldora.block86@ethereal.email",
+        pass: "KdKN8MmH1sD7mrQRYQ",
+      },
+    });
+
+    const success = await transporter.verify();
+
+    let info = await transporter.sendMail({
+      from: '"Crea" <contact@crea-aquitaine.org>',
+      to: email,
+      subject: "Nouveau mot de passe",
+      text: "Hello world",
+      html:`<h4>Bonjour ${findUser.firstName} ${findUser.lastName},</h4>
+
+     <p> Voici votre mot de passe pour la plateforme NetWorking CREA : ${password} </p>
+
+     <em><b> À ne pas communiquer. </b></em>`,
+    });
+
+    res.status(200).json({ success, info });
+  } catch (error) {
+    res.status(400).json(error);
+    console.log(error);
   }
 });
 
