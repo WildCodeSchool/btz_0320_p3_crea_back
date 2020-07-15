@@ -1,6 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 
 const sequelize = require("./sequelize");
 require("./association");
@@ -10,6 +12,9 @@ const User = require("./models/User");
 const api = require("./api/v1");
 const port = process.env.PORT || 8080;
 const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cookieParser());
 
 app.use(express.json());
 app.use(cors());
@@ -20,9 +25,18 @@ app.get("/", (req, res) => {
   res.status(200).send("Bienvenue sur CREA_PROJECT");
 });
 
+const { sendEmail } = require("./mail");
+
+app.post("/api/sendMail", (req, res) => {
+  console.log(req.body);
+
+  // sendEmail(to, name, type);
+  sendEmail(req.body.email, req.body.name, "hello");
+});
+
 if (process.env.NODE_ENV !== "test") {
   sequelize
-    .sync()
+    .sync({ alter: true })
     .then(() => {
       return sequelize.authenticate();
     })

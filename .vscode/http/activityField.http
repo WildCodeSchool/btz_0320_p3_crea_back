@@ -1,5 +1,6 @@
 ### GET ALL FAQ
 GET http://localhost:8080/api/v1/activityFields HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE1M2JlNGYyLWJmMjctNDJkMi04MzkzLTA1NWNmYjUxZjU0NiIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NDM3MzgyOCwiZXhwIjoxNTk0NDYwMjI4fQ.j2mr23rjY5gvl55iKCanEtsQjpKkQsDimg1FKpiHlHQ
 
 ###GET one FAQ
 GET http://localhost:8080/api/v1/activityFields/44b6733d-a728-411e-912e-36ba03cc0967  HTTP/1.1
