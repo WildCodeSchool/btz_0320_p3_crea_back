@@ -51,7 +51,6 @@ router.post("/login", async (req, res) => {
       res.status(422).json({ message: "Wrong credentials", error: err.errors });
     }
   } catch (err) {
-    console.log(err);
     res.status(422).json({ message: "Wrong credentials", error: err.errors });
   }
 });
@@ -102,7 +101,6 @@ router.post("/register", async (req, res) => {
     });
     res.status(201).json(register);
   } catch (err) {
-    console.log(err);
     res.status(422).json({ message: "Wrong credentials", error: err.errors });
   }
 });
@@ -115,11 +113,9 @@ router.post("/forgetPassword", async (req, res) => {
       length: 10,
       numbers: true
   });
-  console.log(password)
 
     User.update({ password }, { where: { email }, individualHooks: true  });
 
-    console.log(req.body);
     let transporter = nodemailer.createTransport({
       host: "smtp.ethereal.email",
       port: 587,
@@ -146,7 +142,6 @@ router.post("/forgetPassword", async (req, res) => {
     res.status(200).json({ success, info });
   } catch (error) {
     res.status(400).json(error);
-    console.log(error);
   }
 });
 

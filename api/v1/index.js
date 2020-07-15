@@ -10,6 +10,7 @@ const jobCategories = require("./routes/jobCategories.route");
 const activityFields = require("./routes/activityFields.route");
 const auth = require("./routes/auth.route");
 const role = require("./routes/role.route");
+const replies = require("./routes/replies.route");
 
 
 const router = express.Router()
@@ -20,10 +21,11 @@ router.use("/partners", partners);
 router.use("/posts", posts);
 router.use("/postTypes", postTypes);
 router.use("/jobCategories", jobCategories);
-router.use("/activityFields", activityFields)
+router.use("/activityFields", activityFields);
 router.use("/faq", faq);
 router.use("/auth", auth);
-router.use("/role", role)
+router.use("/role", role);
+router.use("/replies", replies);
 
 
 module.exports = router
