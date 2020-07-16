@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const Reply = require("../../../model/Reply");
+const Reply = require("../../../models/Reply");
+const User = require("../../../models/User");
+const Post = require("../../../models/Post");
+const authRole = require("../../../middleware/authRole");
 
 router.get("/", async (req, res) => {
   try {
@@ -14,7 +17,17 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const reply = await Reply.findAll({ where: { id } });
+    const reply = await Reply.findAll({
+      where: { id },
+      include: [
+        {
+          model: User,
+        },
+        {
+          model: Post,
+        },
+      ],
+    });
     res.status(200).json(reply);
   } catch (err) {
     res.status(400).json(err);
@@ -22,7 +35,15 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { comment, title, resume, UserId, PostId } = req.body;
+  const {
+    comment,
+    title,
+    resume,
+    UserId,
+    PostId,
+    userPostId,
+    titlePost,
+  } = req.body;
   try {
     const user = await User.create({
       comment,
@@ -30,6 +51,8 @@ router.post("/", async (req, res) => {
       resume,
       UserId,
       PostId,
+      userPostId,
+      titlePost,
     });
     res.status(201).json(user);
   } catch (err) {
@@ -38,7 +61,15 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/:id", async (req, res) => {
-  const { title, resume, comment, UserId, PostId } = req.body;
+  const {
+    title,
+    resume,
+    comment,
+    UserId,
+    PostId,
+    userPostId,
+    titlePost,
+  } = req.body;
   const { id } = req.params;
   try {
     const user = await User.update(
@@ -48,6 +79,8 @@ router.put("/:id", async (req, res) => {
         comment,
         UserId,
         PostId,
+        userPostId,
+        titlePost,
       },
       { where: { id } }
     );
@@ -58,15 +91,43 @@ router.put("/:id", async (req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
-    try {
-      const { id } = req.params;
-      const reply = await Reply.destroy({
-        where: { id },
-      });
-      res.status(205).send("La réponse a bien été effacé");
-    } catch (err) {
-      res.status(422).json(err);
-    }
-  });
+  try {
+    const { id } = req.params;
+    const reply = await Reply.destroy({
+      where: { id },
+    });
+    res.status(205).send("La réponse a bien été effacé");
+  } catch (err) {
+    res.status(422).json(err);
+  }
+});
+
+router.post("/apply", authRole(["ADMIN", "USER"]), async (req, res) => {
+  const {
+    title,
+    comment,
+    resume,
+    UserId,
+    PostId,
+    userPostId,
+    titlePost,
+  } = req.body;
+  try {
+    const user = User.findByPk(UserId);
+    await Reply.create({
+      title,
+      comment,
+      resume,
+      UserId,
+      PostId,
+      userPostId,
+      titlePost,
+    });
+    res.status(201).json({ success, info });
+  } catch (error) {
+    res.status(400).json(error);
+    console.log(error);
+  }
+});
 
 module.exports = router;
