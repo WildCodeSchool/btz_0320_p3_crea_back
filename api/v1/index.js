@@ -10,6 +10,8 @@ const jobCategories = require("./routes/jobCategories.route");
 const activityFields = require("./routes/activityFields.route");
 const auth = require("./routes/auth.route");
 const mail = require("../../mail");
+const role = require("./routes/role.route");
+const replies = require("./routes/replies.route");
 
 const router = express.Router();
 
@@ -22,6 +24,8 @@ router.use("/jobCategories", jobCategories);
 router.use("/activityFields", activityFields);
 router.use("/faq", faq);
 router.use("/auth", auth);
+router.use("/role", role);
+router.use("/replies", replies);
 
 router.use("/sendMail", mail);
 

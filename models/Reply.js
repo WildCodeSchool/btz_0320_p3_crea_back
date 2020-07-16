@@ -19,6 +19,14 @@ const Reply = sequelizeInstance.define("Reply", {
   },
   resume: {
     type: Sequelize.STRING(200),
+    allowNull: true,
+  },
+  userPostId: {
+    type: Sequelize.STRING(200),
+    allowNull: false,
+  },
+  titlePost: {
+    type: Sequelize.STRING(200),
     allowNull: false,
   },
 });

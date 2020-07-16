@@ -1,15 +1,15 @@
 GET http://localhost:8080/api/v1/userTypes HTTP/1.1
-Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE1M2JlNGYyLWJmMjctNDJkMi04MzkzLTA1NWNmYjUxZjU0NiIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NDM3MzU3MiwiZXhwIjoxNTk0NDU5OTcyfQ.PgviiBXHlMfBTwC907aoELjQkXHlJdC62mFoy9QxLu8
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRlNTQwYTE0LTliYmItNGFhNi1hZDUyLTY3NWJiOWVkNzM4ZCIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NDI5OTQ3MSwiZXhwIjoxNTk0Mzg1ODcxfQ._LskOOKVEGDwqBwa813cQIhRo2OzX0GBNBQLn2OMJPY
 
 ### 
 GET http://localhost:8080/api/v1/userTypes/b64ece64-4a8b-4fb2-8d35-b88c3bb813b3 HTTP/1.1
 ###
 POST http://localhost:8080/api/v1/userTypes HTTP/1.1
-Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImExYjM5OTM1LTQwNmItNGE1NC1hNDk5LWJhNzAxODhiMGFiNCIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NDIxMDAzMywiZXhwIjoxNTk0Mjk2NDMzfQ.qVcJ8GlWprDZgsIXSv2m2aYTkm_Udb8zIX-pMkQ6_u0
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjJlNjA5Mjg3LWYyN2QtNGJiZC04ZTU3LWZmYTkyZWI2MTgwYiIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NDMwMDA5OCwiZXhwIjoxNTk0Mzg2NDk4fQ.zagbxgulQRgsS2F7FYcFBsURZwnMY2GdFmiQIGtDmnI
 Content-Type: application/json
 
 {
-    "label" : "Entreprise"
+    "label" : "Demandeur d'emploi"
 }
 
 ###
