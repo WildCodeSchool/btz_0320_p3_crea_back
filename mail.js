@@ -1,52 +1,34 @@
 const mailer = require("nodemailer");
-const { hello } = require("./hello_template");
-const { thanks } = require("./thanks_template");
+const express = require("express");
 
-const getEmailData = (to, name, template) => {
-  let data = null;
-  switch (template) {
-    case "hello":
-      data = {
-        from: "Béatrice <schoolwilder385@gmail.com> ",
-        to,
-        subject: `Hello ${name}`,
-        html: hello(),
-      };
-      break;
+const router = express.Router();
 
-    case "thanks":
-      data = {
-        from: "Béatrice <schoolwilder385@gmail.com> ",
-        to,
-        subject: `Hello ${name}`,
-        html: thanks(),
-      };
-      break;
-    default:
-      data;
+router.post("/", async (req, res) => {
+  const { lastname, firstname, email, text, textarea } = req.body;
+
+  try {
+    const smtpTransport = mailer.createTransport({
+      host: "smtp.ethereal.email",
+      port: 587,
+      auth: {
+        user: "eldora.block86@ethereal.email",
+        pass: "KdKN8MmH1sD7mrQRYQ",
+      },
+    });
+
+    const mail = await smtpTransport.verify();
+
+    await smtpTransport.sendMail({
+      from: `${lastname}${firstname}${email}`,
+      to: '"Crea" <contact@crea-aquitaine.org>',
+      subject: text,
+      text: textarea,
+      html: `<p> ${textarea} </p>`,
+    });
+    res.status(200).json({ mail });
+  } catch (error) {
+    res.status(400).json(error);
   }
-  return data;
-};
+});
 
-const sendEmail = (to, name, type) => {
-  const smtpTransport = mailer.createTransport({
-    service: "Gmail",
-    auth: {
-      user: "schoolwilder385@gmail.com",
-      pass: "pass123456*",
-    },
-  });
-
-  const mail = getEmailData(to, name, type);
-
-  smtpTransport.sendMail(mail, function (error, response) {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log("email sent successfully");
-    }
-    smtpTransport.close();
-  });
-};
-
-module.exports = { sendEmail };
+module.exports = router;

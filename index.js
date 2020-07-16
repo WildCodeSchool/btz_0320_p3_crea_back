@@ -25,15 +25,6 @@ app.get("/", (req, res) => {
   res.status(200).send("Bienvenue sur CREA_PROJECT");
 });
 
-const { sendEmail } = require("./mail");
-
-app.post("/api/sendMail", (req, res) => {
-  console.log(req.body);
-
-  // sendEmail(to, name, type);
-  sendEmail(req.body.email, req.body.name, "hello");
-});
-
 if (process.env.NODE_ENV !== "test") {
   sequelize
     .sync({ alter: true })
