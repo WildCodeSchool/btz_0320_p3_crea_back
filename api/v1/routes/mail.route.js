@@ -8,22 +8,21 @@ router.post("/", async (req, res) => {
 
   try {
     const smtpTransport = mailer.createTransport({
-      host: "smtp.ethereal.email",
-      port: 587,
+      service: "gmail",
       auth: {
-        user: "eldora.block86@ethereal.email",
-        pass: "KdKN8MmH1sD7mrQRYQ",
+        user: "crea.networking.aquitaine@gmail.com",
+        pass: "Networking.64",
       },
     });
-
     const mail = await smtpTransport.verify();
-
+    
     await smtpTransport.sendMail({
       from: `${lastname}${firstname}${email}`,
       to: '"Crea" <contact@crea-aquitaine.org>',
       subject: text,
       text: textarea,
-      html: `<p> ${textarea} </p>`,
+      html: `<h3>Vous avez reçu un message de ${lastname} ${firstname} (${email}) de la plateforme CREA Networking :</h3>
+      <p> ${textarea} </p>`,
     });
     res.status(200).json({ mail });
   } catch (error) {
