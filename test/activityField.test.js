@@ -125,25 +125,11 @@ describe("Activity field", () => {
   });
 
   describe("GET ALL", () => {
-    it("ADMIN should success", async () => {
+    it("should success", async () => {
       try {
         const res = await chai
           .request(server)
           .get("/api/v1/activityFields")
-          .set("Authorization", `Bearer ${adminToken}`);
-        res.should.have.status(200);
-        res.body.should.be.a("array");
-        res.body.length.should.be.eql(2);
-      } catch (err) {
-        throw err;
-      }
-    });
-    it("USER should success", async () => {
-      try {
-        const res = await chai
-          .request(server)
-          .get("/api/v1/activityFields")
-          .set("Authorization", `Bearer ${userToken}`);
         res.should.have.status(200);
         res.body.should.be.a("array");
         res.body.length.should.be.eql(2);
@@ -280,7 +266,6 @@ describe("Activity field", () => {
           .request(server)
           .delete(`/api/v1/activityFields/${activityFieldId}`)
           .set("Authorization", `Bearer ${adminToken}`);
-
         res.should.have.status(204);
         res.body.should.be.a("object");
       } catch (err) {

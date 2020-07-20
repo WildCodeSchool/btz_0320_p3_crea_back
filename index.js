@@ -39,13 +39,6 @@ if (process.env.NODE_ENV !== "test") {
         Role.findCreateFind({ where: { label: "USER" } }),
       ]);
     })
-    .then(() => {
-      return Promise.all([
-        UserType.findCreateFind({ where: { label: "Entreprise" } }),
-        UserType.findCreateFind({ where: { label: "Demandeur emploi" } }),
-        UserType.findCreateFind({ where: { label: "Ecole" } }),
-      ]);
-    })
     .then(([admin, user]) => {
       // then we create two users for testing
       return Promise.all([
@@ -73,6 +66,13 @@ if (process.env.NODE_ENV !== "test") {
             RoleId: user[0].id,
           },
         }),
+      ]);
+    })
+    .then(() => {
+      return Promise.all([
+        UserType.findCreateFind({ where: { label: "Entreprise" } }),
+        UserType.findCreateFind({ where: { label: "Demandeur emploi" } }),
+        UserType.findCreateFind({ where: { label: "Ecole" } }),
       ]);
     })
     .then(() => {

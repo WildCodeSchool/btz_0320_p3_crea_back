@@ -8,7 +8,6 @@ const sequelize = require("../sequelize");
 const JobCategory = require("../models/JobCategory");
 const UserType = require("../models/UserType");
 const User = require("../models/User");
-const TypePost = require("../models/TypePost");
 const Role = require("../models/Role");
 const ActivityField = require("../models/ActivityField");
 
@@ -34,8 +33,6 @@ let userToken;
 let adminToken;
 let roleAdminId;
 let roleUserId;
-let categoryId;
-
 
 describe("JOB CATEGORY", () => {
   before(async () => {
@@ -117,12 +114,6 @@ describe("JOB CATEGORY", () => {
       RoleId: roleAdminId,
     });
     adminId = admin.dataValues.id;
-
-    const typePost = await TypePost.create({
-      labelFr: "partenariat",
-      labelEs: "partenarias",
-      labelEus: "partenariak",
-    });
 
     userToken = jwt.sign(
       {
@@ -295,7 +286,7 @@ describe("JOB CATEGORY", () => {
     });
   });
   describe("DELETE", () => {
-    it("should success", async () => {
+    it("ADMIN should success", async () => {
       try {
         const res = await chai
           .request(server)

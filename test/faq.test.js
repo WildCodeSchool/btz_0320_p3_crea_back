@@ -9,9 +9,7 @@ let server = require("../index");
 const Faq = require("../models/Faq");
 const UserType = require("../models/UserType");
 const Role = require("../models/Role");
-const JobCategory = require("../models/JobCategory");
 const ActivityField = require("../models/ActivityField");
-const activitiesFields = require("../api/v1/routes/activityFields.route");
 const User = require("../models/User");
 
 chai.use(chaiHttp);
@@ -25,11 +23,10 @@ let faqKeys = [
   "updatedAt",
 ];
 
-let fasId;
+let faqId;
 let userId;
 let adminId;
 let userTypeId;
-let jobCategoryId;
 let activityFieldId;
 let userToken;
 let adminToken;
@@ -107,13 +104,6 @@ describe("FAQ", () => {
       RoleId: roleAdminId,
     });
     adminId = admin.dataValues.id;
-
-    const jobCategory = await JobCategory.create({
-      labelFr: "toto",
-      labelEs: "jean",
-      labelEus: "hello",
-    });
-    jobCategoryId = jobCategory.dataValues.id;
 
     userToken = jwt.sign(
       {

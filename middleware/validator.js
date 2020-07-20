@@ -5,30 +5,43 @@ const postForPut = Joi.object({
   content: Joi.string(),
   localisation: Joi.string(),
   language: Joi.string(),
-  UserId : Joi.string().guid({ version: "uuidv4" }),
+  UserId: Joi.string().guid({ version: "uuidv4" }),
   TypePostId: Joi.string().guid({ version: "uuidv4" }),
-  JobCategoryId: Joi.string().guid({ version: "uuidv4" })
-})
+  JobCategoryId: Joi.string().guid({ version: "uuidv4" }),
+});
 
+const partnersForPut = Joi.object({
+  label: Joi.string(),
+  description: Joi.string(),
+  url: Joi.string(),
+  logo: Joi.string(),
+  favorite: Joi.string(),
+});
+
+const userTypesForPut = Joi.object({
+  label: Joi.string(),
+});
 
 const validator = (schema, propToValidate) => async (req, res, next) => {
   try {
-    await schema.validateAsync(req[propToValidate], {abortEarly: false})
-    next()
-  } catch(err) {
-    const errors = err.details.map(err => ({
+    await schema.validateAsync(req[propToValidate], { abortEarly: false });
+    next();
+  } catch (err) {
+    const errors = err.details.map((err) => ({
       message: err.message,
-      type: err.type
-    }))
+      type: err.type,
+    }));
     res.status(422).json({
       status: 422,
-      message : err.message,
+      message: err.message,
       errors,
-    })
+    });
   }
-}
+};
 
 module.exports = {
   validator,
-  postForPut
-}
+  postForPut,
+  partnersForPut,
+  userTypesForPut,
+};

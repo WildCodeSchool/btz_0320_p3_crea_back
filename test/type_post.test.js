@@ -9,9 +9,7 @@ let server = require("../index");
 const TypePost = require("../models/TypePost");
 const UserType = require("../models/UserType");
 const Role = require("../models/Role");
-const JobCategory = require("../models/JobCategory");
 const ActivityField = require("../models/ActivityField");
-const activitiesFields = require("../api/v1/routes/activityFields.route");
 const User = require("../models/User");
 
 const typePostKeys = [
@@ -28,7 +26,6 @@ let typePostId;
 let userId;
 let adminId;
 let userTypeId;
-let jobCategoryId;
 let activityFieldId;
 let userToken;
 let adminToken;
@@ -108,13 +105,6 @@ describe("Types_Posts", () => {
     });
     adminId = admin.dataValues.id;
 
-    const jobCategory = await JobCategory.create({
-      labelFr: "toto",
-      labelEs: "jean",
-      labelEus: "hello",
-    });
-    jobCategoryId = jobCategory.dataValues.id;
-
     userToken = jwt.sign(
       {
         id: user.dataValues.id,
@@ -143,7 +133,6 @@ describe("Types_Posts", () => {
     typePostId =  typePost.dataValues.id;
   });
 
-  //test request all
   describe("GET ALL", () => {
     it("ADMIN should success", async () => {
       try {
@@ -240,7 +229,7 @@ describe("Types_Posts", () => {
         throw err;
       }
     });
-    it("USER should success", async () => {
+    it("USER should Fail", async () => {
       try {
         const res = await chai
           .request(server)
@@ -290,6 +279,26 @@ describe("Types_Posts", () => {
         res.should.have.status(202);
         res.body.should.be.a("object");
         res.body.should.have.keys(typePostKeys)
+      } catch (err) {
+        throw err;
+      }
+    });
+    it("ADMIN Should fail", async () => {
+      try {
+        const res = await chai
+          .request(server)
+          .put(`/api/v1/postTypes/${typePostId}`)
+          .send({
+            labelFr:
+              "ldksjendhejfkdksjdkfjdncjdklskdjakzelazkezaezadsqdssqdsqfffdsfdsf",
+            labelEs:
+              "ldksjendhejfkdksjdkfjdncjdklskdjakzelazkezaezadsqdssqdsqfffdsfdsf",
+            labelEus:
+              "ldksjendhejfkdksjdkfjdncjdklskdjakzelazkezaezadsqdssqdsqfffdsfdsf",
+          })
+          .set("Authorization", `Bearer ${adminToken}`);
+        res.should.have.status(422);
+        res.body.should.be.a("object");
       } catch (err) {
         throw err;
       }

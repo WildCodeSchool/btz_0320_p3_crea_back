@@ -9,9 +9,7 @@ let server = require("../index");
 const Partner = require("../models/Partner");
 const UserType = require("../models/UserType");
 const Role = require("../models/Role");
-const JobCategory = require("../models/JobCategory");
 const ActivityField = require("../models/ActivityField");
-const activitiesFields = require("../api/v1/routes/activityFields.route");
 const User = require("../models/User");
 
 chai.use(chaiHtpp);
@@ -31,7 +29,6 @@ let partnerId;
 let userId;
 let adminId;
 let userTypeId;
-let jobCategoryId;
 let activityFieldId;
 let userToken;
 let adminToken;
@@ -110,13 +107,6 @@ describe("PARTNERS", () => {
     });
     adminId = admin.dataValues.id;
 
-    const jobCategory = await JobCategory.create({
-      labelFr: "toto",
-      labelEs: "jean",
-      labelEus: "hello",
-    });
-    jobCategoryId = jobCategory.dataValues.id;
-
     userToken = jwt.sign(
       {
         id: user.dataValues.id,
@@ -147,25 +137,11 @@ describe("PARTNERS", () => {
     partnerId = partner.dataValues.id;
   });
   describe("GET ALL", () => {
-    it("ADMIN should success", async () => {
+    it("should success", async () => {
       try {
         const res = await chai
           .request(server)
           .get("/api/v1/partners")
-          .set("Authorization", `Bearer ${adminToken}`);
-        res.should.have.status(200);
-        res.body.should.be.a("array");
-        res.body.length.should.be.eql(1);
-      } catch (err) {
-        throw err;
-      }
-    });
-    it("USER should success", async () => {
-      try {
-        const res = await chai
-          .request(server)
-          .get("/api/v1/partners")
-          .set("Authorization", `Bearer ${userToken}`);
         res.should.have.status(200);
         res.body.should.be.a("array");
         res.body.length.should.be.eql(1);
@@ -175,25 +151,12 @@ describe("PARTNERS", () => {
     });
   });
   describe("GET ONE", () => {
-    it("ADMIN should success", async () => {
+    it("should success", async () => {
       try {
         const res = await chai
           .request(server)
           .get(`/api/v1/partners/${partnerId}`)
           .set("Authorization", `Bearer ${adminToken}`);
-        res.should.have.status(200);
-        res.body.should.be.a("object");
-        res.body.should.have.keys(partnerKeys);
-      } catch (err) {
-        throw err;
-      }
-    });
-    it("USER should success", async () => {
-      try {
-        const res = await chai
-          .request(server)
-          .get(`/api/v1/partners/${partnerId}`)
-          .set("Authorization", `Bearer ${userToken}`);
         res.should.have.status(200);
         res.body.should.be.a("object");
         res.body.should.have.keys(partnerKeys);
@@ -280,6 +243,19 @@ describe("PARTNERS", () => {
         res.should.have.status(202);
         res.body.should.be.a("object");
         res.body.should.have.keys(partnerKeys);
+      } catch (err) {
+        throw err;
+      }
+    });
+    it("ADMIN should failed", async () => {
+      try {
+        const res = await chai
+          .request(server)
+          .put(`/api/v1/partners/${partnerId}`)
+          .send({ hello: "bonjour" })
+          .set("Authorization", `Bearer ${adminToken}`);
+        res.should.have.status(422);
+        res.body.should.be.a("object");
       } catch (err) {
         throw err;
       }
