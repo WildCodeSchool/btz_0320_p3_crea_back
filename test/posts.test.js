@@ -389,18 +389,6 @@ describe("POSTS", () => {
         throw err;
       }
     });
-    // it("USER should failed", async () => {
-    //   try {
-    //     const res = await chai
-    //       .request(server)
-    //       .delete("/api/v1/posts/vdvdfvdf")
-    //       .set("Authorization", `Bearer ${userToken}`);
-    //     res.should.have.status(422);
-    //     res.body.should.be.a("object");
-    //   } catch (err) {
-    //     throw err;
-    //   }
-    // });
     it("USER should success", async () => {
       try {
         const res = await chai

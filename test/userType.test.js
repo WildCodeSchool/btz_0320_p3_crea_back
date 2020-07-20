@@ -116,6 +116,20 @@ describe("USERS TYPES", () => {
       { expiresIn: "3h" }
     );
   });
+  describe("GET ALL", () => {
+    it("should success", async () => {
+      try {
+        const res = await chai
+          .request(server)
+          .get("/api/v1/userTypes")
+        res.should.have.status(200);
+        res.body.should.be.a("array");
+        res.body.length.should.be.eql(1);
+      } catch (err) {
+        throw err;
+      }
+    });
+  });
   describe("GET ONE", () => {
     it("ADMIN should success", async () => {
       try {
@@ -157,34 +171,7 @@ describe("USERS TYPES", () => {
       }
     });
   });
-  describe("GET ALL", () => {
-    it("ADMIN should success", async () => {
-      try {
-        const res = await chai
-          .request(server)
-          .get("/api/v1/userTypes")
-          .set("Authorization", `Bearer ${adminToken}`);
-        res.should.have.status(200);
-        res.body.should.be.a("array");
-        res.body.length.should.be.eql(1);
-      } catch (err) {
-        throw err;
-      }
-    });
-    it("USER should success", async () => {
-      try {
-        const res = await chai
-          .request(server)
-          .get("/api/v1/userTypes")
-          .set("Authorization", `Bearer ${userToken}`);
-        res.should.have.status(200);
-        res.body.should.be.a("array");
-        res.body.length.should.be.eql(1);
-      } catch (err) {
-        throw err;
-      }
-    });
-  });
+
   describe("POST", () => {
     it("ADMIN should success", async () => {
       try {
@@ -257,6 +244,21 @@ describe("USERS TYPES", () => {
         res.should.have.status(202);
         res.body.should.be.a("object");
         res.body.should.have.keys(userTypeKeys);
+      } catch (err) {
+        throw err;
+      }
+    });
+    it("ADMIN should failed", async () => {
+      try {
+        const res = await chai
+          .request(server)
+          .put(`/api/v1/userTypes/${userTypeId}`)
+          .send({
+            labl: "Capitalist",
+          })
+          .set("Authorization", `Bearer ${adminToken}`);
+        res.should.have.status(422);
+        res.body.should.be.a("object");
       } catch (err) {
         throw err;
       }

@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Partner = require("../../../models/Partner");
 const authRole = require("../../../middleware/authRole");
+const { validator, partnersForPut } = require("../../../middleware/validator");
+
 
 router.get("/", async (req, res) => {
   try {
@@ -38,7 +40,7 @@ router.post("/", authRole("ADMIN"), async (req, res) => {
   }
 });
 
-router.put("/:id", authRole("ADMIN"), async (req, res) => {
+router.put("/:id", authRole("ADMIN"),validator(partnersForPut, "body"), async (req, res) => {
   const { label, url, logo, favorite, description } = req.body;
   const { id } = req.params;
   try {

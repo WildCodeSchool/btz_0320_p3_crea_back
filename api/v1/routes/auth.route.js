@@ -108,7 +108,7 @@ router.post("/register", async (req, res) => {
 router.post("/forgetPassword", async (req, res) => {
   const { email } = req.body;
   try {
-    const findUser = User.findOne({ where: { email } });
+    const findUser = await User.findOne({ where: { email } });
     const password = generator.generate({
       length: 10,
       numbers: true

@@ -1,4 +1,6 @@
 const express = require("express");
+const { validator, userTypesForPut } = require("../../../middleware/validator");
+
 const UserType = require("../../../models/UserType");
 const User = require("../../../models/User");
 const authRole = require("../../../middleware/authRole");
@@ -53,22 +55,27 @@ router.post("/", authRole("ADMIN"), async (req, res) => {
   }
 });
 
-router.put("/:id", authRole("ADMIN"), async (req, res) => {
-  const { label } = req.body;
-  const { id } = req.params;
-  try {
-    await UserType.update(
-      {
-        label,
-      },
-      { where: { id } }
-    );
-    const userType = await UserType.findByPk(id);
-    res.status(202).json(userType);
-  } catch (err) {
-    res.status(422).json(err);
+router.put(
+  "/:id",
+  authRole("ADMIN"),
+  validator(userTypesForPut, "body"),
+  async (req, res) => {
+    const { label } = req.body;
+    const { id } = req.params;
+    try {
+      await UserType.update(
+        {
+          label,
+        },
+        { where: { id } }
+      );
+      const userType = await UserType.findByPk(id);
+      res.status(202).json(userType);
+    } catch (err) {
+      res.status(422).json(err);
+    }
   }
-});
+);
 
 router.delete("/:id", authRole("ADMIN"), async (req, res) => {
   const { id } = req.params;

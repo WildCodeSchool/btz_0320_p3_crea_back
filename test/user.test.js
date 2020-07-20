@@ -39,40 +39,35 @@ let userKeys = [
   "RoleId",
 ];
 
-let user;
-let admin;
-let type;
 let userTypeId;
-let activityField;
 let activityFieldId;
 let userId;
 let adminId;
-let adminRole;
 let adminRoleId;
-let userToken;
 let adminToken;
+let userToken;
 
 describe("USERS", () => {
   before(async () => {
     await sequelize.sync({ force: true });
 
-    activityField = await ActivityField.create({
+    const activityField = await ActivityField.create({
       labelFr: "Bâtiment",
       labelEs: "Building",
       labelEus: "Eraikin",
     });
     activityFieldId = activityField.dataValues.id;
 
-    type = await UserType.create({ label: "chomeur" });
+    const type = await UserType.create({ label: "chomeur" });
     userTypeId = type.dataValues.id;
 
-    adminRole = await Role.create({ label: "ADMIN" });
+    const adminRole = await Role.create({ label: "ADMIN" });
     adminRoleId = adminRole.dataValues.id;
 
-    userRole = await Role.create({ label: "USER" });
+    const userRole = await Role.create({ label: "USER" });
     userRoleId = userRole.dataValues.id;
 
-    user = await User.create({
+    const user = await User.create({
       ...userSample,
       ActivityFieldId: activityFieldId,
       UserTypeId: userTypeId,
@@ -80,7 +75,7 @@ describe("USERS", () => {
     });
     userId = user.dataValues.id;
 
-    admin = await User.create({
+    const admin = await User.create({
       ...adminSample,
       ActivityFieldId: activityFieldId,
       UserTypeId: userTypeId,
