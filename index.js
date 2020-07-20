@@ -8,6 +8,7 @@ const sequelize = require("./sequelize");
 require("./association");
 const Role = require("./models/Role");
 const User = require("./models/User");
+const UserType = require("./models/UserType");
 
 const api = require("./api/v1");
 const port = process.env.PORT || 8080;
@@ -36,6 +37,13 @@ if (process.env.NODE_ENV !== "test") {
       return Promise.all([
         Role.findCreateFind({ where: { label: "ADMIN" } }),
         Role.findCreateFind({ where: { label: "USER" } }),
+      ]);
+    })
+    .then(() => {
+      return Promise.all([
+        UserType.findCreateFind({ where: { label: "Entreprise" } }),
+        UserType.findCreateFind({ where: { label: "Demandeur emploi" } }),
+        UserType.findCreateFind({ where: { label: "Ecole" } }),
       ]);
     })
     .then(([admin, user]) => {
