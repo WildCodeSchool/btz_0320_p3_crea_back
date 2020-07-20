@@ -9,7 +9,7 @@ const postTypes = require("./routes/postTypes.route");
 const jobCategories = require("./routes/jobCategories.route");
 const activityFields = require("./routes/activityFields.route");
 const auth = require("./routes/auth.route");
-const mail = require("../../mail");
+const mail = require("./routes/mail.route");
 const role = require("./routes/role.route");
 const replies = require("./routes/replies.route");
 
