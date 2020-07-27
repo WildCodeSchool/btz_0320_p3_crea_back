@@ -27,4 +27,5 @@ Content-Type: application/json
 
 
 ### Delete one user type
-DELETE http://localhost:8080/api/v1/userTypes/d7211e0f-fb8d-487f-949f-aff1ae5eab87 HTTP/1.1
+DELETE http://localhost:8080/api/v1/userTypes/0dd99ba2-d007-4dff-98cf-2dd80096678d HTTP/1.1
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE3YWNkOTkxLWI2ZGItNGM1MC05NDA4LTIyYTAzZGFlN2MwNCIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NTg0MDA0MywiZXhwIjoxNTk1OTI2NDQzfQ.60rx9f5d0VoWFZhWtWKX0dJBDsGRQOtJ1N9jnlxQmeI

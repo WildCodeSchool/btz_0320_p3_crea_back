@@ -48,7 +48,9 @@ _please create a ".env" with those fields for using the database_
 _Before using the api, you need to generate a token with your account :_
 URL_API : http://api.networking.crea-aquitaine.org/api/v1
 
-### Auth Admin
+### Auth route
+
+##### Login
 
 POST URL_API/auth/login
 Content-Type: application/json
@@ -92,6 +94,81 @@ _Result example :_
     },
     "UserType": null
   }
+}
+```
+
+##### Register
+
+POST URL_API/auth/register
+Content-Type: application/json
+
+```json (object)
+{
+  "lastName": "Dertone",
+  "firstName": "Paul",
+  "email": "p.dertone@gmail.com",
+  "password": "toto",
+  "localisation": "vielle",
+  "country": "Espagne",
+  "phone_number": "0656565656",
+  "phone_number2": "558547854",
+  "schoolName": "wcs",
+  "companyName": "wcs",
+  "siret": "211680374",
+  "qualification": "job",
+  "mobility": "Espagne",
+  "name_organisation": "wcs",
+  "isActive": false,
+  "logo": "bjisdckjs",
+  "RoleId": "08fdaa1c-00d8-422e-8df9-c665923e9a1e",
+  "UserTypeId": "2322abe1-f6e3-41af-b23a-7a2a44c48539"
+}
+```
+
+_Result example :_
+
+```json (object)
+{
+  "id": "c27cf11f-f246-474e-9586-0425067c3077",
+  "lastName": "Dertone",
+  "firstName": "Paul",
+  "email": "p.dertone@gmail.com",
+  "password": "$2b$10$B4iK8aJghVX0QQHlkrvsx.D3S.URe1Z/wy4euOVU7.P8zlGs66..a",
+  "localisation": "vielle",
+  "country": "Espagne",
+  "phone_number": "0656565656",
+  "phone_number2": "558547854",
+  "schoolName": "wcs",
+  "companyName": "wcs",
+  "siret": "211680374",
+  "qualification": "job",
+  "mobility": "Espagne",
+  "name_organisation": "wcs",
+  "isActive": false,
+  "logo": "bjisdckjs",
+  "UserTypeId": "2322abe1-f6e3-41af-b23a-7a2a44c48539",
+  "RoleId": "08fdaa1c-00d8-422e-8df9-c665923e9a1e",
+  "updatedAt": "2020-07-27T12:14:07.563Z",
+  "createdAt": "2020-07-27T12:14:07.563Z"
+}
+```
+
+##### Forgot password
+
+POST URL_API/auth/forgetPassword
+Content-Type: application/json
+
+```json (object)
+{
+  "email" : "toto@dev.com"
+}
+```
+
+_Result example_
+
+```json (object)
+{
+  "mail": true
 }
 ```
 
@@ -1056,7 +1133,7 @@ _Result example_
 
 ### Replies route
 
-##### Get all of the replies (accessible as all)
+##### Get all of the replies (accessible as admin or user)
 
 GET URL_API/replies
 
@@ -1091,7 +1168,7 @@ _Result example_
 ]
 ```
 
-##### Get one reply
+##### Get one reply (accessible as admin or user)
 
 GET URL_API/replies/{reply_id}
 
@@ -1112,7 +1189,7 @@ _Result example_
   },
 ```
 
-##### Post one reply
+##### Post one reply (accessible as admin or user)
 
 POST URL_API/replies/apply
 Authorization : Bearer token
@@ -1147,7 +1224,7 @@ _Result example_
 }
 ```
 
-##### Delete one reply
+##### Delete one reply (accessible as admin or user)
 
 DELETE URL_API/replies/{reply_id}
 
@@ -1159,7 +1236,7 @@ _Result example_
 }
 ```
 
-### Mail route
+### Mail route (accessible as all)
 
 ##### Post a mail
 
@@ -1176,6 +1253,7 @@ Content-Type: application/json
   "textarea": "message"
 }
 ```
+
 _Result example_
 
 ```json (object)

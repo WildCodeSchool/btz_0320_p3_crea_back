@@ -66,8 +66,8 @@ Content-Type: application/json
     "name_organisation" : "wcs",
     "isActive" : false,
     "logo" : "bjisdckjs",
-    "RoleId" : "a5be2e09-9eb6-4212-88c4-caa5af81abe6",
-    "UserTypeId" : "b59a0dfc-8f2c-4b12-82cc-d904007c8d55"
+    "RoleId" : "08fdaa1c-00d8-422e-8df9-c665923e9a1e",
+    "UserTypeId" : "2322abe1-f6e3-41af-b23a-7a2a44c48539"
 }
 
 ###
