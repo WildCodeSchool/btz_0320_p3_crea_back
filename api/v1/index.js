@@ -1,5 +1,4 @@
 const express = require("express");
-
 const users = require("./routes/users.route");
 const userTypes = require("./routes/userTypes.route");
 const faq = require("./routes/faq.route");

@@ -105,7 +105,7 @@ router.delete("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
     await User.destroy({
       where: { id },
     });
-    res.status(204).end();
+    res.status(204).json({ message: "User is deleted." });
   } catch (err) {
     res.status(422).json(err);
   }

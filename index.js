@@ -54,18 +54,6 @@ if (process.env.NODE_ENV !== "test") {
             RoleId: admin[0].id,
           },
         }),
-        User.findCreateFind({
-          where: { email: "user@dev.com" },
-          defaults: {
-            password: "user",
-            firstName: "user",
-            lastName: "user",
-            localisation: "user",
-            country: "France",
-            phone_number: 0656565656,
-            RoleId: user[0].id,
-          },
-        }),
       ]);
     })
     .then(() => {
