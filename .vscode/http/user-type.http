@@ -2,7 +2,7 @@
 GET http://localhost:8080/api/v1/userTypes HTTP/1.1
 
 ###  Get one of the user type
-GET http://localhost:8080/api/v1/userTypes/b64ece64-4a8b-4fb2-8d35-b88c3bb813b3 HTTP/1.1
+GET http://localhost:8080/api/v1/userTypes/0a82d6c5-963e-4b0b-8a8e-ba9dd8c60121 HTTP/1.1
 
 ### Get all the users of one user type
 GET http://localhost:8080/api/v1/userTypes/39e24a57-d2cd-4e42-948c-ca842de2c1f2/users HTTP/1.1
