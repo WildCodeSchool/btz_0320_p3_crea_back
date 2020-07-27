@@ -5,7 +5,7 @@ const User = require("../../../models/User");
 const Post = require("../../../models/Post");
 const authRole = require("../../../middleware/authRole");
 
-router.get("/", async (req, res) => {
+router.get("/", authRole(["ADMIN", "USER"]), async (req, res) => {
   try {
     const replies = await Reply.findAll();
     res.status(200).json(replies);
@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
   try {
     const { id } = req.params;
     const reply = await Reply.findAll({
@@ -90,7 +90,7 @@ router.get("/:id", async (req, res) => {
 //   }
 // });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
   try {
     const { id } = req.params;
     await Reply.destroy({

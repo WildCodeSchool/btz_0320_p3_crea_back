@@ -84,8 +84,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNhZjczMjBhL
 
 ###
 
-DELETE http://localhost:8080/api/v1/users/e2ded431-0f6c-4726-a35f-89e5b262d743 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNhZjczMjBhLTViMjEtNDE4Ni1hZjdkLTc2NTc4Y2JlZjEyMCIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NTgzNjQ3OSwiZXhwIjoxNTk1OTIyODc5fQ.GOJm2waNxTAhkLjPHnanq3IZoAS9UANjQAM76kJO8lg
+DELETE http://localhost:8080/api/v1/users/d5bd9ece-cfe3-4d35-94c4-1cf68909eb8c HTTP/1.1
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE3YWNkOTkxLWI2ZGItNGM1MC05NDA4LTIyYTAzZGFlN2MwNCIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NTg0MDA0MywiZXhwIjoxNTk1OTI2NDQzfQ.60rx9f5d0VoWFZhWtWKX0dJBDsGRQOtJ1N9jnlxQmeI
 
 ###
 GET http://localhost:8080/api/v1/users/445ee66c-b868-46e2-8154-f0e40a0a43dd/posts HTTP/1.1
