@@ -1,13 +1,13 @@
-GET http://localhost:8080/api/v1/partners HTTP/1.1
-Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImExYjM5OTM1LTQwNmItNGE1NC1hNDk5LWJhNzAxODhiMGFiNCIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NDIxNTI3NSwiZXhwIjoxNTk0MzAxNjc1fQ.7-UtY6-5hr7_if0x0Ia7fQIIScxoRqM5wUE5THSYh8Q
+### Get all partners
+GET http://localhost:8080/api/v1/partners/ HTTP/1.1
 
-###
+### get one partner
 GET http://localhost:8080/api/v1/partners/e995f399-172e-40a8-8d53-92da0b2e480b HTTP/1.1
 
 
-###
+### post one partner
 POST http://localhost:8080/api/v1/partners HTTP/1.1
-Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImExYjM5OTM1LTQwNmItNGE1NC1hNDk5LWJhNzAxODhiMGFiNCIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NDIxNTI3NSwiZXhwIjoxNTk0MzAxNjc1fQ.7-UtY6-5hr7_if0x0Ia7fQIIScxoRqM5wUE5THSYh8Q
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE3YWNkOTkxLWI2ZGItNGM1MC05NDA4LTIyYTAzZGFlN2MwNCIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NTg0MDA0MywiZXhwIjoxNTk1OTI2NDQzfQ.60rx9f5d0VoWFZhWtWKX0dJBDsGRQOtJ1N9jnlxQmeI
 Content-Type: application/json
 
 {
@@ -18,7 +18,7 @@ Content-Type: application/json
     "favorite" : true
 }
 
-###
+### Put one partner
 
 PUT http://localhost:8080/api/v1/partners/e72f7c3a-c2a4-4468-9e02-d7be8358886e HTTP/1.1
 Content-Type: application/json
@@ -27,6 +27,6 @@ Content-Type: application/json
     "label" : "annonce2"
 }
 
-###
+### delete one partner
 
 DELETE http://localhost:8080/api/v1/partners/e72f7c3a-c2a4-4468-9e02-d7be8358886e HTTP/1.1

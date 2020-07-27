@@ -1,6 +1,6 @@
 ### GET ALL FAQ
 GET http://localhost:8080/api/v1/faq HTTP/1.1
-Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MGMxNGMyLTIyNmEtNDU0YS1hODkwLTI5MDRiZThlODEwOSIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NDA1NzU5MCwiZXhwIjoxNTk0MTQzOTkwfQ.hGBnMgCTWAo48Vdyft_1EievAAdhlOQMX-748v68Wu8
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE3YWNkOTkxLWI2ZGItNGM1MC05NDA4LTIyYTAzZGFlN2MwNCIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NTg0MDA0MywiZXhwIjoxNTk1OTI2NDQzfQ.60rx9f5d0VoWFZhWtWKX0dJBDsGRQOtJ1N9jnlxQmeI
 
 
 ###GET one FAQ
@@ -8,12 +8,12 @@ GET http://localhost:8080/api/v1/faq/44b6733d-a728-411e-912e-36ba03cc0967  HTTP/
 
 ### POST new FAQ
 POST  http://localhost:8080/api/v1/faq HTTP/1.1
-Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MGMxNGMyLTIyNmEtNDU0YS1hODkwLTI5MDRiZThlODEwOSIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NDA1NzU5MCwiZXhwIjoxNTk0MTQzOTkwfQ.hGBnMgCTWAo48Vdyft_1EievAAdhlOQMX-748v68Wu8
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE3YWNkOTkxLWI2ZGItNGM1MC05NDA4LTIyYTAzZGFlN2MwNCIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NTg0MDA0MywiZXhwIjoxNTk1OTI2NDQzfQ.60rx9f5d0VoWFZhWtWKX0dJBDsGRQOtJ1N9jnlxQmeI
 Content-Type: application/json
 
 {
     "question": "Quelle différence il y-t-il entre délégué du personnel et délégué syndical ? ",
-    "answer": "Les délégués du personnel veillent au respect des droits des salariés et portent les réclamations des salariés à l’employeur lorsqu’ils estiment être victime d’un manquement de sa part.",
+    "answer": "Les délégués du personnel veillent au respect des droits des salarié...",
     "language" : "Francais"
 }
 
@@ -28,4 +28,5 @@ Content-Type: application/json
 }
 
 ### Delete FAQ 
-DELETE http://localhost:8080/api/v1/faq/44b6733d-a728-411e-912e-36ba03cc0967  HTTP/1.1
+DELETE http://localhost:8080/api/v1/faq/21634ae0-cffe-4459-af2a-22cdf33f93f3  HTTP/1.1
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE3YWNkOTkxLWI2ZGItNGM1MC05NDA4LTIyYTAzZGFlN2MwNCIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NTg0MDA0MywiZXhwIjoxNTk1OTI2NDQzfQ.60rx9f5d0VoWFZhWtWKX0dJBDsGRQOtJ1N9jnlxQmeI

@@ -62,7 +62,7 @@ router.delete("/:id", authRole("ADMIN"), async (req, res) => {
     const type_post = await Type_post.destroy({
       where: { id },
     });
-    res.status(204).end();
+    res.status(204).json({ message: "PostType is deleted." });
   } catch (err) {
     res.status(422).json(err);
   }

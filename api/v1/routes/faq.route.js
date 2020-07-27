@@ -55,7 +55,7 @@ router.delete("/:id",authRole("ADMIN"), async (req, res) => {
     try {
         const { id } = req.params;
         const faq = await Faq.destroy({ where: { id } });
-        res.status(204).send("La question a bien été effacé");
+        res.status(204).json({message : "FAQ is delete."});
     } catch (err) {
         res.status(422).json(err);
     }

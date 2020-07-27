@@ -135,7 +135,7 @@ router.delete("/:id", authRole(["ADMIN", "USER"]), async (req, res) => {
     await Post.destroy({
       where: { id },
     });
-    res.status(204).end();
+    res.status(204).json({message : "Post is deleted."});
   } catch (err) {
     res.status(400).json(err);
   }

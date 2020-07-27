@@ -65,7 +65,7 @@ router.delete("/:id", authRole("ADMIN"), async (req, res) => {
   const { id } = req.params;
   try {
     const partner = await Partner.destroy({ where: { id } });
-    res.status(204).send("Le partenaire d'utilisateur a bien été effacé");
+    res.status(204).json({message : "partner is delete."});
   } catch (err) {
     res.status(422).json(err);
   }
