@@ -1,49 +1,63 @@
-## VARIABLE ENVIRONMENT FOR DATABASE
+# CREA NETWORKING
 
-_please create a ".env" with those fields for using the database_
+## ABOUT THE PROJECT
 
+Crea is a cross-border networking platform.
+
+##  PREREQUISITES
+
+​Node > 14.4.0
+
+Npm > 6.14.5
+
+##  GETTING STARTED
+
+```bash
+git clone # clone the project
+npm install # Install all dependencies
+npm run dev # Runs the dev environment
+npm start # Runs the prod environment
+npm test # Runs mocha
+```
+
+### Variable environment for database
+
+_please create a `.env` with those fields for using the database_
+
+```bash
 - DBNAME="(name of database)"
 - DBUSER= (your user name for database)
 - DBPASS="(password to access database)"
 - DBDIALECT="(dialect for database language ex: sql)"
 - DBHOST="(host server for database)"
 - SECRET=" a random set of unique character for security(SALT)"
+```
 
-## MODULES to INSTALL from package.json with npm install:
+- Databases should be created by hand before (https://www.npmjs.com/package/dotenv)
 
-    "@hapi/joi"(schema description language and data validator for JavaScript. Used in validor.js to fix a failed test)
+### Our stack
 
-    "bcrypt"(a password-hashing function with a salt)
+- Express
+- Node Js
+- Sequelize
 
-    "body-parser"(body-parser extract the entire body portion of an incoming request stream and exposes it on req.body )
+### Architecture
 
-    "chai"(BDD / TDD assertion library)
+```bash
+├── api
+  └── v1 # Version 1
+    └── routes # Api's routes
+├── middleware # All of the middlewares
+├── models # Models's tables
+├── test # Test for each route
+└── webSockets # Websocket management
+```
 
-    "chai-http"(addon plugin for the Chai Assertion Library)
+## TEST
 
-    "cors" (allow front-end to communicate with back-end)
+They are produced with Chai and Mocha.
 
-    "dotenv"( module that loads environment variables from a .env file into process.env to made password secret)
-
-    "express"(a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications)
-
-    "generate-password" (generate random password automatically)
-
-    "jsonwebtoken"(allows you to decode, verify and generate tokens with Json format)
-
-    "mysql"(open-source relational database management system)
-
-    "mysql2"( A modern, simple and very fast MySQL library with additionnal features)
-
-    "nodemon"(a utility that will monitor for any changes in your source and automatically restart your server)
-
-    "pg"()
-
-    "pg-hstore"(A node package for serializing and deserializing JSON data to hstore format)
-
-    "sequelize"(ORM for MySQL)
-
-## Ressource list/pagination
+## RESSOURCE LIST/PAGINATION
 
 _Before using the api, you need to generate a token with your account :_
 URL_API : http://api.networking.crea-aquitaine.org/api/v1
@@ -605,7 +619,7 @@ _Result example_
 ]
 ```
 
-### Delete one post type (accessible as admin )
+##### Delete one post type (accessible as admin )
 
 DELETE URL_API/postTypes/
 Authorization : Bearer token
@@ -1261,3 +1275,56 @@ _Result example_
   "mail": true
 }
 ```
+
+## WHO ARE WE ?
+
+We are a 7 developpers team who did this project.
+
+#### Christelle Conrozier
+
+[_Github_](https://github.com/christellec64)
+
+[_Linkedin_](https://www.linkedin.com/in/christelle-conrozier/)
+
+
+#### Charles Henry Le Nué
+
+[_Github_](https://github.com/Charlyln)
+
+[_Linkedin_](https://www.linkedin.com/in/charles-henry-le-nu%C3%A9/)
+
+
+#### Anaïs Jouaret
+
+[_Github_](https://github.com/nanou-11)
+
+[_Linkedin_](https://www.linkedin.com/in/anais-jouaret/)
+
+
+#### Marie Josselin
+
+[_Github_](https://github.com/MarieJoss)
+
+[_Linkedin_](https://www.linkedin.com/in/marie-josselin)
+
+
+#### Maxime Urbansky
+
+[_Github_](https://github.com/Maxiloudoi)
+
+[_Linkedin_](https://www.linkedin.com/in/maxime-urbanski/)
+
+
+#### Lionel Rouge
+
+[_Github_](https://github.com/lio-code)
+
+[_Linkedin_](https://www.linkedin.com/in/lionel-rouge/)
+
+
+#### Munio Campandegui
+
+[_Github_](https://github.com/whitewolf64)
+
+[_Linkedin_](https://www.linkedin.com/in/campandegui-munio/)
+
