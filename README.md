@@ -1,7 +1,5 @@
 # CREA NETWORKING
 
-<img src="./logo_networking.png" alt="crea-logo" width="350px"/>
-
 ## ABOUT THE PROJECT
 
 Crea is a cross-border networking platform.
@@ -1285,35 +1283,48 @@ We are a 7 developpers team who did this project.
 #### Christelle Conrozier
 
 [_Github_](https://github.com/christellec64)
+
 [_Linkedin_](https://www.linkedin.com/in/christelle-conrozier/)
+
 
 #### Charles Henry Le Nué
 
 [_Github_](https://github.com/Charlyln)
+
 [_Linkedin_](https://www.linkedin.com/in/charles-henry-le-nu%C3%A9/)
+
 
 #### Anaïs Jouaret
 
 [_Github_](https://github.com/nanou-11)
+
 [_Linkedin_](https://www.linkedin.com/in/anais-jouaret/)
+
 
 #### Marie Josselin
 
 [_Github_](https://github.com/MarieJoss)
+
 [_Linkedin_](https://www.linkedin.com/in/marie-josselin)
+
 
 #### Maxime Urbansky
 
 [_Github_](https://github.com/Maxiloudoi)
+
 [_Linkedin_](https://www.linkedin.com/in/maxime-urbanski/)
+
 
 #### Lionel Rouge
 
 [_Github_](https://github.com/lio-code)
+
 [_Linkedin_](https://www.linkedin.com/in/lionel-rouge/)
+
 
 #### Munio Campandegui
 
 [_Github_](https://github.com/whitewolf64)
+
 [_Linkedin_](https://www.linkedin.com/in/campandegui-munio/)
 
