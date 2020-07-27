@@ -1,13 +1,14 @@
+### Get all the post types
 GET http://localhost:8080/api/v1/postTypes HTTP/1.1
-Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRlNTQwYTE0LTliYmItNGFhNi1hZDUyLTY3NWJiOWVkNzM4ZCIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NDI5OTQ3MSwiZXhwIjoxNTk0Mzg1ODcxfQ._LskOOKVEGDwqBwa813cQIhRo2OzX0GBNBQLn2OMJPY
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE3YWNkOTkxLWI2ZGItNGM1MC05NDA4LTIyYTAzZGFlN2MwNCIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NTg0MDA0MywiZXhwIjoxNTk1OTI2NDQzfQ.60rx9f5d0VoWFZhWtWKX0dJBDsGRQOtJ1N9jnlxQmeI
 
 
-### //route test pour récupérer un id
+### Get one post type
 GET http://localhost:8080/api/v1/postTypes/2464b82e-838f-4199-9fef-c5446756f6d5 HTTP/1.1
 
-###
+### Post one post type
 POST http://localhost:8080/api/v1/postTypes HTTP/1.1
-Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFjY2QwOWNiLTM4NDQtNDNiZS04OTQzLTc1NzhlYjI3ZDY3YSIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5Mzg5NTc1NiwiZXhwIjoxNTkzOTgyMTU2fQ.72NxYJV0stBwBp8af-GfzLl57Qf9F4K3Q9bkCUkCk8U
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE3YWNkOTkxLWI2ZGItNGM1MC05NDA4LTIyYTAzZGFlN2MwNCIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NTg0MDA0MywiZXhwIjoxNTk1OTI2NDQzfQ.60rx9f5d0VoWFZhWtWKX0dJBDsGRQOtJ1N9jnlxQmeI
 Content-Type: application/json
 
 {
@@ -16,9 +17,11 @@ Content-Type: application/json
     "labelEus" : "partenariak"
 }
 
-###
+### Put one post type
 PUT http://localhost:8080/api/v1/postTypes/9db9cfc4-4304-408d-9e20-a24c13d47ee0 HTTP/1.1
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE3YWNkOTkxLWI2ZGItNGM1MC05NDA4LTIyYTAzZGFlN2MwNCIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NTg0MDA0MywiZXhwIjoxNTk1OTI2NDQzfQ.60rx9f5d0VoWFZhWtWKX0dJBDsGRQOtJ1N9jnlxQmeI
 Content-Type: application/json
+
 
 {
     "labelFr" : "recherche & dev",
@@ -26,5 +29,5 @@ Content-Type: application/json
     "labelEus" : "recherch & dev"
 }
 
-###
+### Delet one post type
 DELETE http://localhost:8080/api/v1/postTypes/e0cc6580-3268-4168-a434-ad62583634ec  HTTP/1.1

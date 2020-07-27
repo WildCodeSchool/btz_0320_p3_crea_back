@@ -62,7 +62,7 @@ router.delete("/:id", authRole("ADMIN"), async (req, res) => {
     const category = await JobCategory.destroy({
       where: { id },
     });
-    res.status(204).send("La catégorie de job a bien été effacé");
+    res.status(204).json({message : "Job category is deleted."});
   } catch (err) {
     res.status(422).json(err);
   }

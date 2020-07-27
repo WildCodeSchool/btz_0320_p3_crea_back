@@ -1,0 +1,10 @@
+POST http://localhost:8080/api/v1/sendMail HTTP/1.1
+Content-Type: application/json
+
+{
+    "lastname" : "toto",
+    "firstname" : "jean",
+    "email" : "toto@dev.com",
+    "text" : "subject", 
+    "textarea" : "message"
+}

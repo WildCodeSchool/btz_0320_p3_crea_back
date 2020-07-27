@@ -81,7 +81,7 @@ router.delete("/:id", authRole("ADMIN"), async (req, res) => {
   const { id } = req.params;
   try {
     const userType = await UserType.destroy({ where: { id } });
-    res.status(204).send("Le type d'utilisateur a bien été effacé");
+    res.status(204).json({message : "User type is deleted."});
   } catch (err) {
     res.status(422).json(err);
   }

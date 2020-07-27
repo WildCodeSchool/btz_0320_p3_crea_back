@@ -6,7 +6,7 @@ const User = require("../../../models/User");
 const UserType = require("../../../models/UserType");
 const Role = require("../../../models/Role");
 const { SECRET } = process.env;
-const generator = require('generate-password');
+const generator = require("generate-password");
 
 const router = express.Router();
 
@@ -111,17 +111,16 @@ router.post("/forgetPassword", async (req, res) => {
     const findUser = await User.findOne({ where: { email } });
     const password = generator.generate({
       length: 10,
-      numbers: true
-  });
+      numbers: true,
+    });
 
-    User.update({ password }, { where: { email }, individualHooks: true  });
+    User.update({ password }, { where: { email }, individualHooks: true });
 
     let transporter = nodemailer.createTransport({
-      host: "smtp.ethereal.email",
-      port: 587,
+      service: "gmail",
       auth: {
-        user: "eldora.block86@ethereal.email",
-        pass: "KdKN8MmH1sD7mrQRYQ",
+        user: "crea.networking.aquitaine@gmail.com",
+        pass: "Networking.64",
       },
     });
 
@@ -132,7 +131,7 @@ router.post("/forgetPassword", async (req, res) => {
       to: email,
       subject: "Nouveau mot de passe",
       text: "Hello world",
-      html:`<h4>Bonjour ${findUser.firstName} ${findUser.lastName},</h4>
+      html: `<h4>Bonjour ${findUser.firstName} ${findUser.lastName},</h4>
 
      <p> Voici votre mot de passe pour la plateforme NetWorking CREA : ${password} </p>
 

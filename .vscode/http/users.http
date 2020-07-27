@@ -1,7 +1,7 @@
 
 #### get all users
 GET http://localhost:8080/api/v1/users HTTP/1.1
-Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNhZjczMjBhLTViMjEtNDE4Ni1hZjdkLTc2NTc4Y2JlZjEyMCIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NTgzNzQwMiwiZXhwIjoxNTk1OTIzODAyfQ.4jeNQPIDpusnHDI6OghLn31cmaFpkWvyO49Hw9Wc1EU
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE3YWNkOTkxLWI2ZGItNGM1MC05NDA4LTIyYTAzZGFlN2MwNCIsImVtYWlsIjoiYWRtaW5AZGV2LmNvbSIsInJvbGUiOiJBRE1JTiIsInR5cGUiOm51bGwsImlhdCI6MTU5NTg0MDA0MywiZXhwIjoxNTk1OTI2NDQzfQ.60rx9f5d0VoWFZhWtWKX0dJBDsGRQOtJ1N9jnlxQmeI
 
 #### get one user
 
@@ -66,8 +66,8 @@ Content-Type: application/json
     "name_organisation" : "wcs",
     "isActive" : false,
     "logo" : "bjisdckjs",
-    "RoleId" : "a5be2e09-9eb6-4212-88c4-caa5af81abe6",
-    "UserTypeId" : "b59a0dfc-8f2c-4b12-82cc-d904007c8d55"
+    "RoleId" : "08fdaa1c-00d8-422e-8df9-c665923e9a1e",
+    "UserTypeId" : "2322abe1-f6e3-41af-b23a-7a2a44c48539"
 }
 
 ###
