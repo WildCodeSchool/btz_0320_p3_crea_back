@@ -66,73 +66,88 @@ URL_API : http://localhost:port/api/v1
 ### Summary
 
 1. [Auth route](#auth_route)
-  * [Login](#login)
-  * [Register](#register)
-  * [Forget Password](#forget_pass)
+<ul>
+<li>
+
+[Login](#login)
+
+</li>
+<li>
+
+[Register](#register)
+
+</li>
+<li>
+
+[Forget Password](#forget_pass)
+
+</li>
+</ul>
 
 2. [User route](#user_route)
-  * [Get all Users](#get_all_users)
-  * [Get one User](#get_one_user)
-  * [Put one User](#put_one_user)
-  * [Delete one User](#delete_one_user)
-  * [Get all posts for one user](#get_all_posts_for_one)
+   [Get all Users](#get_all_users)
+   [Get one User](#get_one_user)
+   [Put one User](#put_one_user)
+   [Delete one User](#delete_one_user)
+   [Get all posts for one user](#get_all_posts_for_one)
 
 3. [Posts route](#posts_route)
-  * [Get all posts](#get_all_posts)
-  * [Get one post](#get_one_post)
-  * [Post one post](#post_one_post)
-  * [Put one post](#put_one_post)
-  * [delete_one_post](#delete_one_post)
+   [Get all posts](#get_all_posts)
+   [Get one post](#get_one_post)
+   [Post one post](#post_one_post)
+   [Put one post](#put_one_post)
+   [delete_one_post](#delete_one_post)
 
 4. [PostTypes route](#postTypes_route)
-  * [Get all types posts ](#get_all_postTypes)
-  * [Get one type posts](#get_one_postTypes)
-  * [Post one type posts](#post_one_postTypes)
-  * [Put one type posts](#put_one_postTypes)
-  * [Delete one type posts](#delete_one_postTypes)
+   [Get all types posts ](#get_all_postTypes)
+   [Get one type posts](#get_one_postTypes)
+   [Post one type posts](#post_one_postTypes)
+   [Put one type posts](#put_one_postTypes)
+   [Delete one type posts](#delete_one_postTypes)
 
 5. [Job Categories route](#jobCategory_route)
-  * [Get all of job categories](#get_all_jobCategories)
-  * [Get one job categories](#get_one_jobCategories)
-  * [Post one job categories](#post_one_jobCategories)
-  * [Put one job categories](#put_one_jobCategories)
-  * [Delete one job categories](#delete_one_jobCategories)
+   [Get all of job categories](#get_all_jobCategories)
+   [Get one job categories](#get_one_jobCategories)
+   [Post one job categories](#post_one_jobCategories)
+   [Put one job categories](#put_one_jobCategories)
+   [Delete one job categories](#delete_one_jobCategories)
 
 6. [User Types route](#userTypes_route)
-  * [Get all users types](#get_all_userTypes)
-  * [Get one users type](#get_one_userTypes)
-  * [Get all users of one user type](#get_all_users_userTypes)
-  * [Post one users type](#post_one_userTypes)
-  * [Put one user type](#put_one_userTypes)
-  * [Delete one user type](#delete_one_userType)
+   [Get all users types](#get_all_userTypes)
+   [Get one users type](#get_one_userTypes)
+   [Get all users of one user type](#get_all_users_userTypes)
+   [Post one users type](#post_one_userTypes)
+   [Put one user type](#put_one_userTypes)
+   [Delete one user type](#delete_one_userType)
 
 7. [Roles route](#role_route)
-  * [Get all roles](#get_all_roles)
+   [Get all roles](#get_all_roles)
 
 8. [FAQ route](#faq_route)
-  * [Get all of the questions/answers](#get_all_faq)
-  * [Get one question/answer](#get_one_faq)
-  * [Post one question/answer](#post_one_faq)
-  * [Put one question/answer](#put_one_faq)
-  * [Delete a question/answer](#delete_one_faq)
+   [Get all of the questions/answers](#get_all_faq)
+   [Get one question/answer](#get_one_faq)
+   [Post one question/answer](#post_one_faq)
+   [Put one question/answer](#put_one_faq)
+   [Delete a question/answer](#delete_one_faq)
 
 9. [Partners route](#partners_route)
-  * [Get all partners](#get_all_partners)
-  * [Get one partner](#get_one_partner)
-  * [Post one partners](#post_one_partner)
-  * [Put one partners](#put_one_partner)
-  * [Delete one partners](#delete_one_partner)
+   [Get all partners](#get_all_partners)
+   [Get one partner](#get_one_partner)
+   [Post one partners](#post_one_partner)
+   [Put one partners](#put_one_partner)
+   [Delete one partners](#delete_one_partner)
 
 10. [Replies route](#replies_route)
-  * [Get all replies](#get_all_replies)
-  * [Get one reply](#get_one_reply)
-  * [Post one reply](#post_one_reply)
-  * [Delete one reply](#delete_one_reply)
+    [Get all replies](#get_all_replies)
+    [Get one reply](#get_one_reply)
+    [Post one reply](#post_one_reply)
+    [Delete one reply](#delete_one_reply)
 
 11. [Mail route](#mail_route)
-  * [Post a mail](#post_mail)
+    [Post a mail](#post_mail)
 
 ### <a name="auth_route" >Auth route </a>
+
 ##### <a name="login"> Login </a>
 
 POST URL_API/auth/login
@@ -1214,7 +1229,7 @@ _Result example_
 }
 ```
 
-###  <a name="replies_route"> Replies route </a>
+### <a name="replies_route"> Replies route </a>
 
 ##### <a name="get_all_replies"> Get all replies (accessible as admin or user) </a>
 
@@ -1321,7 +1336,7 @@ _Result example_
 
 ### <a name="mail_route"> Mail route (accessible as all) </a>
 
-#####  <a name="post_mail"> Post a mail </a>
+##### <a name="post_mail"> Post a mail </a>
 
 POST URL_API/sendMail
 
