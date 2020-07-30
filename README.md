@@ -66,10 +66,74 @@ URL_API : http://localhost:port/api/v1
 ### Summary
 
 1. [Auth route](#auth_route)
+- [Login](#login)
+- [Register](#register)
+- [Forget Password](#forget_pass)
+
+2. [User route](#user_route)
+- [Get all Users](#get_all_users)
+- [Get one User](#get_one_user)
+- [Put one User](#put_one_user)
+- [Delete one User](#delete_one_user)
+- [Get all posts for one user](#get_all_posts_for_one)
+
+3. [Posts route](#posts_route)
+- [Get all posts](#get_all_posts)
+- [Get one post](#get_one_post)
+- [Post one post](#post_one_post)
+- [Put one post](#put_one_post)
+- [delete_one_post](#delete_one_post)
+
+4. [PostTypes route](#postTypes_route)
+- [Get all types posts ](#get_all_postTypes)
+- [Get one type posts](#get_one_postTypes)
+- [Post one type posts](#post_one_postTypes)
+- [Put one type posts](#put_one_postTypes)
+- [Delete one type posts](#delete_one_postTypes)
+
+5. [Job Categories route](#jobCategory_route)
+- [Get all of job categories](#get_all_jobCategories)
+- [Get one job categories](#get_one_jobCategories)
+- [Post one job categories](#post_one_jobCategories)
+- [Put one job categories](#put_one_jobCategories)
+- [Delete one job categories](#delete_one_jobCategories)
+
+6. [User Types route](#userTypes_route)
+- [Get all users types](#get_all_userTypes)
+- [Get one users type](#get_one_userTypes)
+- [Get all users of one user type](#get_all_users_userTypes)
+- [Post one users type](#post_one_userTypes)
+- [Put one user type](#put_one_userTypes)
+- [Delete one user type](#delete_one_userType)
+
+7. [Roles route](#role_route)
+- [Get all roles](#get_all_roles)
+
+8. [FAQ route](#faq_route)
+- [Get all of the questions/answers](#get_all_faq)
+- [Get one question/answer](#get_one_faq)
+- [Post one question/answer](#post_one_faq)
+- [Put one question/answer](#put_one_faq)
+- [Delete a question/answer](#delete_one_faq)
+
+9. [Partners route](#partners_route)
+- [Get all partners](#get_all_partners)
+- [Get one partner](#get_one_partner)
+- [Post one partners](#post_one_partner)
+- [Put one partners](#put_one_partner)
+- [Delete one partners](#delete_one_partner)
+
+10. [Replies route](#replies_route)
+- [Get all replies](#get_all_replies)
+- [Get one reply](#get_one_reply)
+- [Post one reply](#post_one_reply)
+- [Delete one reply](#delete_one_reply)
+
+11. [Mail route](#mail_route)
+- [Post a mail](#post_mail)
 
 ### <a name="auth_route" >Auth route </a>
-
-##### Login
+##### <a name="login"> Login </a>
 
 POST URL_API/auth/login
 Content-Type: application/json
@@ -116,7 +180,7 @@ _Result example :_
 }
 ```
 
-##### Register
+##### <a name="register"> Register </a>
 
 POST URL_API/auth/register
 Content-Type: application/json
@@ -172,7 +236,7 @@ _Result example :_
 }
 ```
 
-##### Forgot password
+##### <a name="forget_pass"> Forgot password </a>
 
 POST URL_API/auth/forgetPassword
 Content-Type: application/json
@@ -191,9 +255,9 @@ _Result example_
 }
 ```
 
-### Users route
+### <a name="user_route"> Users route </a>
 
-##### Get all users (accessible as admin)
+##### <a name="get_all_users"> Get all users (accessible as admin) </a>
 
 GET URL_API/users
 Authorization : Bearer token
@@ -249,7 +313,7 @@ _Result example_
 ]
 ```
 
-##### Get one user (accessible as admin or user)
+##### <a name="get_one_user"> Get one user (accessible as admin or user) </a>
 
 GET URL_API/users/{id}
 Authorization : Bearer token
@@ -283,7 +347,7 @@ _Result example_
 }
 ```
 
-##### Put one user (accessible as admin or user)
+##### <a name="put_one_use"> Put one user (accessible as admin or user) </a>
 
 PUT URL_API/users/{id}
 Authorization : Bearer token
@@ -323,7 +387,7 @@ _Result example_
 }
 ```
 
-##### Delete one user (accessible as admin or user)
+##### <a name="delete_one_user"> Delete one user (accessible as admin or user) </a>
 
 DELETE URL_API/users/{id}
 Authorization : Bearer token
@@ -336,7 +400,7 @@ _Result example_
 }
 ```
 
-##### Get all post of one user (accessible as admin or user)
+##### <a name="get_all_posts_for_one"> Get all post of one user (accessible as admin or user) </a>
 
 _For all other routes, you need to get a token and one user Id_
 
@@ -360,9 +424,9 @@ Authorization : Bearer token
 ]
 ```
 
-### Posts route
+### <a name="posts_route"> Posts route </a>
 
-##### Get all of the posts (accessible as admin or user)
+##### <a name="get_all_posts">Get all of the posts (accessible as admin or user) </a>
 
 GET URL_API/posts/
 Authorization : Bearer token
@@ -402,7 +466,7 @@ _Result example_
 ]
 ```
 
-##### Get one post (accessible as admin or user)
+##### <a name="get_one_post"> Get one post (accessible as admin or user) </a>
 
 GET URL_API/posts/{post_id}
 Authorization : Bearer token
@@ -442,7 +506,7 @@ _Result example_
 ]
 ```
 
-##### Post one post (accessible as admin or user)
+##### <a name="post_one_post"> Post one post (accessible as admin or user) </a>
 
 POST URL_API/posts/
 Authorization : Bearer token
@@ -478,7 +542,7 @@ _Result example_
 }
 ```
 
-##### Put one post (accessible as admin or user)
+##### <a name="put_one_post"> Put one post (accessible as admin or user) </a>
 
 PUT URL_API/posts/{post_id}
 Authorization : Bearer token
@@ -506,7 +570,7 @@ _Result example_
 }
 ```
 
-##### Delete one post (accessible as admin or user)
+##### <a name="delete_one_post"> Delete one post (accessible as admin or user) </a>
 
 PUT URL_API/posts/{post_id}
 Authorization : Bearer token
@@ -519,9 +583,9 @@ _Result example_
 }
 ```
 
-### PostTypes route
+### <a name="postTypes_route" > PostTypes route </a>
 
-##### Get all the post types (accessible as admin or user)
+##### <a name="get_all_postTypes"> Get all the post types (accessible as admin or user) </a>
 
 GET URL_API/postTypes
 Authorization : Bearer token
@@ -549,7 +613,7 @@ _Result example_
 ]
 ```
 
-##### Get one post type (accessible as admin or user)
+##### <a name="get_one_postTypes" > Get one post type (accessible as admin or user) </a>
 
 GET URL_API/postTypes/{postType_id}
 Authorization : Bearer token
@@ -569,7 +633,7 @@ _Result example_
 ]
 ```
 
-##### Post one post type (accessible as admin)
+##### <a name="post_one_postTypes" > Post one post type (accessible as admin) </a>
 
 POST URL_API/postTypes/
 Authorization : Bearer token
@@ -598,7 +662,7 @@ _Result example_
 ]
 ```
 
-##### Put one post type (accessible as admin)
+##### <a name="put_one_postTypes"> Put one post type (accessible as admin) </a>
 
 PUT URL_API/postTypes/
 Authorization : Bearer token
@@ -624,7 +688,7 @@ _Result example_
 ]
 ```
 
-##### Delete one post type (accessible as admin )
+##### <a name="delete_one_postTypes">Delete one post type (accessible as admin )</a>
 
 DELETE URL_API/postTypes/
 Authorization : Bearer token
@@ -643,9 +707,9 @@ _Result example_
 }
 ```
 
-### Job Categories route
+### <a name="jobCategory_route"> Job Categories route </a>
 
-##### Get all of the job categories (accessible as admin or user)
+##### <a name="get_all_jobCategories">Get all of the job categories (accessible as admin or user) </a>
 
 GET URL_API/jobCategories/
 Authorization : Bearer token
@@ -673,7 +737,7 @@ _Result example_
 ]
 ```
 
-##### Get one job category (accessible as admin or user)
+##### <a name="get_one_jobCategories"> Get one job category (accessible as admin or user) </a>
 
 GET URL_API/jobCategories/{jobCategory_id}
 Authorization : Bearer token
@@ -691,7 +755,7 @@ _Result example_
 }
 ```
 
-##### Post one job category (accessible as admin)
+##### <a name="post_one_jobCategories" >Post one job category (accessible as admin)</a>
 
 POST URL_API/jobCategories/{jobCategory_id}
 Authorization : Bearer token
@@ -718,7 +782,7 @@ _Result example_
 }
 ```
 
-##### Put one job category (accessible as admin)
+##### <a name="put_one_jobCategories"> Put one job category (accessible as admin) </a>
 
 PUT URL_API/jobCategories/{jobCategory_id}
 Authorization : Bearer token
@@ -743,7 +807,7 @@ _Result example_
 }
 ```
 
-##### Delete one job category (accessible as admin)
+##### <a name="delete_one_jobCategories">Delete one job category (accessible as admin)</a>
 
 DELETE URL_API/jobCategories/{jobCategory_id}
 Authorization : Bearer token
@@ -756,9 +820,9 @@ _Result example_
 }
 ```
 
-### User Types route
+### <a name="userTypes_route">User Types route</a>
 
-##### Get all of the user types (accessible as all)
+##### <a name="get_all_userTypes">Get all of the user types (accessible as all)</a>
 
 GET URL_API/userTypes/
 
@@ -787,7 +851,7 @@ _Result example_
 ]
 ```
 
-##### Get one user type (accessible as admin or user)
+##### <a name="get_one_userTypes"> Get one user type (accessible as admin or user) </a>
 
 GET URL_API/userTypes/{userType_id}
 Authorization : Bearer token
@@ -803,7 +867,7 @@ _Result example_
 }
 ```
 
-##### Get all of the user of one user type (accessible as admin or user)
+##### <a name="get_all_users_userTypes"> Get all of the user of one user type (accessible as admin or user) </a>
 
 GET URL_API/userTypes/{userType_id}/users
 Authorization : Bearer token
@@ -830,7 +894,7 @@ _Result example_
 
 ```
 
-##### Post one user type (accessible as admin)
+##### <a name="post_one_userTypes"> Post one user type (accessible as admin) </a>
 
 POST URL_API/userTypes/
 Authorization : Bearer token
@@ -853,7 +917,7 @@ _Result example_
 }
 ```
 
-##### Put one user type (accessible as admin)
+##### <a name="put_one_userTypes"> Put one user type (accessible as admin) </a>
 
 PUT URL_API/userTypes/{userType_id}
 Authorization : Bearer token
@@ -876,7 +940,7 @@ _Result example_
 }
 ```
 
-##### Delet one user type (accessible as admin)
+##### <a name="delete_one_userType"> Delete one user type (accessible as admin) </a>
 
 DELETE URL_API/userTypes/{userType_id}
 Authorization : Bearer token
@@ -889,9 +953,9 @@ _Result example_
 }
 ```
 
-### Roles route
+### <a name="role_route"> Roles route </a>
 
-##### Get all of the roles (accessible as all)
+##### <a name="get_all_roles"> Get all of the roles (accessible as all)</a>
 
 GET URL_API/role
 
@@ -914,9 +978,9 @@ _Result example_
 ]
 ```
 
-### Faq route
+### <a name="faq_route"> Faq route </a>
 
-##### Get all of the questions/answers (accessible as admin or user)
+##### <a name="get_all_faq"> Get all of the questions/answers (accessible as admin or user) </a>
 
 GET URL_API/faq
 
@@ -943,7 +1007,7 @@ _Result example_
 ]
 ```
 
-##### Get one question/answer (accessible as admin or user)
+##### <a name="get_one_faq">Get one question/answer (accessible as admin or user) </a>
 
 GET URL_API/faq/{faq_id}
 Authorization : Bearer token
@@ -961,7 +1025,7 @@ _Result example_
 }
 ```
 
-##### Post one question/answer (accessible as admin)
+##### <a name="post_one_faq"> Post one question/answer (accessible as admin) </a>
 
 POST URL_API/faq/{faq_id}
 Authorization : Bearer token
@@ -987,7 +1051,7 @@ _Result example_
 }
 ```
 
-##### Put one question/answer (accessible as admin)
+##### <a name="put_one_faq"> Put one question/answer (accessible as admin) </a>
 
 PUT URL_API/faq/{faq_id}
 Authorization : Bearer token
@@ -1011,7 +1075,7 @@ _Result example_
 }
 ```
 
-##### Delete a question/answer (accessible as admin)
+##### <a name="delete_one_faq"> Delete a question/answer (accessible as admin) </a>
 
 DELETE URL_API/faq/{faq_id}
 Authorization : Bearer token
@@ -1024,9 +1088,9 @@ _Result example_
 }
 ```
 
-### Partners route
+### <a name="partners_route"> Partners route </a>
 
-##### Get all of the partners (accessible as all)
+##### <a name="get_all_partners"> Get all partners (accessible as all) </a>
 
 GET URL_API/partners
 Authorization : Bearer token
@@ -1058,7 +1122,7 @@ _Result example_
 ]
 ```
 
-##### Get one partner (accessible as all)
+##### <a name="get_one_partner> Get one partner (accessible as all) </a>
 
 GET URL_API/partners/{partner_Id}
 Authorization : Bearer token
@@ -1078,7 +1142,7 @@ _Result example_
 }
 ```
 
-##### Post one partner (accessible as admin)
+##### <a name="post_one_partner"> Post one partner (accessible as admin) </a>
 
 POST URL_API/partners/
 Authorization : Bearer token
@@ -1109,7 +1173,7 @@ _Result example_
 }
 ```
 
-##### Put one partner (accessible as admin)
+##### <a name="put_one_partner"> Put one partner (accessible as admin) </a>
 
 PUT URL_API/partners/{partner_Id}
 Authorization : Bearer token
@@ -1136,7 +1200,7 @@ _Result example_
 }
 ```
 
-##### Delete one partner (accessible as admin)
+##### <a name="delete_one_partner"> Delete one partner (accessible as admin) </a>
 
 DELETE URL_API/partners/{partner_Id}
 Authorization : Bearer token
@@ -1150,9 +1214,9 @@ _Result example_
 }
 ```
 
-### Replies route
+###  <a name="replies_route"> Replies route </a>
 
-##### Get all of the replies (accessible as admin or user)
+##### <a name="get_all_replies"> Get all replies (accessible as admin or user) </a>
 
 GET URL_API/replies
 
@@ -1187,7 +1251,7 @@ _Result example_
 ]
 ```
 
-##### Get one reply (accessible as admin or user)
+##### <a name="get_one_reply"> Get one reply (accessible as admin or user) </a>
 
 GET URL_API/replies/{reply_id}
 
@@ -1208,7 +1272,7 @@ _Result example_
   },
 ```
 
-##### Post one reply (accessible as admin or user)
+##### <a name="post_one_reply"> Post one reply (accessible as admin or user) </a>
 
 POST URL_API/replies/apply
 Authorization : Bearer token
@@ -1243,7 +1307,7 @@ _Result example_
 }
 ```
 
-##### Delete one reply (accessible as admin or user)
+##### <a name="delete_one_reply"> Delete one reply (accessible as admin or user) </a>
 
 DELETE URL_API/replies/{reply_id}
 
@@ -1255,9 +1319,9 @@ _Result example_
 }
 ```
 
-### Mail route (accessible as all)
+### <a name="mail_route"> Mail route (accessible as all) </a>
 
-##### Post a mail
+#####  <a name="post_mail"> Post a mail </a>
 
 POST URL_API/sendMail
 
