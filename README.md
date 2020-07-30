@@ -8,15 +8,14 @@ Crea is a cross-border networking platform.
 
 ## PREREQUISITES
 
-​Node > 14.4.0
-
-Npm > 6.14.5
+​Node > 12.18.3
 
 ## GETTING STARTED
 
 ```bash
 git clone # clone the project
 npm install # Install all dependencies
+Create environment variables
 npm run dev # Runs the dev environment
 npm start # Runs the prod environment
 npm test # Runs mocha
@@ -30,7 +29,7 @@ _please create a `.env` with those fields for using the database_
 - DBNAME="(name of database)"
 - DBUSER= (your user name for database)
 - DBPASS="(password to access database)"
-- DBDIALECT="(dialect for database language ex: sql)"
+- DBDIALECT="(Sequelize is independent from specific dialects. This means that you'll have to install the respective connector library to your project yourself.)"
 - DBHOST="(host server for database)"
 - SECRET=" a random set of unique character for security(SALT)"
 ```
@@ -62,9 +61,13 @@ They are produced with Chai and Mocha.
 ## RESSOURCE LIST/PAGINATION
 
 _Before using the api, you need to generate a token with your account :_
-URL_API : http://api.networking.crea-aquitaine.org/api/v1
+URL_API : http://localhost:port/api/v1
 
-### Auth route
+### Summary
+
+1. [Auth route](#auth_route)
+
+### <a name="auth_route" >Auth route </a>
 
 ##### Login
 
