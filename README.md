@@ -4,17 +4,16 @@
 
 Crea is a cross-border networking platform.
 
-##  PREREQUISITES
+## PREREQUISITES
 
-​Node > 14.4.0
+​Node > 12.18.3
 
-Npm > 6.14.5
-
-##  GETTING STARTED
+## GETTING STARTED
 
 ```bash
 git clone # clone the project
 npm install # Install all dependencies
+Create environment variables
 npm run dev # Runs the dev environment
 npm start # Runs the prod environment
 npm test # Runs mocha
@@ -28,7 +27,7 @@ _please create a `.env` with those fields for using the database_
 - DBNAME="(name of database)"
 - DBUSER= (your user name for database)
 - DBPASS="(password to access database)"
-- DBDIALECT="(dialect for database language ex: sql)"
+- DBDIALECT="(dialect for database language ex: sql)"// lister doc sequelize
 - DBHOST="(host server for database)"
 - SECRET=" a random set of unique character for security(SALT)"
 ```
@@ -60,7 +59,9 @@ They are produced with Chai and Mocha.
 ## RESSOURCE LIST/PAGINATION
 
 _Before using the api, you need to generate a token with your account :_
-URL_API : http://api.networking.crea-aquitaine.org/api/v1
+URL_API : http://localhost:port/api/v1
+
+//todo faire un sommaire pour les endpoints
 
 ### Auth route
 
@@ -174,7 +175,7 @@ Content-Type: application/json
 
 ```json (object)
 {
-  "email" : "toto@dev.com"
+  "email": "toto@dev.com"
 }
 ```
 
@@ -1286,13 +1287,11 @@ We are a 7 developpers team who did this project.
 
 [_Linkedin_](https://www.linkedin.com/in/christelle-conrozier/)
 
-
 #### Charles Henry Le Nué
 
 [_Github_](https://github.com/Charlyln)
 
 [_Linkedin_](https://www.linkedin.com/in/charles-henry-le-nu%C3%A9/)
-
 
 #### Anaïs Jouaret
 
@@ -1300,20 +1299,17 @@ We are a 7 developpers team who did this project.
 
 [_Linkedin_](https://www.linkedin.com/in/anais-jouaret/)
 
-
 #### Marie Josselin
 
 [_Github_](https://github.com/MarieJoss)
 
 [_Linkedin_](https://www.linkedin.com/in/marie-josselin)
 
-
-#### Maxime Urbansky
+#### Maxime Urbanski
 
 [_Github_](https://github.com/Maxiloudoi)
 
 [_Linkedin_](https://www.linkedin.com/in/maxime-urbanski/)
-
 
 #### Lionel Rouge
 
@@ -1321,10 +1317,8 @@ We are a 7 developpers team who did this project.
 
 [_Linkedin_](https://www.linkedin.com/in/lionel-rouge/)
 
-
 #### Munio Campandegui
 
 [_Github_](https://github.com/whitewolf64)
 
 [_Linkedin_](https://www.linkedin.com/in/campandegui-munio/)
-
