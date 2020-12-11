@@ -4,7 +4,6 @@ const Partner = require("../../../models/Partner");
 const authRole = require("../../../middleware/authRole");
 const { validator, partnersForPut } = require("../../../middleware/validator");
 
-
 router.get("/", async (req, res) => {
   try {
     const partner = await Partner.findAll();
@@ -40,32 +39,37 @@ router.post("/", authRole("ADMIN"), async (req, res) => {
   }
 });
 
-router.put("/:id", authRole("ADMIN"),validator(partnersForPut, "body"), async (req, res) => {
-  const { label, url, logo, favorite, description } = req.body;
-  const { id } = req.params;
-  try {
-    await Partner.update(
-      {
-        label,
-        description,
-        url,
-        logo,
-        favorite,
-      },
-      { where: { id } }
-    );
-    const partner = await Partner.findByPk(id);
-    res.status(202).json(partner);
-  } catch (err) {
-    res.status(422).json(err);
+router.put(
+  "/:id",
+  authRole("ADMIN"),
+  validator(partnersForPut, "body"),
+  async (req, res) => {
+    const { label, url, logo, favorite, description } = req.body;
+    const { id } = req.params;
+    try {
+      await Partner.update(
+        {
+          label,
+          description,
+          url,
+          logo,
+          favorite,
+        },
+        { where: { id } }
+      );
+      const partner = await Partner.findByPk(id);
+      res.status(202).json(partner);
+    } catch (err) {
+      res.status(422).json(err);
+    }
   }
-});
+);
 
 router.delete("/:id", authRole("ADMIN"), async (req, res) => {
   const { id } = req.params;
   try {
     const partner = await Partner.destroy({ where: { id } });
-    res.status(204).json({message : "partner is delete."});
+    res.status(204).json({ message: "partner is delete." });
   } catch (err) {
     res.status(422).json(err);
   }

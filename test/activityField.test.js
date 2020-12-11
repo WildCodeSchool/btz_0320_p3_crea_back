@@ -215,6 +215,22 @@ describe("Activity field", () => {
         throw err;
       }
     });
+    it("without token", async () => {
+      try {
+        const res = await chai
+          .request(server)
+          .post("/api/v1/activityFields")
+          .send({
+            labelFr: "Informatique",
+            labelEs: "Data processing",
+            labelEus: "Informatika",
+          });
+        res.should.have.status(401);
+        res.body.should.be.a("object");
+      } catch (err) {
+        throw err;
+      }
+    });
   });
   describe("PUT", () => {
     it("ADMIN should success", async () => {
